@@ -6,8 +6,11 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <h1>Customized Audio Player</h1>
+    <h1>Play! Audio Player</h1>
     <div class="audio-controls">
+        <div class="album-cover">
+            <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.jpg" alt="Album Cover" width="60px" height="60px">
+        </div>
         <div id="currentTrack"> </div>
         <button onclick="previousAlbum()"><i class="fas fa-chevron-left"></i></button>
         <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
@@ -95,10 +98,10 @@
         };
         var currentAlbum = "tylerthecreator/wolf";
         var albums = [
-            { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf" },
-            { artist: "Arctic Monkeys", album: "AM", folder: "arcticmonkeys/am"},
-            { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug"},
-            { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens"},
+            { artist: "Tyler, The Creator", album: "Wolf", folder: "/tylerthecreator/wolf", image: "/songs/tylerthecreator/wolf/albumcover.jpg" },
+            { artist: "Arctic Monkeys", album: "AM", folder: "arcticmonkeys/am", image: "/songs/arcticmonkeys/am/albumcover.jpg"},
+            { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "/songs/arcticmoneys/humbug/albumcover.jpg"},
+            { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "/songs/wallows/nonthinghappens/albumcover.jpg"},
             
             // Add more albums here
         ];
@@ -150,7 +153,20 @@
             audio.currentTime = seekTime;
         }
 
-        function nextAlbum() {
+// Modify the updateAlbumCover function
+function updateAlbumCover() {
+    // Get the album cover image element
+    var albumCover = document.getElementById("albumCover");
+
+    // Get the selected album object
+    var selectedAlbum = albums[currentAlbumIndex];
+
+    // Set the src attribute to the image location specified in the album object
+    albumCover.src = selectedAlbum.image;
+}
+
+// Call the updateAlbumCover function when changing albums
+function nextAlbum() {
     currentAlbumIndex++;
     if (currentAlbumIndex >= albums.length) {
         currentAlbumIndex = 0; // Loop back to the first album
@@ -162,22 +178,27 @@
     if (audioTracks[currentAlbum]) {
         loadTrack();
         audio.play();
+        // Update the album cover image
+        updateAlbumCover();
     } else {
         // Handle the case when the album is not found
         console.error("Album not found: " + currentAlbum);
     }
 }
 
-        function previousAlbum() {
-            currentAlbumIndex--;
-            if (currentAlbumIndex < 0) {
-                currentAlbumIndex = albums.length - 1; // Go to the last album
-            }
-            currentAlbum = albums[currentAlbumIndex].folder;
-            currentTrackIndex = 0;
-            loadTrack();
-            audio.play();
-        }
+function previousAlbum() {
+    currentAlbumIndex--;
+    if (currentAlbumIndex < 0) {
+        currentAlbumIndex = albums.length - 1; // Go to the last album
+    }
+    currentAlbum = albums[currentAlbumIndex].folder;
+    currentTrackIndex = 0;
+    loadTrack();
+    audio.play();
+    // Update the album cover image
+    updateAlbumCover();
+}
+
 
         audio.addEventListener("timeupdate", function() {
     var currentTime = audio.currentTime;
