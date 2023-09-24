@@ -76,6 +76,42 @@
                 "Tamale.mp3",
                 "Lone.mp3"
             ],
+            "tylerthecreator/flowerboy": [
+                "01 Foreword (feat. Rex Orange County).mp3",
+                "02 Where This Flower Blooms (feat. Frank Ocean).mp3",
+                "Sometimes....mp3",
+                "04 See You Again (feat. Kali Uchis).mp3",
+                "05 Who Dat Boy (feat. A$AP Rocky).mp3",
+                "06 Pothole (feat. Jaden Smith).mp3",
+                "07 Garden Shed (feat. Estelle).mp3",
+                "08 Boredom (feat. Rex Orange County _ Anna of the North).mp3",
+                "09 I Ain_t Got Time!.mp3",
+                "10 911 _ Mr. Lonely (feat. Frank Ocean _ Steve Lacy).mp3",
+                "11 Droppin _ Seeds (feat. Lil Wayne).mp3",
+                "November.mp3",
+                "Glitter.mp3",
+                "Enjoy Right Now, Today.mp3"
+            ],
+            "tylerthecreator/igor": [
+                "01 IGOR_S THEME (feat. Lil Uzi Vert _ Kali Uchis).mp3",
+                "02 EARFQUAKE (feat. Playboi Carti _ Charlie Wilson).mp3",
+                "03 I THINK (feat. Solange).mp3",
+                "04 BOYFRIEND.mp3",
+                "05 .mp3",
+                "06 .mp3",
+                "07 .mp3",
+                "08 .mp3",
+                "09 .mp3",
+                "10 .mp3",
+                "11 .mp3",
+                "12 .mp3"
+            ],
+            "tylerthecreator/cherrybomb": [
+
+            ],
+            "tylerthecreator/goblin": [
+                
+            ],
             "arcticmonkeys/am": [
                 "01 - Do I Wanna Know.mp3",
                 "02 - R U Mine.mp3",
@@ -119,10 +155,14 @@
         };
         var currentAlbum = "tylerthecreator/wolf";
         var albums = [
-            { artist: "Tyler, The Creator", album: "Wolf", folder: "/tylerthecreator/wolf", image: "/songs/tylerthecreator/wolf/albumcover.jpg" },
+            { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf", image: "/songs/tylerthecreator/wolf/albumcover.jpg" },
+            { artist: "Tyler, The Creator", album: "Flower Boy", folder: "tylerthecreator/flowerboy", image: "/songs/tylerthecreator/flowerboy/albumcover.png" },
+            { artist: "Tyler, The Creator", album: "Igor", folder: "tylerthecreator/igor", image: "/songs/tylerthecreator/igor/igorcover.jpg" },
+            { artist: "Tyler, The Creator", album: "Cherry Bomb", folder: "tylerthecreator/cherrybomb", image: "/songs/tylerthecreator/cherrybomb/cherrybomb.png" },
+            { artist: "Tyler, The Creator", album: "Goblin", folder: "tylerthecreator/goblin", image: "/songs/tylerthecreator/goblin/Goblincover.jpg" },
             { artist: "Arctic Monkeys", album: "AM", folder: "arcticmonkeys/am", image: "/songs/arcticmonkeys/am/albumcover.jpg"},
-            { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "/songs/arcticmoneys/humbug/albumcover.jpg"},
-            { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "/songs/wallows/nonthinghappens/albumcover.jpg"},
+            { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "/songs/arcticmonkeys/humbug/albumcover.jpg"},
+            { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "/songs/wallows/nonthinghappens/albumcover.png"},
             
             // Add more albums here
         ];
@@ -130,10 +170,10 @@
         var currentTrackText = document.getElementById("currentTrack");
 
         function loadTrack() {
-    var trackPath = audioTracks[currentAlbum][currentTrackIndex];
-    audio.src = "songs/" + currentAlbum + "/" + trackPath;
-    audio.load();
-    updateTrackText();
+            var trackPath = audioTracks[currentAlbum][currentTrackIndex];
+            audio.src = "songs/" + currentAlbum + "/" + trackPath;
+            audio.load();
+            updateTrackText();
 }
 
         function playPause() {
