@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Customized HTML Audio Player</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="manifest" href="app.webmanifest">
     <meta name="description" content="A simple audio player website by angel">
     <meta name="keywords" content="audio player, music, playmusic, angel">
     <meta name="author" content="sillyangel3">
@@ -21,33 +23,61 @@
     <meta name="twitter:title" content="Your PlayMusic Website">
     <meta name="twitter:description" content="A simple audio player website by angel">
     <meta name="twitter:image" content="./assets/logo/mlogo.png"> <!-- Replace with a link to your website's image -->
-
+    <script>
+    navigator.serviceWorker.register("sw.js")
+    </script>
     <!-- Favicon (you can create a favicon.ico and place it in the root directory of your website) -->
     <link rel="icon" href="mlogo.png" type="image/png">
     
 </head>
 <body>
-    <h1>Play! Audio Player</h1>
-    <div class="audio-controls">
+  <div class="topnav">
+    <a href="/">Home</a>
+    <a href="https://forms.gle/8Pyc2k3QLwyvsSEv9" style="text-align: right;">Request a Artist</a>
+  </div>
+  <div class="audio-controls">
         <div class="album-cover">
             <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.jpg" alt="Album Cover" width="60px" height="60px">
         </div>
-        <div id="currentTrack"> </div>
-        <button onclick="previousAlbum()"><i class="fas fa-chevron-left"></i></button>
-        <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
-        <button onclick="playPause()"><i class="fas fa-play"></i></button>
-        <button onclick="skipTrack()"><i class="fas fa-forward"></i></button>
-        <button onclick="nextAlbum()"><i class="fas fa-chevron-right"></i></button>
-        <input type="range" id="volume" min="0" max="1" step="0.01" onchange="setVolume()">
-        <div id="songTime">0:00</div>
-        <progress id="progress" value="0" max="100" onclick="seek(event)"></progress>
-        <div id="songDuration">0:00</div>
-    </div>
-
+          <div id="currentTrack"> </div>
+            <button alt="" onclick="previousAlbum()"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
+            <button onclick="playPause()"><i class="fas fa-play"></i></button>
+            <button onclick="skipTrack()"><i class="fas fa-forward"></i></button>
+            <button onclick="nextAlbum()"><i class="fas fa-chevron-right"></i></button>
+            <input type="range" id="volume" min="0" max="1" step="0.01" onchange="setVolume()">
+            <div id="songTime">0:00</div>
+            <progress id="progress" value="0" max="100" onclick="seek(event)"></progress>
+            <div id="songDuration">0:00</div>
+        </div>
+        <div id="songselector">
+          <h1>Tyler the creator</h1>
+          <button onclick="albumsec(0)"><img src="songs/tylerthecreator/wolf/albumcover.png" width="100px" height="100px"></button>
+          <button onclick="albumsec(1)"><img src="songs/tylerthecreator/flowerboy/albumcover.png" width="100px" height="100px"></button>
+          <button onclick="albumsec(2)"><img src="songs/tylerthecreator/igor/igorcover.png" width="100px" height="100px"></button>
+          <button onclick="albumsec(3)"><img src="songs/tylerthecreator/cherrybomb/cherrybomb.png" width="100px" height="100px"></button>
+          <button onclick="albumsec(4)"><img src="songs/tylerthecreator/goblin/Goblincover.png" width="100px" height="100px"></button>
+          <button onclick="albumsec(8)"><img src="songs/tylerthecreator/bas/bas.png" width="101px" height="100px"></button>
+          <br>
+          <h1>Arctic Monkeys</h1>
+          <button onclick="albumsec(5)"><img src="songs/arcticmonkeys/am/albumcover.jpg" width="100px" height="100px"></button>
+          <button onclick="albumsec(6)"><img src="songs/arcticmonkeys/humbug/albumcover.jpg" width="100px" height="100px"></button>
+          <br>
+          <h1>Wallows</h1>
+          <button onclick="albumsec(7)"><img src="songs/wallows/nonthinghappens/albumcover.png" width="100px" height="100px"></button>
+          <br>
+          <h1>Melanie Martinez</h1>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          
+        </div>
     <audio id="myAudio" controls>
         Your browser does not support the audio element.
     </audio>
-
     <script>
         var audio = document.getElementById("myAudio");
         var playButton = document.querySelector(".audio-controls button:nth-of-type(3)");
@@ -106,10 +136,36 @@
                 "12 ARE WE STILL FRIENDS_ (feat. Pharell Williams).mp3"
             ],
             "tylerthecreator/cherrybomb": [
-
+                "1 Deathcamp.mp3",
+                "2 Buffalo.mp3",
+                "3 PILOT.mp3",
+                "4 RUN.mp3",
+                "5 FIND YOUR WINGS.mp3",
+                "6 Cherry Bomb.mp3",
+                "7 BLOW MY LOAD.mp3",
+                "8 2SEATER.mp3",
+                "9 THE BROWN STAINS OF DARKEESE.mp3",
+                "10 F YOUNG _ PERFECT.mp3",
+                "11 SMUCKERS.mp3",
+                "12 KEEP DA O_S.mp3",
+                "13 OKAGA, CA.mp3"
             ],
             "tylerthecreator/goblin": [
-                
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              ""
             ],
             "arcticmonkeys/am": [
                 "01 - Do I Wanna Know.mp3",
@@ -150,168 +206,233 @@
                 "Remember When.mp3",
                 "I_m Full.mp3",
                 "Do Not Wait.mp3"
+            ],
+            "tylerthecreator/bas": [
+
             ]
         };
         var currentAlbum = "tylerthecreator/wolf";
         var albums = [
-            { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf", image: "/songs/tylerthecreator/wolf/albumcover.jpg" },
-            { artist: "Tyler, The Creator", album: "Flower Boy", folder: "tylerthecreator/flowerboy", image: "/songs/tylerthecreator/flowerboy/albumcover.png" },
-            { artist: "Tyler, The Creator", album: "Igor", folder: "tylerthecreator/igor", image: "/songs/tylerthecreator/igor/igorcover.jpg" },
-            { artist: "Tyler, The Creator", album: "Cherry Bomb", folder: "tylerthecreator/cherrybomb", image: "/songs/tylerthecreator/cherrybomb/cherrybomb.png" },
-            { artist: "Tyler, The Creator", album: "Goblin", folder: "tylerthecreator/goblin", image: "/songs/tylerthecreator/goblin/Goblincover.jpg" },
-            { artist: "Arctic Monkeys", album: "AM", folder: "arcticmonkeys/am", image: "/songs/arcticmonkeys/am/albumcover.jpg"},
-            { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "/songs/arcticmonkeys/humbug/albumcover.jpg"},
-            { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "/songs/wallows/nonthinghappens/albumcover.png"},
+            { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf", image: "songs/tylerthecreator/wolf/albumcover.png" },
+            { artist: "Tyler, The Creator", album: "Flower Boy", folder: "tylerthecreator/flowerboy", image: "songs/tylerthecreator/flowerboy/albumcover.png" },
+            { artist: "Tyler, The Creator", album: "Igor", folder: "tylerthecreator/igor", image: "songs/tylerthecreator/igor/igorcover.png" },
+            { artist: "Tyler, The Creator", album: "Cherry Bomb", folder: "tylerthecreator/cherrybomb", image: "songs/tylerthecreator/cherrybomb/cherrybomb.png" },
+            { artist: "Tyler, The Creator", album: "Goblin", folder: "tylerthecreator/goblin", image: "songs/tylerthecreator/goblin/Goblincover.png" },
+            { artist: "Arctic Monkeys", album: "AM", folder: "arcticmonkeys/am", image: "songs/arcticmonkeys/am/albumcover.jpg"},
+            { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "songs/arcticmonkeys/humbug/albumcover.jpg"},
+            { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "songs/wallows/nonthinghappens/albumcover.png"},
+            { artist: "Tyler, The Creator", album: "Bastard", folder: "tylerthecreator/bas", image: "songs/tylerthecreator/bas/bas.png" },
+           
             
             // Add more albums here
         ];
-        var currentAlbumIndex = 0;
-        var currentTrackText = document.getElementById("currentTrack");
+	var currentAlbumIndex = 0;
+	var currentTrackText = document.getElementById("currentTrack");
 
-        function loadTrack() {
-            var trackPath = audioTracks[currentAlbum][currentTrackIndex];
-            audio.src = "songs/" + currentAlbum + "/" + trackPath;
-            audio.load();
-            updateTrackText();
-}
+	function loadTrack() {
+		var trackPath = audioTracks[currentAlbum][currentTrackIndex];
+		audio.src = "songs/" + currentAlbum + "/" + trackPath;
+		audio.load();
+		updateTrackText();
+		mediathinggy();
+	}
 
-        function playPause() {
-            if (audio.paused) {
-                audio.play();
-                playButton.innerHTML = '<i class="fas fa-pause"></i>';
-            } else {
-                audio.pause();
-                playButton.innerHTML = '<i class="fas fa-play"></i>';
-            }
-        }
+	function playPause() {
+		if (audio.paused) {
+			audio.play();
+			playButton.innerHTML = '<i class="fas fa-pause"></i>';
+		} else {
+			audio.pause();
+			playButton.innerHTML = '<i class="fas fa-play"></i>';
+		}
+	}
 
-        function setVolume() {
-            audio.volume = volumeControl.value;
-        }
+	function setVolume() {
+		audio.volume = volumeControl.value;
+	}
 
-        function skipTrack() {
-            currentTrackIndex++;
-            if (currentTrackIndex >= audioTracks[currentAlbum].length) {
-                currentTrackIndex = 0; // Loop back to the first track
-            }
-            loadTrack();
-            audio.play();
-        }
+	function skipTrack() {
+		currentTrackIndex++;
+		if (currentTrackIndex >= audioTracks[currentAlbum].length) {
+			currentTrackIndex = 0; // Loop back to the first track
+		}
+		loadTrack();
+		audio.play();
+	}
 
-        function previousTrack() {
-            currentTrackIndex--;
-            if (currentTrackIndex < 0) {
-                currentTrackIndex = audioTracks[currentAlbum].length - 1; // Go to the last track
-            }
-            loadTrack();
-            audio.play();
-        }
+	function previousTrack() {
+		currentTrackIndex--;
+		if (currentTrackIndex < 0) {
+			currentTrackIndex = audioTracks[currentAlbum].length - 1; // Go to the last track
+		}
+		loadTrack();
+		audio.play();
+	}
 
-        function seek(event) {
-            const percent = event.offsetX / progressBar.offsetWidth;
-            const seekTime = percent * audio.duration;
-            audio.currentTime = seekTime;
-        }
+	function seek(event) {
+		const percent = event.offsetX / progressBar.offsetWidth;
+		const seekTime = percent * audio.duration;
+		audio.currentTime = seekTime;
+	}
+	// Modify the updateAlbumCover function
+	function updateAlbumCover() {
+		// Get the album cover image element
+		var albumCover = document.getElementById("albumCover");
+		// Get the selected album object
+		var selectedAlbum = albums[currentAlbumIndex];
+		// Set the src attribute to the image location specified in the album object
+		albumCover.src = selectedAlbum.image;
+		
+	}
+	// Call the updateAlbumCover function when changing albums
+	function nextAlbum() {
+		currentAlbumIndex++;
+		if (currentAlbumIndex >= albums.length) {
+			currentAlbumIndex = 0; // Loop back to the first album
+		}
+		currentAlbum = albums[currentAlbumIndex].folder;
+		currentTrackIndex = 0;
+		// Check if audioTracks[currentAlbum] exists before loading
+		if (audioTracks[currentAlbum]) {
+			loadTrack();
+			audio.play();
+			// Update the album cover image
+			updateAlbumCover();
+		} else {
+			// Handle the case when the album is not found
+			console.error("Album not found: " + currentAlbum);
+		}
+	}
 
-// Modify the updateAlbumCover function
-function updateAlbumCover() {
-    // Get the album cover image element
-    var albumCover = document.getElementById("albumCover");
+	function previousAlbum() {
+		currentAlbumIndex--;
+		if (currentAlbumIndex < 0) {
+			currentAlbumIndex = albums.length - 1; // Go to the last album
+		}
+		currentAlbum = albums[currentAlbumIndex].folder;
+		currentTrackIndex = 0;
+		loadTrack();
+		audio.play();
+		// Update the album cover image
+		updateAlbumCover();
+	}
+	audio.addEventListener("timeupdate", function() {
+		var currentTime = audio.currentTime;
+		var duration = audio.duration;
+		// Check if duration is a finite number before calculating percentComplete
+		if (isFinite(duration)) {
+			var percentComplete = (currentTime / duration) * 100;
+			progressBar.value = percentComplete;
+		}
+	});
+	// Load the first track when the page loads
+	loadTrack();
+	// Event listener for when the current track ends
+	audio.addEventListener("ended", function() {
+		// Play the next track automatically
+		skipTrack();
+	});
 
-    // Get the selected album object
-    var selectedAlbum = albums[currentAlbumIndex];
+	function updateTrackText() {
+		var artist = albums[currentAlbumIndex].artist;
+		var album = albums[currentAlbumIndex].album;
+		var track = audioTracks[currentAlbum][currentTrackIndex];
+		currentTrackText.textContent = artist + " - " + album + " - " + track;
+	}
+	// Add these lines to update the song duration and current time
+	var songTimeElement = document.getElementById("songTime");
+	var songDurationElement = document.getElementById("songDuration");
+	audio.addEventListener("timeupdate", function() {
+		var currentTime = audio.currentTime;
+		var duration = audio.duration;
+		// Check if duration is a finite number before calculating percentComplete
+		if (isFinite(duration)) {
+			var percentComplete = (currentTime / duration) * 100;
+			progressBar.value = percentComplete;
+			// Update the song duration and current time
+			var currentMinutes = Math.floor(currentTime / 60);
+			var currentSeconds = Math.floor(currentTime % 60);
+			var durationMinutes = Math.floor(duration / 60);
+			var durationSeconds = Math.floor(duration % 60);
+			// Display current time and duration in the format "M:SS"
+			songTimeElement.textContent = currentMinutes + ":" + (currentSeconds < 10 ? "0" : "") + currentSeconds;
+			songDurationElement.textContent = durationMinutes + ":" + (durationSeconds < 10 ? "0" : "") + durationSeconds;
+		}
+	});
+	function albumsec(albumnumber) {
+	  currentAlbumIndex = albumnumber
+	  currentAlbum = albums[currentAlbumIndex].folder;
+		currentTrackIndex = 0;
+		loadTrack();
+		audio.play();
+		// Update the album cover image
+		updateAlbumCover();
+	}
+	function mediathinggy() {
+	  if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+      title: audioTracks[currentAlbum][currentTrackIndex],
+      artist: albums[currentAlbumIndex].artist,
+      album: albums[currentAlbumIndex].album,
+      artwork: [
+        {
+          src: 'albums[currentAlbumIndex].image',
+          sizes: "96x96",
+          type: "image/png",
+        },
+        {
+          src: 'albums[currentAlbumIndex].image',
+          sizes: "128x128",
+          type: "image/png",
+        },
+        {
+          src: 'albums[currentAlbumIndex].image',
+          sizes: "192x192",
+          type: "image/png",
+        },
+        {
+          src: 'albums[currentAlbumIndex].image',
+          sizes: "256x256",
+          type: "image/png",
+        },
+        {
+          src: 'albums[currentAlbumIndex].image',
+          sizes: "384x384",
+          type: "image/png",
+        },
+        {
+          src: 'albums[currentAlbumIndex].image',
+          sizes: "512x512",
+          type: "image/png",
+        },
+    ],
+  });
 
-    // Set the src attribute to the image location specified in the album object
-    albumCover.src = selectedAlbum.image;
-}
-
-// Call the updateAlbumCover function when changing albums
-function nextAlbum() {
-    currentAlbumIndex++;
-    if (currentAlbumIndex >= albums.length) {
-        currentAlbumIndex = 0; // Loop back to the first album
-    }
-    currentAlbum = albums[currentAlbumIndex].folder;
-    currentTrackIndex = 0;
+  navigator.mediaSession.setActionHandler("play", () => {
+    playPause();
+  });
+  navigator.mediaSession.setActionHandler("pause", () => {
+    playPause();
+  });
+  /*
+  navigator.mediaSession.setActionHandler("seekbackward", () => {
     
-    // Check if audioTracks[currentAlbum] exists before loading
-    if (audioTracks[currentAlbum]) {
-        loadTrack();
-        audio.play();
-        // Update the album cover image
-        updateAlbumCover();
-    } else {
-        // Handle the case when the album is not found
-        console.error("Album not found: " + currentAlbum);
-    }
+  });
+  navigator.mediaSession.setActionHandler("seekforward", () => {
+    
+  });
+  navigator.mediaSession.setActionHandler("seekto", () => {
+
+  });*/
+  navigator.mediaSession.setActionHandler("previoustrack", () => {
+    previousTrack();
+  });
+  navigator.mediaSession.setActionHandler("nexttrack", () => {
+    skipTrack();
+  });
+
 }
-
-function previousAlbum() {
-    currentAlbumIndex--;
-    if (currentAlbumIndex < 0) {
-        currentAlbumIndex = albums.length - 1; // Go to the last album
-    }
-    currentAlbum = albums[currentAlbumIndex].folder;
-    currentTrackIndex = 0;
-    loadTrack();
-    audio.play();
-    // Update the album cover image
-    updateAlbumCover();
 }
-
-
-        audio.addEventListener("timeupdate", function() {
-    var currentTime = audio.currentTime;
-    var duration = audio.duration;
-
-    // Check if duration is a finite number before calculating percentComplete
-    if (isFinite(duration)) {
-        var percentComplete = (currentTime / duration) * 100;
-        progressBar.value = percentComplete;
-    }
-});
-
-
-        // Load the first track when the page loads
-        loadTrack();
-
-        // Event listener for when the current track ends
-        audio.addEventListener("ended", function() {
-            // Play the next track automatically
-            skipTrack();
-        });
-
-        function updateTrackText() {
-            var artist = albums[currentAlbumIndex].artist;
-            var album = albums[currentAlbumIndex].album;
-            var track = audioTracks[currentAlbum][currentTrackIndex];
-            currentTrackText.textContent =  artist + " - " + album + " - " + track;
-        }
-        // Add these lines to update the song duration and current time
-var songTimeElement = document.getElementById("songTime");
-var songDurationElement = document.getElementById("songDuration");
-
-audio.addEventListener("timeupdate", function() {
-    var currentTime = audio.currentTime;
-    var duration = audio.duration;
-
-    // Check if duration is a finite number before calculating percentComplete
-    if (isFinite(duration)) {
-        var percentComplete = (currentTime / duration) * 100;
-        progressBar.value = percentComplete;
-
-        // Update the song duration and current time
-        var currentMinutes = Math.floor(currentTime / 60);
-        var currentSeconds = Math.floor(currentTime % 60);
-        var durationMinutes = Math.floor(duration / 60);
-        var durationSeconds = Math.floor(duration % 60);
-
-        // Display current time and duration in the format "M:SS"
-        songTimeElement.textContent = currentMinutes + ":" + (currentSeconds < 10 ? "0" : "") + currentSeconds;
-        songDurationElement.textContent = durationMinutes + ":" + (durationSeconds < 10 ? "0" : "") + durationSeconds;
-    }
-});
-
     </script>
 </body>
 </html>
