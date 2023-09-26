@@ -1,2 +1,2 @@
 # playmusic
-online music player
+online music player with custom thingys
