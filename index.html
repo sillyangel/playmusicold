@@ -453,44 +453,45 @@
 		updateAlbumCover();
 	}
 	function mediathinggy() {
-	  if ("mediaSession" in navigator) {
-      navigator.mediaSession.metadata = new MediaMetadata({
-      title: audioTracks[currentAlbum][currentTrackIndex],
-      artist: albums[currentAlbumIndex].artist,
-      album: albums[currentAlbumIndex].album,
-      artwork: [
-        {
-          src: 'albums[currentAlbumIndex].image',
-          sizes: "96x96",
-          type: "image/png",
-        },
-        {
-          src: 'albums[currentAlbumIndex].image',
-          sizes: "128x128",
-          type: "image/png",
-        },
-        {
-          src: 'albums[currentAlbumIndex].image',
-          sizes: "192x192",
-          type: "image/png",
-        },
-        {
-          src: 'albums[currentAlbumIndex].image',
-          sizes: "256x256",
-          type: "image/png",
-        },
-        {
-          src: 'albums[currentAlbumIndex].image',
-          sizes: "384x384",
-          type: "image/png",
-        },
-        {
-          src: 'albums[currentAlbumIndex].image',
-          sizes: "512x512",
-          type: "image/png",
-        },
+    if ("mediaSession" in navigator) {
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: audioTracks[currentAlbum][currentTrackIndex],
+    artist: albums[currentAlbumIndex].artist,
+    album: albums[currentAlbumIndex].album,
+    artwork: [
+      {
+        src: albums[currentAlbumIndex].image,
+        sizes: "96x96",
+        type: "image/png",
+      },
+      {
+        src: albums[currentAlbumIndex].image,
+        sizes: "128x128",
+        type: "image/png",
+      },
+      {
+        src: albums[currentAlbumIndex].image,
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        src: albums[currentAlbumIndex].image,
+        sizes: "256x256",
+        type: "image/png",
+      },
+      {
+        src: albums[currentAlbumIndex].image,
+        sizes: "384x384",
+        type: "image/png",
+      },
+      {
+        src: albums[currentAlbumIndex].image,
+        sizes: "512x512",
+        type: "image/png",
+      },
     ],
   });
+
 
   navigator.mediaSession.setActionHandler("play", () => {
     playPause();
