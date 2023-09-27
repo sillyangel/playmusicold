@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,26 +33,21 @@
     
 </head>
 <body>
-  <div class="topnav">
-    <a href="/">Home</a>
-    <a href="https://forms.gle/8Pyc2k3QLwyvsSEv9" style="text-align: right;">Request a Artist</a>
-  </div>
-  <div class="audio-controls">
-        <div class="album-cover">
-            <img id="albumCover" src="assets/nonealbum.png" alt="Album Cover" width="60px" height="60px">
+          <div class="sidebarmen">
+            <img src="assets/logo/mlogo.png" width="50px" height="50px">
+            <br>
+                        <br>
+                                    <br>
+            <br>
+            <ul>
+               <!-- <li><a href="#home"><i class="fa-regular fa-user" style="color: #ffffff;"></i> </a></li> -->
+                <li><button onclick="switchthingy('search')"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> </button></li>
+                <li><button onclick="switchthingy('hom')"><i class="fa-solid fa-house" style="color: #ffffff;"></i> </button></li>
+                <li><button onclick="switchthingy('lil')"><i class="fa-solid fa-lines-leaning" style="color: #ffffff;"></i> </button></li>
+            </ul>
         </div>
-          <div id="currentTrack"> </div>
-            <button alt="" onclick="previousAlbum()"><i class="fas fa-chevron-left"></i></button>
-            <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
-            <button onclick="playPause()"><i class="fas fa-play"></i></button>
-            <button onclick="skipTrack()"><i class="fas fa-forward"></i></button>
-            <button onclick="nextAlbum()"><i class="fas fa-chevron-right"></i></button>
-            <input type="range" id="volume" min="0" max="1" step="0.01" onchange="setVolume()">
-            <div id="songTime">0:00</div>
-            <progress id="progress" value="0" max="100" onclick="seek(event)"></progress>
-            <div id="songDuration">0:00</div>
-        </div>
-        <div id="songselector">
+         <div id="songselector" >
+           <h2>Home</h2>
           <h1>Tyler the creator</h1>
           <button onclick="albumsec(0)"><img src="songs/tylerthecreator/wolf/albumcover.png" width="100px" height="100px"></button>
           <button onclick="albumsec(1)"><img src="songs/tylerthecreator/flowerboy/albumcover.png" width="100px" height="100px"></button>
@@ -117,6 +114,28 @@
           <br>
           
           
+        </div>
+        <div style="display: none" id="searching">
+          <h2>Search</h2>
+          <input type="text" id="myInput" onkeyup="" placeholder="Search for songs">
+        </div>
+        <div style="display: none" id="lilbrary">
+          <h2>Your Library</h2>
+        </div>
+  <div class="audio-controls">
+        <div class="album-cover">
+            <img id="albumCover" src="assets/nonealbum.png" alt="Album Cover" width="60px" height="60px">
+        </div>
+          <div id="currentTrack"> </div>
+            <button alt="" onclick="previousAlbum()"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
+            <button onclick="playPause()"><i class="fas fa-play"></i></button>
+            <button onclick="skipTrack()"><i class="fas fa-forward"></i></button>
+            <button onclick="nextAlbum()"><i class="fas fa-chevron-right"></i></button>
+            <input type="range" id="volume" min="0" max="1" step="0.01" onchange="setVolume()">
+            <div id="songTime">0:00</div>
+            <progress id="progress" value="0" max="100" onclick="seek(event)"></progress>
+            <div id="songDuration">0:00</div>
         </div>
     <audio id="myAudio" controls>
         Your browser does not support the audio element.
@@ -291,6 +310,20 @@
             "arcticmonkeys/car": [
               ""
             ],
+            "melanie/crybaby": [],
+            "melanie/k12": [],
+            "melanie/portals": [],
+            "theweekend/kissland": [],
+            "theweekend/bbtm": [],
+            "theweekend/starboy": [],
+            "theweekend/afterhours": [],
+            "theweekend/dawnfm": [],
+            "laufey/bewitched": [],
+            "laufey/eikal": [],
+            "rr/llf": [],
+            "rr/pemfba": [],
+            "ld/sp": [],
+            "ld/cc": []
         };
         var currentAlbum = "tylerthecreator/wolf";
         var albums = [
@@ -308,6 +341,20 @@
             { artist: "Arctic Monkeys", album: "Suck It and See", folder: "arcticmonkeys/sias", image: "songs/arcticmonkeys/sias/albumcover.jpg"},
             { artist: "Arctic Monkeys", album: "Tranquility Base Hotel & Casino", folder: "arcticmonkeys/tbhc", image: "songs/arcticmonkeys/tbhc/albumcover.png"},
             { artist: "Arctic Monkeys", album: "The Car", folder: "arcticmonkeys/car", image: "songs/arcticmonkeys/car/albumcover.jpg"},
+            { artist: "Melanie Martinez", album: "Crybaby", folder: "melanie/crybaby", image: "songs/melanie/crybaby/albumcover.png"},
+            { artist: "Melanie Martinez", album: "K-12", folder: "melanie/k12", image: "songs/melanie/k12/albumcover.png"},
+            { artist: "Melanie Martinez", album: "Portals", folder: "melanie/portals", image: "songs/melanie/portals/albumcover.png"},
+            { artist: "The weeknd", album: "Kiss Land", folder: "theweekend/kissland", image: "songs/theweekend/kissland/albumcover.png"},
+            { artist: "The weeknd", album: "Beauty Behind the Madness", folder: "theweekend/bbtm", image: "songs/theweekend/bbtm/albumcover.png"},
+            { artist: "The weeknd", album: "starboy", folder: "theweekend/starboy", image: "songs/theweekend/starboy/albumcover.png"},
+            { artist: "The weeknd", album: "Afterhours", folder: "theweekend/afterhours", image: "songs/theweekend/afterhours/albumcover.png"},
+            { artist: "The weeknd", album: "Dawnfm", folder: "theweekend/dawnfm", image: "songs/theweekend/dawnfm/albumcover.png"},
+            { artist: "Laufey", album: "Bewitched", folder: "laufey/bewitched", image: "songs/laufey/bewitched/albumcover.png"},
+            { artist: "Laufey", album: "Everything I know about love", folder: "laufey/eikal", image: "songs/laufey/eikal/albumcover.png"},
+            { artist: "Roddy Ricch", album: "life lives fast", folder: "rr/llf", image: "songs/rr/llf/albumcover.png"},
+            { artist: "Roddy Ricch", album: "Please excuse me for being antisocial", folder: "rr/pemfba", image: "songs/rr/pemfba/albumcover.png"},
+            { artist: "Lemon Demon", album: "Spirit phone", folder: "ld/sp", image: "songs/ld/sp/albumcover.png"},
+            { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.png"}
             // Add more albums here
         ];
 	var currentAlbumIndex = 0;
@@ -451,6 +498,7 @@
 		audio.play();
 		// Update the album cover image
 		updateAlbumCover();
+
 	}
 	function mediathinggy() {
     if ("mediaSession" in navigator) {
@@ -517,6 +565,26 @@
   });
 
 }
+}
+function switchthingy(st) {
+  var home = document.getElementById("songselector")
+  var search = document.getElementById("searching")
+  var libaraby = document.getElementById("lilbrary")
+  if (st == "hom") {
+    home.style.display = "block";
+    search.style.display = "none";
+    libaraby.style.display = "none";
+  } else if (st == "lil"){
+    home.style.display = "none";
+    search.style.display = "none";
+    libaraby.style.display = "block";
+  } else {
+    home.style.display = "none";
+    search.style.display = "block";
+    libaraby.style.display = "none";
+  }
+  
+  
 }
     </script>
 </body>
