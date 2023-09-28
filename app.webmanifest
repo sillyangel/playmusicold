@@ -1,23 +1,23 @@
 {
-    "name": "Play!",
-    "short_name": "play!",
-    "theme_color": "blue",
-    "background_color": "#222222",
-    "start_url": "./",
-    "id": "/",
-    "display": "standalone",
-    "scope": "./",
-    "icons": [
-       {
-          "src": "assets/logo/icon-512x512.png",
-          "type": "image/png",
-          "sizes": "512x512"
-       },
-       {
-          "src": "assets/logo/icon-512x512.png",
-          "type": "image/png",
-          "sizes": "512x512",
-          "purpose": "maskable"
-       }
-     ]
-  }
+  "name": "Play!",
+  "short_name": "play!",
+  "theme_color": "blue",
+  "background_color": "#222222",
+  "start_url": "./",
+  "id": "/",
+  "display": "standalone",
+  "scope": "./",
+  "icons": [
+     {
+        "src": "assets/logo/icon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+     },
+     {
+        "src": "assets/logo/icon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512",
+        "purpose": "maskable"
+     }
+   ]
+}
