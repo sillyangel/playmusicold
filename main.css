@@ -197,7 +197,7 @@ border: none;
 cursor: pointer;
 }
 
-#lilbrary {
+#library {
   left: 20px;
   padding-left: 20px;
   margin-top: 0 10px;
@@ -242,7 +242,7 @@ input[type=text]:focus {
   padding-top: 5px;
 }
 
-#lilbrary button {
+#library button {
   background: none;
   border: none;
   cursor: pointer;
