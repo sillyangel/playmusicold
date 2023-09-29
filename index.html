@@ -141,7 +141,7 @@
           <br>
           <br>
         </div>
-        <div style="display: none" id="lilbrary">
+        <div style="display: none" id="library">
           <h2>Your Library</h2>
           <button onclick="createaplaylist()"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
         </div>
@@ -592,7 +592,7 @@
 function switchthingy(st) {
   var home = document.getElementById("songselector")
   var search = document.getElementById("searching")
-  var libaraby = document.getElementById("lilbrary")
+  var libaraby = document.getElementById("library")
   if (st == "hom") {
     home.style.display = "block";
     search.style.display = "none";
@@ -611,37 +611,59 @@ function switchthingy(st) {
 }
 
 function searchfunction() {
-  let input = document.getElementById('myInput').value
-  input = input.toLowerCase();
+  let input = document.getElementById('myInput').value.toLowerCase();
   let x = document.querySelector('#list-holder');
-  x.innerHTML = ""
+  x.innerHTML = "";
 
   for (i = 0; i < albums.length; i++) {
     let obj = albums[i];
-    let obj2 = audioTracks;
+    let albumName = obj.album.toLowerCase();
+    let artistName = obj.artist.toLowerCase();
 
-    if (obj.artist.toLowerCase().includes(input)) {
-      const elem = document.createElement("li")
-      elem.innerHTML = `<button onclick="albumsec()">${obj.album} - ${obj.artist}</button>`;
-      x.appendChild(elem)
-      
+    if (albumName.includes(input) || artistName.includes(input)) {
+      const elem = document.createElement("li");
+      elem.innerHTML = `${obj.album} - ${obj.artist}`;
+      x.appendChild(elem);
     }
   }
 }
+
 function createaplaylist() {
   var nameofplaylist = prompt("Name of new playlist?");
-  var urltonewplaylistimg = prompt("url for the playimg url");
+  var urltonewplaylistimg = prompt("URL for the playlist image?");
   localStorage.setItem("playlist", nameofplaylist);
+  localStorage.setItem("playlistimg", urltonewplaylistimg); // Store the playlist image URL
 }
-  
-  const ul = document.getElementById('lilbrary');
-  var nameofoldplaylist = localStorage.getItem("playlist");
-  var imageofthenewplaylist = localStorage.getItem("playlistimg")
-  const li = document.createElement('button');
-  li.innerHTML =  '<img src="" id="playlistbuttonimg" width="120px" height="120px" />';
-  ul.appendChild(li);
-  const imagenewplaylist = document.getElementById('playlistbuttonimg');
-  imagenewplaylist.src = `${imageofthenewplaylist}`;
+
+function createaplaylist() {
+  var nameofplaylist = prompt("Name of new playlist?");
+  var urltonewplaylistimg = prompt("URL for the playlist image?");
+  localStorage.setItem("playlist", nameofplaylist);
+  localStorage.setItem("playlistimg", urltonewplaylistimg); // Store the playlist image URL
+}
+
+// Retrieve playlist name and image URL from localStorage
+var nameofoldplaylist = localStorage.getItem("playlist");
+var imageofthenewplaylist = localStorage.getItem("playlistimg");
+
+const div = document.getElementById('library'); // Use 'lilbrary' as the ID
+const li = document.createElement('div');
+
+// Create a button element and set its text and click behavior
+const button = document.createElement('button');
+
+// Create an image element and set its attributes
+const imagenewplaylist = document.createElement('img');
+imagenewplaylist.src = imageofthenewplaylist; // Set the image source
+imagenewplaylist.width = "120";
+imagenewplaylist.height = "120";
+
+// Append the image to the button
+button.appendChild(imagenewplaylist);
+
+// Append the button to the div with ID 'lilbrary'
+li.appendChild(button);
+div.appendChild(li);
 
     </script>
 </body>
