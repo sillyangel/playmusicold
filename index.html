@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,16 +94,29 @@
           <br>
           <h1>Gorillaz</h1>
           <br>
+          <h1>Kayne West</h1>
+          <br>
+          <h1>Doja Cat</h1>
+          <br>
+          <h1>Elita</h1>
+          <br>
+          <h1>Ericdoa</h1>
+          <br>
+          <h1>Tv girl</h1>
+          <br>
+          <h1>Radiohead</h1>
+          <br>
+          <h1>The cure</h1>
+          <br>
+          <h1>MF DOOM</h1>
+          <br>
+          <h1></h1>
           <br>
           <br>
           <br>
           <br>
           <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
+                    <br>
           <br>
           <br>
           <br>
@@ -116,10 +127,23 @@
         </div>
         <div style="display: none" id="searching">
           <h2>Search</h2>
-          <input type="text" id="myInput" onkeyup="" placeholder="Search for songs">
+          <input type="text" id="myInput" onkeyup="searchfunction()" name="search" placeholder="Search for songs">
+          <ul id="list-holder">
+          </ul>
+                    <br>
+          <br>
+          <br>
+          <br>
+          <br>
+                    <br>
+          <br>
+          <br>
+          <br>
+          <br>
         </div>
         <div style="display: none" id="lilbrary">
           <h2>Your Library</h2>
+          <button onclick="createaplaylist()"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
         </div>
   <div class="audio-controls">
         <div class="album-cover">
@@ -325,7 +349,7 @@
             "ld/cc": []
         };
         var currentAlbum = "tylerthecreator/wolf";
-        var albums = [
+        let albums = [
             { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf", image: "songs/tylerthecreator/wolf/albumcover.png" },
             { artist: "Tyler, The Creator", album: "Flower Boy", folder: "tylerthecreator/flowerboy", image: "songs/tylerthecreator/flowerboy/albumcover.png" },
             { artist: "Tyler, The Creator", album: "Igor", folder: "tylerthecreator/igor", image: "songs/tylerthecreator/igor/igorcover.png" },
@@ -335,7 +359,7 @@
             { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "songs/arcticmonkeys/humbug/albumcover.jpg"},
             { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "songs/wallows/nonthinghappens/albumcover.png"},
             { artist: "Tyler, The Creator", album: "Bastard", folder: "tylerthecreator/bas", image: "songs/tylerthecreator/bas/bas.png" },
-            { artist: "Arctic Monkeys", album: "WPSIATWIN", folder: "arcticmonkeys/wpsiatwin", image: "songs/arcticmonkeys/wpsiatwin/albumcover.jpg"},
+            { artist: "Arctic Monkeys", album: "Whatever People Say I Am, That's What I'm Not", folder: "arcticmonkeys/wpsiatwin", image: "songs/arcticmonkeys/wpsiatwin/albumcover.jpg"},
             { artist: "Arctic Monkeys", album: "Favourite Worst Nightmare", folder: "arcticmonkeys/fwn", image: "songs/arcticmonkeys/fwn/albumcover.jpg"},
             { artist: "Arctic Monkeys", album: "Suck It and See", folder: "arcticmonkeys/sias", image: "songs/arcticmonkeys/sias/albumcover.jpg"},
             { artist: "Arctic Monkeys", album: "Tranquility Base Hotel & Casino", folder: "arcticmonkeys/tbhc", image: "songs/arcticmonkeys/tbhc/albumcover.png"},
@@ -350,7 +374,7 @@
             { artist: "The weeknd", album: "Dawnfm", folder: "theweekend/dawnfm", image: "songs/theweekend/dawnfm/albumcover.png"},
             { artist: "Laufey", album: "Bewitched", folder: "laufey/bewitched", image: "songs/laufey/bewitched/albumcover.png"},
             { artist: "Laufey", album: "Everything I know about love", folder: "laufey/eikal", image: "songs/laufey/eikal/albumcover.png"},
-            { artist: "Roddy Ricch", album: "life lives fast", folder: "rr/llf", image: "songs/rr/llf/albumcover.png"},
+            { artist: "Roddy Ricch", album: "Life Lives fast", folder: "rr/llf", image: "songs/rr/llf/albumcover.png"},
             { artist: "Roddy Ricch", album: "Please excuse me for being antisocial", folder: "rr/pemfba", image: "songs/rr/pemfba/albumcover.png"},
             { artist: "Lemon Demon", album: "Spirit phone", folder: "ld/sp", image: "songs/ld/sp/albumcover.png"},
             { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.png"}
@@ -585,6 +609,40 @@ function switchthingy(st) {
   
   
 }
+
+function searchfunction() {
+  let input = document.getElementById('myInput').value
+  input = input.toLowerCase();
+  let x = document.querySelector('#list-holder');
+  x.innerHTML = ""
+
+  for (i = 0; i < albums.length; i++) {
+    let obj = albums[i];
+    let obj2 = audioTracks;
+
+    if (obj.artist.toLowerCase().includes(input)) {
+      const elem = document.createElement("li")
+      elem.innerHTML = `<button onclick="albumsec()">${obj.album} - ${obj.artist}</button>`;
+      x.appendChild(elem)
+      
+    }
+  }
+}
+function createaplaylist() {
+  var nameofplaylist = prompt("Name of new playlist?");
+  var urltonewplaylistimg = prompt("url for the playimg url");
+  localStorage.setItem("playlist", nameofplaylist);
+}
+  
+  const ul = document.getElementById('lilbrary');
+  var nameofoldplaylist = localStorage.getItem("playlist");
+  var imageofthenewplaylist = localStorage.getItem("playlistimg")
+  const li = document.createElement('button');
+  li.innerHTML =  '<img src="" id="playlistbuttonimg" width="120px" height="120px" />';
+  ul.appendChild(li);
+  const imagenewplaylist = document.getElementById('playlistbuttonimg');
+  imagenewplaylist.src = `${imageofthenewplaylist}`;
+
     </script>
 </body>
 </html>

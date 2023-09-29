@@ -142,7 +142,6 @@ ul {
   background-color: #222;
   border-right: 5px;
   border-color: #333;
-  width: 5%;
   
 }
 li i {
@@ -234,4 +233,17 @@ input[type=text] {
 
 input[type=text]:focus {
   border: 3px solid #ffffff;
+}
+
+#list-holder li {
+  font-weight: bold;
+  font-size: 15px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+#lilbrary button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
