@@ -101,6 +101,8 @@
     <div class="audio-controls">
             <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="60px" height="60px">
           <div class="currentTrack"> </div>
+      <button onclick="openfullplayer()" id="arrow-button"><i class="fas fa-chevron-up"></i></button>
+
         </div>
     <div id="playerfull">
       <button onclick="hidefullplayer()" id="arrow-button"><i class="fas fa-chevron-down"></i></button>
@@ -136,20 +138,27 @@
 </body>
 <script src="main.js"></script>
 <script>
-  var songselectorjs = document.getElementById("songselector")
-  var playerfull = document.getElementById("playerfull")
-  var playermini = document.getElementById("audio-controls")
-  
-  function hidefullplayer() {
-    songselectorjs.style.display = "block";
-    playerfull.style.display = "none";
-    playermini.style.display = "block";
-  }
-  function openfullplayer() {
-    songselectorjs.style.display = "none";
-    playerfull.style.display = "block";
-    playermini.style.display = "none";
+var songselectorjs = document.getElementById("songselector");
+var playerfull = document.getElementById("playerfull");
+var playermini = document.getElementsByClassName("audio-controls");
 
+function hidefullplayer() {
+  songselectorjs.style.display = "block";
+  playerfull.style.display = "none";
+  // Loop through the elements with the class "audio-controls" and set their display style
+  for (var i = 0; i < playermini.length; i++) {
+    playermini[i].style.display = "flex";
   }
+}
+
+function openfullplayer() {
+  songselectorjs.style.display = "none";
+  playerfull.style.display = "block";
+  // Loop through the elements with the class "audio-controls" and set their display style
+  for (var i = 0; i < playermini.length; i++) {
+    playermini[i].style.display = "none";
+  }
+}
+
 </script>
 </html>

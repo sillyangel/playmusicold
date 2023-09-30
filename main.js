@@ -265,14 +265,17 @@ audio.currentTime = seekTime;
 }
 // Modify the updateAlbumCover function
 function updateAlbumCover() {
-// Get the album cover image element
-var albumCover = document.getElementById("albumCover");
-// Get the selected album object
-var selectedAlbum = albums[currentAlbumIndex];
-// Set the src attribute to the image location specified in the album object
-albumCover.src = selectedAlbum.image;
+    // Get all elements with the same ID "albumCover"
+    var albumCovers = document.querySelectorAll('[id="albumCover"]');
+    var selectedAlbum = albums[currentAlbumIndex];
 
+    // Loop through each element with the same ID and update its src attribute
+    albumCovers.forEach(function (element) {
+        element.src = selectedAlbum.image;
+    });
 }
+
+
 // Call the updateAlbumCover function when changing albums
 function nextAlbum() {
 currentAlbumIndex++;
