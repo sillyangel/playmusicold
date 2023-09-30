@@ -1,2 +1,3 @@
-# playmusic
-online music player with custom thingys
+# PLAYMUSIC (a knockoff spofity)
+
+no ads and better spotify no use anything abt spotify
