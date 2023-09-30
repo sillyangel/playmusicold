@@ -23,7 +23,19 @@ h2 {
     border: none;
     color: #fff;
     cursor: pointer;
-    font-size: 24px;
+    left: 0px;
+    padding-top: 20px;
+    padding-left: 10px;
+
+   /* Increase icon size */
+}
+.audio-controls i {
+    font-size: 1px;
+    padding: 1px;
+    font-size: 12px;
+
+    transform: scale(0.9);
+
    /* Increase icon size */
 }
 .audio-controls hr {
@@ -81,9 +93,7 @@ progress {
      text-align: center;
      color: #fff;
      margin-left: 10px;
-     font-size: 10px;
-     width: auto;
-     max-width: 50%;
+     font-size: 15px;
 }
 .currentTrack2 {
     text-align: left;
@@ -97,7 +107,9 @@ progress {
     width: 99%;
     bottom: 0px;
     border-top: 2px solid #333;
-    display: none;
+    display: flex;
+    width: auto;
+    
 }
 #songselector img {
   width: 80px;
@@ -110,7 +122,7 @@ progress {
   float: right;
   width: 95%;
   height: auto;
-  display: none;
+  display: block;
 }
 #albumcover {
     width: auto;
@@ -124,7 +136,7 @@ cursor: pointer;
 #playerfull {
     margin-top: 0 10px;
     padding: 20px;
-    display: block;
+    display: none;
 }
 #playerfull img {
     align-self: center;
