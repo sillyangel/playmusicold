@@ -140,3 +140,19 @@ cursor: pointer;
     cursor: pointer;
     font-size: 40px;
 }
+#arrow-button {
+    background-color: none;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 1px;
+    cursor: pointer;
+}
+
+#arrow-button i {
+    padding-top: 5px;
+    padding-bottom: 30px;
+    margin-right: 5px;
+    font-size: 25px;
+}

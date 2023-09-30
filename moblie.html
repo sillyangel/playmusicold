@@ -103,6 +103,7 @@
           <div class="currentTrack"> </div>
         </div>
     <div id="playerfull">
+      <button onclick="hidefullplayer()" id="arrow-button"><i class="fas fa-chevron-down"></i></button>
         <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="300px" height="300px">
         <br>
         <br>
@@ -135,5 +136,20 @@
 </body>
 <script src="main.js"></script>
 <script>
+  var songselectorjs = document.getElementById("songselector")
+  var playerfull = document.getElementById("playerfull")
+  var playermini = document.getElementById("audio-controls")
+  
+  function hidefullplayer() {
+    songselectorjs.style.display = "block";
+    playerfull.style.display = "none";
+    playermini.style.display = "block";
+  }
+  function openfullplayer() {
+    songselectorjs.style.display = "none";
+    playerfull.style.display = "block";
+    playermini.style.display = "none";
+
+  }
 </script>
 </html>
