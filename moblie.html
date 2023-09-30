@@ -98,29 +98,42 @@
       
       
     </div>
-<div class="audio-controls">
-    <div class="album-cover">
-        <img id="albumCover" src="assets/nonealbum.png" alt="Album Cover" width="60px" height="60px">
-    </div>
-      <div id="currentTrack"> </div>
-        <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
-        <button id="playbuttonthung" onclick="playPause()"><i class="fas fa-play"></i></button>
-        <button onclick="skipTrack()"><i class="fas fa-forward"></i></button>
+    <div class="audio-controls">
+            <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="60px" height="60px">
+          <div class="currentTrack"> </div>
+        </div>
+    <div id="playerfull">
+        <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="300px" height="300px">
+        <br>
+        <br>
+        <div class="currentTrack2"> </div>
+        <div id="progress-container">
+        <br>
+
+        <br>
+
+        <br>
+
         <div id="songTime">0:00</div>
         <progress id="progress" value="0" max="100" onclick="seek(event)"></progress>
         <div id="songDuration">0:00</div>
+        </div>
+        <br>
+
+        <div id="audio-controls">
+            <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
+            <button id="playbuttonthung" onclick="playPause()"><i class="fas fa-play"></i></button>
+            <button onclick="skipTrack()"><i class="fas fa-forward"></i></button>
+        </div>
     </div>
+
+
+
 <audio id="myAudio" controls>
     Your browser does not support the audio element.
 </audio>
 </body>
 <script src="main.js"></script>
 <script>
-function updateTrackText() {
-var artist = albums[currentAlbumIndex].artist;
-var album = albums[currentAlbumIndex].album;
-var track = audioTracks[currentAlbum][currentTrackIndex];
-currentTrackText.textContent = artist + " - " + track;
-}
 </script>
 </html>
