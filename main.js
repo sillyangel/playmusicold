@@ -215,7 +215,8 @@ var albums = [
     // Add more albums here
 ];
 var currentAlbumIndex = 0;
-var currentTrackText = document.getElementById("currentTrack");
+var currentTrackElements = document.querySelectorAll(".currentTrack");
+var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
 
 function loadTrack() {
 var trackPath = audioTracks[currentAlbum][currentTrackIndex];
@@ -264,14 +265,17 @@ audio.currentTime = seekTime;
 }
 // Modify the updateAlbumCover function
 function updateAlbumCover() {
-// Get the album cover image element
-var albumCover = document.getElementById("albumCover");
-// Get the selected album object
-var selectedAlbum = albums[currentAlbumIndex];
-// Set the src attribute to the image location specified in the album object
-albumCover.src = selectedAlbum.image;
+    // Get all elements with the same ID "albumCover"
+    var albumCovers = document.querySelectorAll('[id="albumCover"]');
+    var selectedAlbum = albums[currentAlbumIndex];
 
+    // Loop through each element with the same ID and update its src attribute
+    albumCovers.forEach(function (element) {
+        element.src = selectedAlbum.image;
+    });
 }
+
+
 // Call the updateAlbumCover function when changing albums
 function nextAlbum() {
 currentAlbumIndex++;
@@ -322,6 +326,24 @@ skipTrack();
 });
 
 
+
+function updateTrackText() {
+    var artist = albums[currentAlbumIndex].artist;
+    var track = audioTracks[currentAlbum][currentTrackIndex];
+    
+    // Loop through each element with class "currentTrack" and update its content
+    currentTrackElements.forEach(function (element) {
+        element.textContent = artist + " - " + track;
+    });
+
+    // Loop through each element with class "currentTrack2" and update its content
+    currentTrack2Elements.forEach(function (element) {
+        element.textContent = artist + " - " + track;
+    });
+}
+
+// Call the function to update both elements
+updateTrackText();
 // Add these lines to update the song duration and current time
 var songTimeElement = document.getElementById("songTime");
 var songDurationElement = document.getElementById("songDuration");

@@ -125,7 +125,7 @@
         <div class="album-cover">
             <img id="albumCover" src="assets/nonealbum.png" alt="Album Cover" width="60px" height="60px">
         </div>
-          <div id="currentTrack"> </div>
+          <div class="currentTrack"> </div>
             <button alt="" onclick="previousAlbum()"><i class="fas fa-chevron-left"></i></button>
             <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
             <button id="playbuttonthung" onclick="playPause()"><i class="fas fa-play"></i></button>
@@ -141,12 +141,4 @@
     </audio>
 </body>
 <script src="main.js"></script>
-<script>
-  function updateTrackText() {
-var artist = albums[currentAlbumIndex].artist;
-var album = albums[currentAlbumIndex].album;
-var track = audioTracks[currentAlbum][currentTrackIndex];
-currentTrackText.textContent = artist + " - " + album + " - " + track;
-}
-  </script>
 </html>
