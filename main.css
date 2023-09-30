@@ -62,7 +62,7 @@ h2 {
  audio {
      display: none;
 }
- #currentTrack {
+ .currentTrack {
      text-align: center;
      color: #fff;
      margin-left: 10px;

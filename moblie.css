@@ -10,51 +10,106 @@ h1 {
 h2 {
     font-size: 30px;
 }
- .audio-controls {
-     display: flex;
-     align-items: center;
-     background-color: #242424;
-     color: #fff;
-     padding: 5px;
-     font-size: 10px;
+/* Style the custom audio controls */
+.audio-controls {
+    display: flex;
+    align-items: center;
+    background-color: #242424;
+    color: #fff;
+    padding: 10px;
 }
- .audio-controls button {
-     background: none;
-     border: none;
-     color: #fff;
-     cursor: pointer;
-     font-size: 20px;
-     width: 50%;
+.audio-controls button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    left: 0px;
+    padding-top: 20px;
+    padding-left: 10px;
+
+   /* Increase icon size */
 }
- .audio-controls progress {
-     width: 100%;
+.audio-controls i {
+    font-size: 1px;
+    padding: 1px;
+    font-size: 12px;
+
+    transform: scale(0.9);
+
+   /* Increase icon size */
+}
+.audio-controls hr {
+    width: 100%;
+   /* Full width line */
+    margin-top: 10px;
+   /* Space between line and text */
+    border: 1px solid #555;
+   /* Line color */
+}
+
+/* Hide the default audio player */
+audio {
+    display: none;
+}
+/* Add styles to position the song time and duration */
+#audio-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#progress-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+progress {
+    width: 100%;
+}
+#songTime,
+#songDuration {
+    position: absolute;
+    bottom: -6px; /* Adjust the value to control the vertical positioning */
+}
+
+#songTime {
+    left: 0;
+}
+
+#songDuration {
+    right: 0;
+}
+
+.audio-controls {
+   position: fixed;
+   width: 99%;
+   bottom: 0px;
+   border-top: 2px solid #333;
 }
  audio {
      display: none;
 }
- #currentTrack {
+ .currentTrack {
      text-align: center;
      color: #fff;
      margin-left: 10px;
-     font-size: 5px;
+     font-size: 15px;
 }
- #audio-controls {
-     display: flex;
-     align-items: center;
-}
- #progress {
-     flex-grow: 1;
-     margin: 0 10px;
-}
- #songTime, #songDuration {
-     white-space: nowrap;
-     margin: 0 10px;
+.currentTrack2 {
+    text-align: left;
+    color: #fff;
+    font-size: auto;
+    width: auto;
+    font-weight: bold;
 }
 .audio-controls {
     position: fixed;
     width: 99%;
     bottom: 0px;
     border-top: 2px solid #333;
+    display: flex;
+    width: auto;
+    
 }
 #songselector img {
   width: 80px;
@@ -67,9 +122,49 @@ h2 {
   float: right;
   width: 95%;
   height: auto;
+  display: block;
+}
+#albumcover {
+    width: auto;
 }
 #songselector button {
 background: none;
 border: none;
 cursor: pointer;
+}
+
+#playerfull {
+    margin-top: 0 10px;
+    padding: 20px;
+    display: none;
+}
+#playerfull img {
+    align-self: center;
+    padding-left: 2%;
+}
+
+
+
+#playerfull button {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 40px;
+}
+#arrow-button {
+    background-color: none;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 1px;
+    cursor: pointer;
+}
+
+#arrow-button i {
+    padding-top: 5px;
+    padding-bottom: 30px;
+    margin-right: 5px;
+    font-size: 25px;
 }
