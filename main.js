@@ -258,14 +258,28 @@ var audioTracks = {
         "14. I Heard You Married.mp3",
         "15. Less Than Zero.mp3",
         "16. Phantom Regret by Jim.mp3"
-
     ],
     "laufey/bewitched": [],
     "laufey/eikal": [],
     "rr/llf": [],
     "rr/pemfba": [],
     "ld/sp": [],
-    "ld/cc": []
+    "ld/cc": [],
+    "kanyewest/mbdtf": [
+        "01. Dark Fantasy.mp3",
+        "02. Who Will Survive In America.mp3",
+        "03. Gorgeous [feat. Kid Cudi].mp3",
+        "04. POWER.mp3",
+        "05. All Of The Lights [Interlude].mp3",
+        "06. All Of The Lights.mp3",
+        "07. Monster [feat. Jay-Z, Rick Ross, Nicki Minaj & Bon Iver].mp3",
+        "08. So Appalled [feat. Jay-Z, Pusha T, Prynce Cy Hi, Swizz Beatz & The RZA].mp3",
+        "09. Devil In A New Dress [feat. Rick Ross].mp3",
+        "10. Runaway [feat. Pusha T].mp3",
+        "11. Hell Of A Life.mp3",
+        "12. Blame Game [feat. John Legend].mp3",
+        "13. Lost In The World [feat. Bon Iver].mp3"
+    ]
 };
 var currentAlbum = "tylerthecreator/wolf";
 var albums = [
@@ -296,7 +310,8 @@ var albums = [
     { artist: "Roddy Ricch", album: "life lives fast", folder: "rr/llf", image: "songs/rr/llf/albumcover.png"},
     { artist: "Roddy Ricch", album: "Please excuse me for being antisocial", folder: "rr/pemfba", image: "songs/rr/pemfba/albumcover.png"},
     { artist: "Lemon Demon", album: "Spirit phone", folder: "ld/sp", image: "songs/ld/sp/albumcover.png"},
-    { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.png"}
+    { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.png"},
+    { artist: "Kanye West", album: "My Beautiful Dark Twisted Fantasy", folder: "kanyewest/mbdtf", image: "songs/kanyewest/mbdtf/albumcover.png"}
     // Add more albums here
 ];
 var currentAlbumIndex = 0;
