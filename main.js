@@ -291,7 +291,63 @@ var audioTracks = {
       "08 Kanye West - Guilt Trip.mp3",
       "09 Kanye West - Send It Up.mp3",
       "10 Kanye West - Bound 2.mp3"
+    ],
+    "kanyewest/ye": [
+        "01. I Thought About Killing You.mp3",
+        "02. Yikes.mp3",
+        "03. All Mine.mp3",
+        "04. Wouldn't Leave.mp3",
+        "05. No Mistakes.mp3",
+        "06. Ghost Town.mp3",
+        "07. Violent Crimes.mp3"
+    ],
+    "kanyewest/jesusisking": [
+        "01 Every Hour (feat. Sunday Service Choir).mp3",
+        "02 Selah.mp3",
+        "03 Follow God.mp3",
+        "04 Closed On Sunday.mp3",
+        "05 On God.mp3",
+        "06 Everything We Need (feat. Ty Doll.mp3",
+        "07 Water (feat. Ant Clemons).mp3",
+        "08 God Is.mp3",
+        "09 Hands On (feat. Fred Hammond).mp3",
+        "10 Use This Gospel (feat. Clipse & K.mp3",
+        "11 Jesus Is Lord.mp3"
+    ],
+    "kanyewest/donda": [
+        "01 Donda Chant.mp3",
+        "02 Jail.mp3",
+        "03 God Breathed.mp3",
+        "04 Off The Grid.mp3",
+        "05 Hurricane.mp3",
+        "06 Praise God.mp3",
+        "07 Jonah.mp3",
+        "08 Ok Ok.mp3",
+        "09 Junya.mp3",
+        "10 Believe What I Say.mp3",
+        "11 24.mp3",
+        "12 Remote.mp3",
+        "13 Moon.mp3",
+        "14 Heaven And Hell.mp3",
+        "15 Donda.mp3",
+        "16 Keep My Spirit Alive.mp3",
+        "17 Jesus Lord.mp3",
+        "18 New Again.mp3",
+        "19 Tell The Vision.mp3",
+        "20 Lord I Need You.mp3",
+        "21 Pure Souls.mp3",
+        "22 Come To Life.mp3",
+        "23 No Child Left Behind.mp3",
+        "24 Jail Pt 2.mp3",
+        "25 Ok Ok Pt 2.mp3",
+        "26 Junya Pt 2.mp3",
+        "27 Jesus Lord Pt 2.mp3"
+    ],
+    "kanyewest/donda2": [
+        "01 True Love (feat. XXXTentacion).mp3",
+        "02 Broken Road (feat. Don Toliver).mp3"
     ]
+
 };
 var currentAlbum = "tylerthecreator/wolf";
 var albums = [
