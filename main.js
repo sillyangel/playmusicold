@@ -273,12 +273,24 @@ var audioTracks = {
         "05. All Of The Lights [Interlude].mp3",
         "06. All Of The Lights.mp3",
         "07. Monster [feat. Jay-Z, Rick Ross, Nicki Minaj & Bon Iver].mp3",
-        "08. So Appalled [feat. Jay-Z, Pusha T, Prynce Cy Hi, Swizz Beatz & The RZA].mp3",
+        "08. So Appalled [feat. Jay-Z, Pusha T, CyHi Da Prynce, Swizz Beatz & The RZA].mp3",
         "09. Devil In A New Dress [feat. Rick Ross].mp3",
         "10. Runaway [feat. Pusha T].mp3",
         "11. Hell Of A Life.mp3",
         "12. Blame Game [feat. John Legend].mp3",
         "13. Lost In The World [feat. Bon Iver].mp3"
+    ],
+    "kanyewest/yeezus": [
+      "01 Kanye West - On Sight.mp3",
+      "02 Kanye West - Black Skinhead.mp3",
+      "03 Kanye West - I am A God.mp3",
+      "04 Kanye West - New Slaves.mp3",
+      "05 Kanye West - Hold My Liquor.mp3",
+      "06 Kanye West - I'm In It.mp3",
+      "07 Kanye West - Blood On The Leaves.mp3",
+      "08 Kanye West - Guilt Trip.mp3",
+      "09 Kanye West - Send It Up.mp3",
+      "10 Kanye West - Bound 2.mp3"
     ]
 };
 var currentAlbum = "tylerthecreator/wolf";
@@ -311,7 +323,12 @@ var albums = [
     { artist: "Roddy Ricch", album: "Please excuse me for being antisocial", folder: "rr/pemfba", image: "songs/rr/pemfba/albumcover.png"},
     { artist: "Lemon Demon", album: "Spirit phone", folder: "ld/sp", image: "songs/ld/sp/albumcover.png"},
     { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.png"},
-    { artist: "Kanye West", album: "My Beautiful Dark Twisted Fantasy", folder: "kanyewest/mbdtf", image: "songs/kanyewest/mbdtf/albumcover.png"}
+    { artist: "Kanye West", album: "My Beautiful Dark Twisted Fantasy", folder: "kanyewest/mbdtf", image: "songs/kanyewest/mbdtf/albumcover.jpg"},
+    { artist: "Kanye West", album: "Yeezus", folder: "kanyewest/yeezus", image: "songs/kanyewest/Yeezus/albumcover.jpg"},
+    { artist: "Kanye West", album: "Ye", folder: "kanyewest/ye", image: "songs/kanyewest/ye/Cover.jpg" },
+    { artist: "Kanye West", album: "Jesus Is King", folder: "kanyewest/jesusisking", image: "songs/kanyewest/jesusisking/Cover.jpg" },
+    { artist: "Kanye West", album: "Donda", folder: "kanyewest/donda", image: "songs/kanyewest/donda/cover.jpg" },
+    { artist: "Kanye West", album: "Donda 2", folder: "kanyewest/donda2", image: "songs/kanyewest/donda2/" },
     // Add more albums here
 ];
 var currentAlbumIndex = 0;
