@@ -27,9 +27,10 @@
     </script>
     <!-- Favicon (you can create a favicon.ico and place it in the root directory of your website) -->
     <link rel="icon" href="assets/logo/mlogo.png" type="image/png">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
-<body>
+<body onload="checkOrientationAndRedirect();">
           <div class="sidebarmen">
             <img src="assets/logo/mlogo.png" width="50px" height="50px">
             <br>
@@ -146,4 +147,19 @@
     </audio>
 </body>
 <script src="main.js"></script>
+<script>
+  // Function to check the screen orientation and redirect if necessary
+  function checkOrientationAndRedirect() {
+    if (window.innerWidth <= 768 && (window.orientation === 0 || window.orientation === 180)) {
+      // Portrait orientation on a mobile device, redirect to the mobile version
+      window.location.href = "moblie.html";
+    }
+  }
+
+  // Initial check when the page loads
+  
+
+  // Listen for orientation change events and check again
+  window.addEventListener("orientationchange", checkOrientationAndRedirect);
+</script>
 </html>
