@@ -128,19 +128,26 @@
         </div>
         <div style="display: none" id="lilbrary">
           <h2>Your Library</h2> 
-          <div id="login-form-container" style="display: none;">
-            <h2>Login</h2>
-            <form id="login-form">
-                <label for="login-email">Email:</label>
-                <input type="email" id="login-email" required>
-                
-                <label for="login-password">Password:</label>
-                <input type="password" id="login-password" required>
-                
-                <button type="submit">Log In</button>
-            </form>
         </div>
-        </div>
+        <div style="display: none;"class="container">
+          <h1>Firebase Authentication</h1>
+          <div id="login">
+              <h2>Login</h2>
+              <form id="login-form">
+                  <input type="email" id="login-email" placeholder="Email" required>
+                  <input type="password" id="login-password" placeholder="Password" required>
+                  <button type="submit">Login</button>
+              </form>
+          </div>
+          <div id="signup">
+              <h2>Sign Up</h2>
+              <form id="signup-form">
+                  <input type="email" id="signup-email" placeholder="Email" required>
+                  <input type="password" id="signup-password" placeholder="Password" required>
+                  <button type="submit">Sign Up</button>
+              </form>
+          </div>
+      </div>
   <div class="audio-controls">
         <div class="album-cover">
             <img id="albumCover" src="assets/nonealbum.png" alt="Album Cover" width="60px" height="60px">
