@@ -46,7 +46,6 @@
         </div>
          <div id="songselector" >
            <h2>Home</h2>
-           <!--
           <h1>Tyler the creator</h1>
           <button onclick="albumsec(0)"><img src="songs/tylerthecreator/wolf/albumcover.png" width="100px" height="100px"></button>
           <button onclick="albumsec(1)"><img src="songs/tylerthecreator/flowerboy/albumcover.png" width="100px" height="100px"></button>
@@ -118,9 +117,6 @@
           <br>
           <br>
           <br>
-         -->
-          
-          
         </div>
         <div style="display: none" id="searching">
           <h2>Search</h2>
@@ -129,7 +125,7 @@
         <div style="display: none" id="lilbrary">
           <h2>Your Library</h2> 
         </div>
-        <div style="display: none;"class="container">
+        <div style="display: none;"id="login">
           <h1>Firebase Authentication</h1>
           <div id="login">
               <h2>Login</h2>
@@ -169,27 +165,6 @@
 </body>
 <script src="main.js"></script>
 <script type="module" src="app.js"></script>
-
-<script>
-  function switchthingy(st) {
-    var home = document.getElementById("songselector")
-    var search = document.getElementById("searching")
-    var libaraby = document.getElementById("lilbrary")
-    if (st == "hom") {
-      home.style.display = "block";
-      search.style.display = "none";
-      libaraby.style.display = "none";
-    } else if (st == "lil"){
-      home.style.display = "none";
-      search.style.display = "none";
-      libaraby.style.display = "block";
-    } else {
-      home.style.display = "none";
-      search.style.display = "block";
-      libaraby.style.display = "none";
-    }
- }
-</script>
 <script>
   // Function to check the screen orientation and redirect if necessary
   function checkOrientationAndRedirect() {
