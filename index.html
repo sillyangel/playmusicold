@@ -28,7 +28,7 @@
     <!-- Favicon (you can create a favicon.ico and place it in the root directory of your website) -->
     <link rel="icon" href="assets/logo/mlogo.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
 </head>
 <body onload="checkOrientationAndRedirect();">
           <div class="sidebarmen">
@@ -38,22 +38,22 @@
                                     <br>
             <br>
             <ul>
-                <li><button onclick=""><i class="fa-regular fa-user" style="color: #ffffff;"></i></button></li>
+                <li><button onclick="switchthingy('user')"><i class="fa-regular fa-user" style="color: #ffffff;"></i></button></li>
                 <li><button onclick="switchthingy('search')"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> </button></li>
                 <li><button onclick="switchthingy('hom')"><i class="fa-solid fa-house" style="color: #ffffff;"></i> </button></li>
                 <li><button onclick="switchthingy('lil')"><i class="fa-solid fa-lines-leaning" style="color: #ffffff;"></i> </button></li>
             </ul>
         </div>
-         <div id="songselector" >
+        <div id="songselector">
            <h2>Home</h2>
-          <h1>Tyler the creator</h1>
+           <h1>Tyler the creator</h1>
           <button onclick="albumsec(0)"><img src="songs/tylerthecreator/wolf/albumcover.png" width="100px" height="100px"></button>
           <button onclick="albumsec(1)"><img src="songs/tylerthecreator/flowerboy/albumcover.png" width="100px" height="100px"></button>
           <button onclick="albumsec(2)"><img src="songs/tylerthecreator/igor/igorcover.png" width="100px" height="100px"></button>
           <button onclick="albumsec(3)"><img src="songs/tylerthecreator/cherrybomb/cherrybomb.png" width="100px" height="100px"></button>
           <button onclick="albumsec(4)"><img src="songs/tylerthecreator/goblin/Goblincover.png" width="100px" height="100px"></button>
           <button onclick="albumsec(8)"><img src="songs/tylerthecreator/bas/bas.png" width="101px" height="100px"></button>
-          br>
+          <br>
           <h1>Arctic Monkeys</h1>
           <button onclick="albumsec(5)"><img src="songs/arcticmonkeys/am/albumcover.jpg" width="100px" height="100px"></button>
           <button onclick="albumsec(6)"><img src="songs/arcticmonkeys/humbug/albumcover.jpg" width="100px" height="100px"></button>
@@ -118,32 +118,38 @@
           <br>
           <br>
         </div>
-        <div style="display: none" id="searching">
+        <div style="display: none;" id="searching">
           <h2>Search</h2>
-          <input type="text" id="myInput" onkeyup="" placeholder="Search for songs">
+          <input type="text" id="myInput" onkeyup="searchfunction()" placeholder="Search for songs">
+          <ul id="list-holder">
+          </ul>
+          <br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
-        <div style="display: none" id="lilbrary">
-          <h2>Your Library</h2> 
+        <div style="display: none;" id="lilbrary">
+          <h2>Your Library</h2>
+          <button onclick="createaplaylist()"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
         </div>
-        <div style="display: none;"id="login">
-          <h1>Firebase Authentication</h1>
-          <div id="login">
-              <h2>Login</h2>
-              <form id="login-form">
-                  <input type="email" id="login-email" placeholder="Email" required>
-                  <input type="password" id="login-password" placeholder="Password" required>
-                  <button type="submit">Login</button>
-              </form>
-          </div>
-          <div id="signup">
-              <h2>Sign Up</h2>
-              <form id="signup-form">
-                  <input type="email" id="signup-email" placeholder="Email" required>
-                  <input type="password" id="signup-password" placeholder="Password" required>
-                  <button type="submit">Sign Up</button>
-              </form>
-          </div>
-      </div>
+        <div style="display: none;" id="mlogin">
+          <h2>Account</h2>
+      <div class="container">
+        <h2>Firebase Authentication</h2>
+        <div id="login">
+            <h3>Login</h3>
+            <form id="login-form">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div id="signup">
+            <h3>Sign Up</h3>
+            <form id="signup-form">
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+    </div>
   <div class="audio-controls">
         <div class="album-cover">
             <img id="albumCover" src="assets/nonealbum.png" alt="Album Cover" width="60px" height="60px">
@@ -179,5 +185,14 @@
 
   // Listen for orientation change events and check again
   window.addEventListener("orientationchange", checkOrientationAndRedirect);
+  function switchintols(s) {
+    if (s == "login") {
+      document.getElementById("login").style.display = "block";
+      document.getElementById("signup").style.display = "none";
+    } else {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("signup").style.display = "block";
+    } 
+  }
 </script>
 </html>

@@ -12,46 +12,52 @@ const firebaseConfig = {
   measurementId: "G-DZ88CYJF8L"
 };
 
-const loginForm = document.getElementById("login-form");
-const loginEmail = document.getElementById("login-email");
-const loginPassword = document.getElementById("login-password");
-const signupForm = document.getElementById("signup-form");
-const signupEmail = document.getElementById("signup-email");
-const signupPassword = document.getElementById("signup-password");
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 // Firebase authentication
 const auth = getAuth(app);
 
-// Login event
-loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = loginEmail.value;
-    const password = loginPassword.value;
-    
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("Logged in:", user);
-        })
-        .catch((error) => {
-            console.error("Login error:", error.message);
-        });
-});
+// Get HTML elements
+const loginForm = document.getElementById("login-form");
+const loginEmail = document.getElementById("login-email");
+const loginPassword = document.getElementById("login-password");
+const signupForm = document.getElementById("signup-form");
+const signupEmail = document.getElementById("signup-email");
+const signupPassword = document.getElementById("signup-password");
 
-// Signup event
-signupForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = signupEmail.value;
-    const password = signupPassword.value;
+// Function to handle login
+function handleLogin(event) {
+  event.preventDefault(); // Prevent form submission
+  const email = loginEmail.value;
+  const password = loginPassword.value;
+  
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("Logged in:", user);
+    })
+    .catch((error) => {
+      console.error("Login error:", error.message);
+    });
+}
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log("Signed up:", user);
-        })
-        .catch((error) => {
-            console.error("Signup error:", error.message);
-        });
-});
+// Function to handle signup
+function handleSignup(event) {
+  event.preventDefault(); // Prevent form submission
+  const email = signupEmail.value;
+  const password = signupPassword.value;
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("Signed up:", user);
+    })
+    .catch((error) => {
+      console.error("Signup error:", error.message);
+    });
+}
+
+// Attach event listeners to forms
+loginForm.addEventListener("submit", handleLogin);
+signupForm.addEventListener("submit", handleSignup);    

@@ -220,9 +220,54 @@ input[type=text]:focus {
   border: none;
   cursor: pointer;
 }
-#accountbutton {
-  top: 0px;
-  right: 1px;
-  padding-right: 20px;
-  position: relative;
+
+#mlogin {
+  left: 20px;
+  padding-left: 20px;
+  margin-top: 0 10px;
+  float: right;
+  width: 90%;
+  height: auto;
+  display: flex;
+  align-content: center;
+  text-align: center;
+  align-items: center;
+}
+#mlogin button {
+  background: #333333;
+  border: 3px solid #444444;
+  color: white;
+}
+#mlogin h2 {
+  font-size: 40px;
+}
+h3 {
+  font-size: 25px;
+}
+input[type=email]:focus {
+  border: 3px solid #ffffff
+}
+input[type=email] {
+  box-sizing: border-box;
+  border: 2px solid #acacac;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+input[type=password] {
+  box-sizing: border-box;
+  border: 2px solid #acacac;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+#list-holder li{
+  color: white;
+  cursor: pointer;
 }

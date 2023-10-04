@@ -392,34 +392,34 @@ var currentTrackElements = document.querySelectorAll(".currentTrack");
 var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
 
 function loadTrack() {
-var trackPath = audioTracks[currentAlbum][currentTrackIndex];
-audio.src = "songs/" + currentAlbum + "/" + trackPath;
-audio.load();
-updateTrackText();
-mediathinggy();
+  var trackPath = audioTracks[currentAlbum][currentTrackIndex];
+  audio.src = "songs/" + currentAlbum + "/" + trackPath;
+  audio.load();
+  updateTrackText();
+  mediathinggy();
 }
 
 function playPause() {
-if (audio.paused) {
+  if (audio.paused) {
     audio.play();
     playButton.innerHTML = '<i class="fas fa-pause"></i>';
-} else {
+  } else {
     audio.pause();
     playButton.innerHTML = '<i class="fas fa-play"></i>';
-}
+  }
 }
 
 function setVolume() {
-audio.volume = volumeControl.value;
+  audio.volume = volumeControl.value;
 }
 
 function skipTrack() {
-currentTrackIndex++;
-if (currentTrackIndex >= audioTracks[currentAlbum].length) {
+  currentTrackIndex++;
+  if (currentTrackIndex >= audioTracks[currentAlbum].length) {
     currentTrackIndex = 0; // Loop back to the first track
-}
-loadTrack();
-audio.play();
+  }
+  loadTrack();
+  audio.play();
 }
 
 function previousTrack() {
@@ -516,7 +516,7 @@ function updateTrackText() {
 }
 
 // Call the function to update both elements
-updateTrackText();
+  updateTrackText();
 // Add these lines to update the song duration and current time
 var songTimeElement = document.getElementById("songTime");
 var songDurationElement = document.getElementById("songDuration");
@@ -538,13 +538,13 @@ if (isFinite(duration)) {
 }
 });
 function albumsec(albumnumber) {
-currentAlbumIndex = albumnumber
-currentAlbum = albums[currentAlbumIndex].folder;
-currentTrackIndex = 0;
-loadTrack();
-audio.play();
-// Update the album cover image
-updateAlbumCover();
+  currentAlbumIndex = albumnumber
+  currentAlbum = albums[currentAlbumIndex].folder;
+  currentTrackIndex = 0;
+  loadTrack();
+  audio.play();
+  // Update the album cover image
+  updateAlbumCover();
 
 }
 function mediathinggy() {
@@ -615,35 +615,84 @@ skipTrack();
 }
 
 function switchthingy(st) {
-    try {
-      var home = document.getElementById("songselector");
-      var search = document.getElementById("searching");
-      var libaraby = document.getElementById("lilbrary");
-      var login = document.getElementById("container");
-  
-      if (st == "hom") {
-        home.style.display = "block";
-        search.style.display = "none";
-        libaraby.style.display = "none";
-        login.style.display = "none";
-      } else if (st == "lil") {
-        home.style.display = "none";
-        search.style.display = "none";
-        libaraby.style.display = "block";
-        login.style.display = "none";
-      } else if (st == "user") {
-        home.style.display = "none";
-        search.style.display = "none";
-        libaraby.style.display = "none";
-        login.style.display = "block";
-      } else {
-        home.style.display = "none";
-        search.style.display = "block";
-        libaraby.style.display = "none";
-        login.style.display = "none";
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
+  var home = document.getElementById("songselector");
+  var search = document.getElementById("searching");
+  var libaraby = document.getElementById("lilbrary");
+  var login = document.getElementById("mlogin")
+    
+  if (st == "hom") {
+    home.style.display = "block";
+    search.style.display = "none";
+    libaraby.style.display = "none";
+    login.style.display = "none";
+  }
+  if (st == "lil") {
+    home.style.display = "none";
+    search.style.display = "none";
+    libaraby.style.display = "block";
+    login.style.display = "none";
+  }
+  if (st == "user") {
+    home.style.display = "none";
+    search.style.display = "none";
+    libaraby.style.display ="none";
+    login.style.display = "block";
+  }
+  if (st == "search"){
+    home.style.display = "none";
+    search.style.display = "block";
+    libaraby.style.display = "none";
+    login.style.display = "none";
+  }
+}
+function searchfunction() {
+  let input = document.getElementById('myInput').value.toLowerCase();
+  let x = document.querySelector('#list-holder');
+  x.innerHTML = "";
+
+  for (i = 0; i < albums.length; i++) {
+    let obj = albums[i];
+    let albumName = obj.album.toLowerCase();
+    let artistName = obj.artist.toLowerCase();
+
+    if (albumName.includes(input) || artistName.includes(input)) {
+      const elem = document.createElement("li");
+      elem.innerHTML = `${obj.album} - ${obj.artist}`;
+      x.appendChild(elem);
     }
   }
-  
+}
+
+function createaplaylist() {
+  var nameofplaylist = prompt("Name of new playlist?");
+  var urltonewplaylistimg = prompt("url for the playimg url");
+  localStorage.setItem("playlist", nameofplaylist);
+  localStorage.setItem("playlistimg", urltonewplaylistimg);
+  /* refresh da page*/
+  location.reload();
+}
+function onplaylist() {
+  const nameofoldplaylist = localStorage.getItem("playlist");
+  const imageofthenewplaylist = localStorage.getItem("playlistimg");
+
+  // Check if values are present in local storage
+  if (nameofoldplaylist && imageofthenewplaylist) {
+    const ul = document.getElementById('lilbrary');
+    const li = document.createElement('button');
+    
+    // Create an image element and set its src and alt attributes
+    const imagenewplaylist = document.createElement('img');
+    imagenewplaylist.src = imageofthenewplaylist;
+    imagenewplaylist.alt = nameofoldplaylist;
+    imagenewplaylist.width = 120;
+    imagenewplaylist.height = 120;
+
+    // Append the image to the button and the button to the ul
+    li.appendChild(imagenewplaylist);
+    ul.appendChild(li);
+  } else {
+    console.log("Values in local storage are null or undefined.");
+  }
+}
+
+onplaylist();
