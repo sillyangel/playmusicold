@@ -613,23 +613,3 @@ skipTrack();
 
 }
 }
-function switchthingy(st) {
-var home = document.getElementById("songselector")
-var search = document.getElementById("searching")
-var libaraby = document.getElementById("lilbrary")
-if (st == "hom") {
-home.style.display = "block";
-search.style.display = "none";
-libaraby.style.display = "none";
-} else if (st == "lil"){
-home.style.display = "none";
-search.style.display = "none";
-libaraby.style.display = "block";
-} else {
-home.style.display = "none";
-search.style.display = "block";
-libaraby.style.display = "none";
-}
-
-
-}
