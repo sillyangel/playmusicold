@@ -1,6 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCrXbgrgnkGFfPkbHdJ5oRD4ezbv5ypWbE",
@@ -17,6 +19,7 @@ const analytics = getAnalytics(app);
 
 // Firebase authentication
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 // Get HTML elements
 const loginForm = document.getElementById("login-form");
@@ -25,6 +28,8 @@ const loginPassword = document.getElementById("login-password");
 const signupForm = document.getElementById("signup-form");
 const signupEmail = document.getElementById("signup-email");
 const signupPassword = document.getElementById("signup-password");
+const logoutButton = document.getElementById("logout-button");
+const createPlaylistButton = document.getElementById("createplaylist");
 
 // Function to handle login
 function handleLogin(event) {
@@ -60,4 +65,39 @@ function handleSignup(event) {
 
 // Attach event listeners to forms
 loginForm.addEventListener("submit", handleLogin);
-signupForm.addEventListener("submit", handleSignup);    
+signupForm.addEventListener("submit", handleSignup);
+const user = firebase.auth().currentUser;
+
+function createPlaylistInFirestore() {
+    const nameofplaylist = prompt("Name of new playlist?");
+    const urltonewplaylistimg = prompt("URL for the playlist image");
+  
+    if (nameofplaylist && urltonewplaylistimg) {
+      // Replace 'userId123' with the actual user ID or identifier
+      const userId = user.uid;
+  
+      // Define the playlist data
+      const playlistData = {
+        name: nameofplaylist,
+        imageUrl: urltonewplaylistimg,
+        // Add more properties as needed
+      };
+  
+      // Create a reference to the "playlists" collection
+      const playlistsCollection = collection(db, "playlists");
+  
+      // Add the playlist data to Firestore
+      addDoc(playlistsCollection, {
+        userId: userId,
+        data: playlistData
+      })
+        .then(() => {
+          console.log("Playlist data saved in Firestore.");
+          // Optionally, you can reload the page or update the UI here
+        })
+        .catch((error) => {
+          console.error("Error adding playlist data: ", error);
+        });
+    }
+  }
+ createPlaylistButton.addEventListener("click", createPlaylistInFirestore);

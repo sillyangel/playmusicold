@@ -662,37 +662,3 @@ function searchfunction() {
     }
   }
 }
-
-function createaplaylist() {
-  var nameofplaylist = prompt("Name of new playlist?");
-  var urltonewplaylistimg = prompt("url for the playimg url");
-  localStorage.setItem("playlist", nameofplaylist);
-  localStorage.setItem("playlistimg", urltonewplaylistimg);
-  /* refresh da page*/
-  location.reload();
-}
-function onplaylist() {
-  const nameofoldplaylist = localStorage.getItem("playlist");
-  const imageofthenewplaylist = localStorage.getItem("playlistimg");
-
-  // Check if values are present in local storage
-  if (nameofoldplaylist && imageofthenewplaylist) {
-    const ul = document.getElementById('lilbrary');
-    const li = document.createElement('button');
-    
-    // Create an image element and set its src and alt attributes
-    const imagenewplaylist = document.createElement('img');
-    imagenewplaylist.src = imageofthenewplaylist;
-    imagenewplaylist.alt = nameofoldplaylist;
-    imagenewplaylist.width = 120;
-    imagenewplaylist.height = 120;
-
-    // Append the image to the button and the button to the ul
-    li.appendChild(imagenewplaylist);
-    ul.appendChild(li);
-  } else {
-    console.log("Values in local storage are null or undefined.");
-  }
-}
-
-onplaylist();
