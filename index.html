@@ -127,7 +127,7 @@
         </div>
         <div style="display: none;" id="lilbrary">
           <h2>Your Library</h2>
-          <button onclick="createaplaylist()"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
+          <button id="createplaylist" onclick="createaplaylist()"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
         </div>
         <div style="display: none;" id="mlogin">
           <h2>Account</h2>
@@ -150,6 +150,7 @@
             </form>
         </div>
     </div>
+    </div>
   <div class="audio-controls">
         <div class="album-cover">
             <img id="albumCover" src="assets/nonealbum.png" alt="Album Cover" width="60px" height="60px">
@@ -170,7 +171,7 @@
     </audio>
 </body>
 <script src="main.js"></script>
-<script type="module" src="app.js"></script>
+<script type="module" src="firebase.js"></script>
 <script>
   // Function to check the screen orientation and redirect if necessary
   function checkOrientationAndRedirect() {
@@ -185,14 +186,5 @@
 
   // Listen for orientation change events and check again
   window.addEventListener("orientationchange", checkOrientationAndRedirect);
-  function switchintols(s) {
-    if (s == "login") {
-      document.getElementById("login").style.display = "block";
-      document.getElementById("signup").style.display = "none";
-    } else {
-      document.getElementById("login").style.display = "none";
-      document.getElementById("signup").style.display = "block";
-    } 
-  }
 </script>
 </html>
