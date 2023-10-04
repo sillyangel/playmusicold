@@ -613,3 +613,37 @@ skipTrack();
 
 }
 }
+
+function switchthingy(st) {
+    try {
+      var home = document.getElementById("songselector");
+      var search = document.getElementById("searching");
+      var libaraby = document.getElementById("lilbrary");
+      var login = document.getElementById("container");
+  
+      if (st == "hom") {
+        home.style.display = "block";
+        search.style.display = "none";
+        libaraby.style.display = "none";
+        login.style.display = "none";
+      } else if (st == "lil") {
+        home.style.display = "none";
+        search.style.display = "none";
+        libaraby.style.display = "block";
+        login.style.display = "none";
+      } else if (st == "user") {
+        home.style.display = "none";
+        search.style.display = "none";
+        libaraby.style.display = "none";
+        login.style.display = "block";
+      } else {
+        home.style.display = "none";
+        search.style.display = "block";
+        libaraby.style.display = "none";
+        login.style.display = "none";
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  }
+  
