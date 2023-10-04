@@ -84,34 +84,6 @@ h2 {
      margin: 0 10px;
     /* Adjust the margin as needed */
 }
-/* Styling for the popup container */
- .popup-container {
-     display: none;
-     position: fixed;
-     top: 0;
-     left: 0;
-     width: 100%;
-     height: 100%;
-     background-color: rgba(0, 0, 0, 0.7);
-     z-index: 999;
-     justify-content: center;
-     align-items: center;
-     text-align: center;
-}
-/* Styling for the popup box */
- .popup-box {
-     background-color: #222;
-     padding: 20px;
-     border-radius: 5px;
-}
-/* Styling for the close button */
- .close-button {
-     position: absolute;
-     top: 10px;
-     right: 10px;
-     cursor: pointer;
-}
-
 .audio-controls {
     position: fixed;
     width: 99%;
@@ -197,13 +169,14 @@ border: none;
 cursor: pointer;
 }
 
-#library {
+#lilbrary {
   left: 20px;
   padding-left: 20px;
   margin-top: 0 10px;
   float: right;
   width: 90%;
   height: auto;
+  display: flex;
 }
 #searching {
   left: 20px;
@@ -242,8 +215,14 @@ input[type=text]:focus {
   padding-top: 5px;
 }
 
-#library button {
+#lilbrary button {
   background: none;
   border: none;
   cursor: pointer;
+}
+#accountbutton {
+  top: 0px;
+  right: 1px;
+  padding-right: 20px;
+  position: relative;
 }

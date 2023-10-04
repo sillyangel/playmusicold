@@ -283,7 +283,7 @@ var audioTracks = {
     "kanyewest/yeezus": [
       "01 Kanye West - On Sight.mp3",
       "02 Kanye West - Black Skinhead.mp3",
-      "03 Kanye West - I am A God.mp3",
+      "03 Kanye West - I Am A God.mp3",
       "04 Kanye West - New Slaves.mp3",
       "05 Kanye West - Hold My Liquor.mp3",
       "06 Kanye West - I'm In It.mp3",

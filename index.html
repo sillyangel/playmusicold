@@ -38,7 +38,7 @@
                                     <br>
             <br>
             <ul>
-               <!-- <li><a href="#home"><i class="fa-regular fa-user" style="color: #ffffff;"></i> </a></li> -->
+                <li><button onclick=""><i class="fa-regular fa-user" style="color: #ffffff;"></i></button></li>
                 <li><button onclick="switchthingy('search')"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> </button></li>
                 <li><button onclick="switchthingy('hom')"><i class="fa-solid fa-house" style="color: #ffffff;"></i> </button></li>
                 <li><button onclick="switchthingy('lil')"><i class="fa-solid fa-lines-leaning" style="color: #ffffff;"></i> </button></li>
@@ -52,8 +52,8 @@
           <button onclick="albumsec(2)"><img src="songs/tylerthecreator/igor/igorcover.png" width="100px" height="100px"></button>
           <button onclick="albumsec(3)"><img src="songs/tylerthecreator/cherrybomb/cherrybomb.png" width="100px" height="100px"></button>
           <button onclick="albumsec(4)"><img src="songs/tylerthecreator/goblin/Goblincover.png" width="100px" height="100px"></button>
-          <button onclick="albumsec(8)"><img src="songs/tylerthecreator/bas/bas.png" width="101px" height="100px"></button>
-          <br>
+         <!-- <button onclick="albumsec(8)"><img src="songs/tylerthecreator/bas/bas.png" width="101px" height="100px"></button>
+          --><br>
           <h1>Arctic Monkeys</h1>
           <button onclick="albumsec(5)"><img src="songs/arcticmonkeys/am/albumcover.jpg" width="100px" height="100px"></button>
           <button onclick="albumsec(6)"><img src="songs/arcticmonkeys/humbug/albumcover.jpg" width="100px" height="100px"></button>
@@ -125,7 +125,7 @@
           <input type="text" id="myInput" onkeyup="" placeholder="Search for songs">
         </div>
         <div style="display: none" id="lilbrary">
-          <h2>Your Library</h2>
+          <h2>Your Library</h2> 
         </div>
   <div class="audio-controls">
         <div class="album-cover">
@@ -150,7 +150,7 @@
 <script>
   // Function to check the screen orientation and redirect if necessary
   function checkOrientationAndRedirect() {
-    if (window.innerWidth <= 768 && (window.orientation === 0 || window.orientation === 180)) {
+    if (window.innerWidth <= 800 && (window.orientation === 0 || window.orientation === 180)) {
       // Portrait orientation on a mobile device, redirect to the mobile version
       window.location.href = "moblie.html";
     }
