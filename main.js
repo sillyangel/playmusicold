@@ -564,7 +564,8 @@ fetch('songs.json')
     });
   })
   .catch((error) => {
-    console.error('Error loading JSON data:', error);
+    alert('Error loading JSON data:', error);
+    console.log('Error loading JSON data:', error);
   });
 
 
