@@ -89,6 +89,9 @@ var audioTracks = {
       "",
       "2-03 Steak Sauce.mp3",
     ],
+    "tylerthecreator/bas": [
+      ""
+    ],
     "arcticmonkeys/am": [
         "01 - Do I Wanna Know.mp3",
         "02 - R U Mine.mp3",
@@ -115,22 +118,6 @@ var audioTracks = {
         "09. pretty visitors.mp3",
         "10 the jeweller's hands.mp3",
         "11_red right hand(2)(2).mp3"
-    ],
-    "wallows/nonthinghappens": [
-        "Only Friend.mp3",
-        "Treacherous Doctor.mp3",
-        "Sidelines.mp3",
-        "Are You Bored Yet (feat. Clairo).mp3",
-        "Scrawny.mp3",
-        "Ice Cold Pool.mp3",
-        "Worlds Apart.mp3",
-        "What You Like.mp3",
-        "Remember When.mp3",
-        "I_m Full.mp3",
-        "Do Not Wait.mp3"
-    ],
-    "tylerthecreator/bas": [
-      ""
     ],
     "arcticmonkeys/wpsiatwin": [
       "01 The View from the Afternoon.mp3",
@@ -170,6 +157,19 @@ var audioTracks = {
     "arcticmonkeys/car": [
       ""
     ],
+    "wallows/nonthinghappens": [
+      "Only Friend.mp3",
+      "Treacherous Doctor.mp3",
+      "Sidelines.mp3",
+      "Are You Bored Yet (feat. Clairo).mp3",
+      "Scrawny.mp3",
+      "Ice Cold Pool.mp3",
+      "Worlds Apart.mp3",
+      "What You Like.mp3",
+      "Remember When.mp3",
+      "I_m Full.mp3",
+      "Do Not Wait.mp3"
+  ],
     "melanie/crybaby": [],
     "melanie/k12": [],
     "melanie/portals": [],
@@ -356,15 +356,15 @@ var albums = [
     { artist: "Tyler, The Creator", album: "Igor", folder: "tylerthecreator/igor", image: "songs/tylerthecreator/igor/igorcover.png" },
     { artist: "Tyler, The Creator", album: "Cherry Bomb", folder: "tylerthecreator/cherrybomb", image: "songs/tylerthecreator/cherrybomb/cherrybomb.png" },
     { artist: "Tyler, The Creator", album: "Goblin", folder: "tylerthecreator/goblin", image: "songs/tylerthecreator/goblin/Goblincover.png" },
+    { artist: "Tyler, The Creator", album: "Bastard", folder: "tylerthecreator/bas", image: "songs/tylerthecreator/bas/bas.png" },
     { artist: "Arctic Monkeys", album: "AM", folder: "arcticmonkeys/am", image: "songs/arcticmonkeys/am/albumcover.jpg"},
     { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "songs/arcticmonkeys/humbug/albumcover.jpg"},
-    { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "songs/wallows/nonthinghappens/albumcover.png"},
-    { artist: "Tyler, The Creator", album: "Bastard", folder: "tylerthecreator/bas", image: "songs/tylerthecreator/bas/bas.png" },
     { artist: "Arctic Monkeys", album: "WPSIATWIN", folder: "arcticmonkeys/wpsiatwin", image: "songs/arcticmonkeys/wpsiatwin/albumcover.jpg"},
     { artist: "Arctic Monkeys", album: "Favourite Worst Nightmare", folder: "arcticmonkeys/fwn", image: "songs/arcticmonkeys/fwn/albumcover.jpg"},
     { artist: "Arctic Monkeys", album: "Suck It and See", folder: "arcticmonkeys/sias", image: "songs/arcticmonkeys/sias/albumcover.jpg"},
     { artist: "Arctic Monkeys", album: "Tranquility Base Hotel & Casino", folder: "arcticmonkeys/tbhc", image: "songs/arcticmonkeys/tbhc/albumcover.png"},
     { artist: "Arctic Monkeys", album: "The Car", folder: "arcticmonkeys/car", image: "songs/arcticmonkeys/car/albumcover.jpg"},
+    { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "songs/wallows/nonthinghappens/albumcover.png"},
     { artist: "Melanie Martinez", album: "Crybaby", folder: "melanie/crybaby", image: "songs/melanie/crybaby/albumcover.png"},
     { artist: "Melanie Martinez", album: "K-12", folder: "melanie/k12", image: "songs/melanie/k12/albumcover.png"},
     { artist: "Melanie Martinez", album: "Portals", folder: "melanie/portals", image: "songs/melanie/portals/albumcover.png"},
@@ -537,16 +537,61 @@ if (isFinite(duration)) {
     songDurationElement.textContent = durationMinutes + ":" + (durationSeconds < 10 ? "0" : "") + durationSeconds;
 }
 });
-function albumsec(albumnumber) {
-  currentAlbumIndex = albumnumber
-  currentAlbum = albums[currentAlbumIndex].folder;
-  currentTrackIndex = 0;
-  loadTrack();
-  audio.play();
-  // Update the album cover image
-  updateAlbumCover();
+// Load data from JSON file
+fetch('songs.json')
+  .then((response) => response.json())
+  .then((data) => {
+    const songSelector = document.getElementById('songselector');
+    songSelector.innerHTML = ''; // Clear existing content
 
-}
+    let currentArtist = ''; // Initialize the current artist
+    data.albums.forEach((album, albumIndex) => {
+      if (album.artist !== currentArtist) {
+        // Create a new <h1> for a different artist
+        const artistHeader = document.createElement('h1');
+        artistHeader.textContent = album.artist;
+        songSelector.appendChild(artistHeader);
+
+        // Update the current artist
+        currentArtist = album.artist;
+      }
+
+      // Create a button for the album
+      const albumButton = document.createElement('button');
+      albumButton.innerHTML = `<img src="${album.cover}" width="100px" height="100px">`;
+      albumButton.onclick = () => albumsec(albumIndex);
+      songSelector.appendChild(albumButton);
+    });
+  })
+  .catch((error) => {
+    console.error('Error loading JSON data:', error);
+  });
+
+
+  function albumsec(albumnumber) {
+    // Retrieve the album details from the albums array
+    const albumDetails = albums[albumnumber];
+  
+    if (albumDetails) {
+      // Update the currentAlbumIndex
+      currentAlbumIndex = albumnumber;
+  
+      // Update the currentAlbum and currentTrackIndex
+      currentAlbum = albumDetails.folder;
+      currentTrackIndex = 0;
+  
+      // Load the track and play it
+      loadTrack();
+      audio.play();
+  
+      // Update the album cover image
+      updateAlbumCover();
+    } else {
+      console.error(`Album with index ${albumnumber} not found in the albums array.`);
+    }
+  }
+  
+
 function mediathinggy() {
 if ("mediaSession" in navigator) {
 navigator.mediaSession.metadata = new MediaMetadata({
