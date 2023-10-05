@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,6 @@
             </ul>
         </div>
         <div id="songselector">
-            oh
         </div>
         <div style="display: none;" id="searching">
           <h2>Search</h2>
@@ -56,6 +56,10 @@
         </div>
         <div style="display: none;" id="lilbrary">
           <h2>Your Library</h2>
+          <div class="user-profile">
+            <i class="fas fa-user"></i>
+            <span class="username">YourUsername</span>
+        </div>
           <button id="createplaylist" onclick="createaplaylist()"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
         </div>
         <div style="display: none;" id="mlogin">
@@ -100,7 +104,10 @@
     </audio>
 </body>
 <script src="main.js"></script>
-<script type="module" src="firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
+<script type="module" src="firebase/firebase.js"></script>
+
 <script>
   // Function to check the screen orientation and redirect if necessary
   function checkOrientationAndRedirect() {
