@@ -542,7 +542,7 @@ fetch('songs.json')
   .then((response) => response.json())
   .then((data) => {
     const songSelector = document.getElementById('songselector');
-    songSelector.innerHTML = ''; // Clear existing content
+    songSelector.innerHTML = '<h2>Home</h2>'; // Clear existing content
 
     let currentArtist = ''; // Initialize the current artist
     data.albums.forEach((album, albumIndex) => {
