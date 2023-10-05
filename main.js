@@ -392,49 +392,49 @@ var currentTrackElements = document.querySelectorAll(".currentTrack");
 var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
 
 function loadTrack() {
-  var trackPath = audioTracks[currentAlbum][currentTrackIndex];
-  audio.src = "songs/" + currentAlbum + "/" + trackPath;
-  audio.load();
-  updateTrackText();
-  mediathinggy();
+    var trackPath = audioTracks[currentAlbum][currentTrackIndex];
+    audio.src = "songs/" + currentAlbum + "/" + trackPath;
+    audio.load();
+    updateTrackText();
+    mediathinggy();
 }
 
 function playPause() {
-  if (audio.paused) {
-    audio.play();
-    playButton.innerHTML = '<i class="fas fa-pause"></i>';
-  } else {
-    audio.pause();
-    playButton.innerHTML = '<i class="fas fa-play"></i>';
-  }
+    if (audio.paused) {
+        audio.play();
+        playButton.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+        audio.pause();
+        playButton.innerHTML = '<i class="fas fa-play"></i>';
+    }
 }
 
 function setVolume() {
-  audio.volume = volumeControl.value;
+    audio.volume = volumeControl.value;
 }
 
 function skipTrack() {
-  currentTrackIndex++;
-  if (currentTrackIndex >= audioTracks[currentAlbum].length) {
-    currentTrackIndex = 0; // Loop back to the first track
-  }
-  loadTrack();
-  audio.play();
+    currentTrackIndex++;
+    if (currentTrackIndex >= audioTracks[currentAlbum].length) {
+        currentTrackIndex = 0; // Loop back to the first track
+    }
+    loadTrack();
+    audio.play();
 }
 
 function previousTrack() {
-currentTrackIndex--;
-if (currentTrackIndex < 0) {
-    currentTrackIndex = audioTracks[currentAlbum].length - 1; // Go to the last track
-}
-loadTrack();
-audio.play();
+    currentTrackIndex--;
+    if (currentTrackIndex < 0) {
+        currentTrackIndex = audioTracks[currentAlbum].length - 1; // Go to the last track
+    }
+    loadTrack();
+    audio.play();
 }
 
 function seek(event) {
-const percent = event.offsetX / progressBar.offsetWidth;
-const seekTime = percent * audio.duration;
-audio.currentTime = seekTime;
+    const percent = event.offsetX / progressBar.offsetWidth;
+    const seekTime = percent * audio.duration;
+    audio.currentTime = seekTime;
 }
 // Modify the updateAlbumCover function
 function updateAlbumCover() {
@@ -443,7 +443,7 @@ function updateAlbumCover() {
     var selectedAlbum = albums[currentAlbumIndex];
 
     // Loop through each element with the same ID and update its src attribute
-    albumCovers.forEach(function (element) {
+    albumCovers.forEach(function(element) {
         element.src = selectedAlbum.image;
     });
 }
@@ -451,51 +451,51 @@ function updateAlbumCover() {
 
 // Call the updateAlbumCover function when changing albums
 function nextAlbum() {
-currentAlbumIndex++;
-if (currentAlbumIndex >= albums.length) {
-    currentAlbumIndex = 0; // Loop back to the first album
+    currentAlbumIndex++;
+    if (currentAlbumIndex >= albums.length) {
+        currentAlbumIndex = 0; // Loop back to the first album
+    }
+    currentAlbum = albums[currentAlbumIndex].folder;
+    currentTrackIndex = 0;
+    // Check if audioTracks[currentAlbum] exists before loading
+    if (audioTracks[currentAlbum]) {
+        loadTrack();
+        audio.play();
+        // Update the album cover image
+        updateAlbumCover();
+    } else {
+        // Handle the case when the album is not found
+        console.error("Album not found: " + currentAlbum);
+    }
 }
-currentAlbum = albums[currentAlbumIndex].folder;
-currentTrackIndex = 0;
-// Check if audioTracks[currentAlbum] exists before loading
-if (audioTracks[currentAlbum]) {
+
+function previousAlbum() {
+    currentAlbumIndex--;
+    if (currentAlbumIndex < 0) {
+        currentAlbumIndex = albums.length - 1; // Go to the last album
+    }
+    currentAlbum = albums[currentAlbumIndex].folder;
+    currentTrackIndex = 0;
     loadTrack();
     audio.play();
     // Update the album cover image
     updateAlbumCover();
-} else {
-    // Handle the case when the album is not found
-    console.error("Album not found: " + currentAlbum);
-}
-}
-
-function previousAlbum() {
-currentAlbumIndex--;
-if (currentAlbumIndex < 0) {
-    currentAlbumIndex = albums.length - 1; // Go to the last album
-}
-currentAlbum = albums[currentAlbumIndex].folder;
-currentTrackIndex = 0;
-loadTrack();
-audio.play();
-// Update the album cover image
-updateAlbumCover();
 }
 audio.addEventListener("timeupdate", function() {
-var currentTime = audio.currentTime;
-var duration = audio.duration;
-// Check if duration is a finite number before calculating percentComplete
-if (isFinite(duration)) {
-    var percentComplete = (currentTime / duration) * 100;
-    progressBar.value = percentComplete;
-}
+    var currentTime = audio.currentTime;
+    var duration = audio.duration;
+    // Check if duration is a finite number before calculating percentComplete
+    if (isFinite(duration)) {
+        var percentComplete = (currentTime / duration) * 100;
+        progressBar.value = percentComplete;
+    }
 });
 // Load the first track when the page loads
 loadTrack();
 // Event listener for when the current track ends
 audio.addEventListener("ended", function() {
-// Play the next track automatically
-skipTrack();
+    // Play the next track automatically
+    skipTrack();
 });
 
 
@@ -503,208 +503,208 @@ skipTrack();
 function updateTrackText() {
     var artist = albums[currentAlbumIndex].artist;
     var track = audioTracks[currentAlbum][currentTrackIndex];
-    
+
     // Loop through each element with class "currentTrack" and update its content
-    currentTrackElements.forEach(function (element) {
+    currentTrackElements.forEach(function(element) {
         element.textContent = artist + " - " + track;
     });
 
     // Loop through each element with class "currentTrack2" and update its content
-    currentTrack2Elements.forEach(function (element) {
+    currentTrack2Elements.forEach(function(element) {
         element.textContent = artist + " - " + track;
     });
 }
 
 // Call the function to update both elements
-  updateTrackText();
+updateTrackText();
 // Add these lines to update the song duration and current time
 var songTimeElement = document.getElementById("songTime");
 var songDurationElement = document.getElementById("songDuration");
 audio.addEventListener("timeupdate", function() {
-var currentTime = audio.currentTime;
-var duration = audio.duration;
-// Check if duration is a finite number before calculating percentComplete
-if (isFinite(duration)) {
-    var percentComplete = (currentTime / duration) * 100;
-    progressBar.value = percentComplete;
-    // Update the song duration and current time
-    var currentMinutes = Math.floor(currentTime / 60);
-    var currentSeconds = Math.floor(currentTime % 60);
-    var durationMinutes = Math.floor(duration / 60);
-    var durationSeconds = Math.floor(duration % 60);
-    // Display current time and duration in the format "M:SS"
-    songTimeElement.textContent = currentMinutes + ":" + (currentSeconds < 10 ? "0" : "") + currentSeconds;
-    songDurationElement.textContent = durationMinutes + ":" + (durationSeconds < 10 ? "0" : "") + durationSeconds;
-}
+    var currentTime = audio.currentTime;
+    var duration = audio.duration;
+    // Check if duration is a finite number before calculating percentComplete
+    if (isFinite(duration)) {
+        var percentComplete = (currentTime / duration) * 100;
+        progressBar.value = percentComplete;
+        // Update the song duration and current time
+        var currentMinutes = Math.floor(currentTime / 60);
+        var currentSeconds = Math.floor(currentTime % 60);
+        var durationMinutes = Math.floor(duration / 60);
+        var durationSeconds = Math.floor(duration % 60);
+        // Display current time and duration in the format "M:SS"
+        songTimeElement.textContent = currentMinutes + ":" + (currentSeconds < 10 ? "0" : "") + currentSeconds;
+        songDurationElement.textContent = durationMinutes + ":" + (durationSeconds < 10 ? "0" : "") + durationSeconds;
+    }
 });
 // Load data from JSON file
 fetch('songs.json')
-  .then((response) => response.json())
-  .then((data) => {
-    const songSelector = document.getElementById('songselector');
-    songSelector.innerHTML = '<h2>Home</h2>'; // Clear existing content
+    .then((response) => response.json())
+    .then((data) => {
+        const songSelector = document.getElementById('songselector');
+        songSelector.innerHTML = '<h2>Home</h2>'; // Clear existing content
 
-    let currentArtist = ''; // Initialize the current artist
-    data.albums.forEach((album, albumIndex) => {
-      if (album.artist !== currentArtist) {
-        // Create a new <h1> for a different artist
-        const artistHeader = document.createElement('h1');
-        artistHeader.textContent = album.artist;
-        songSelector.appendChild(artistHeader);
+        let currentArtist = ''; // Initialize the current artist
+        data.albums.forEach((album, albumIndex) => {
+            if (album.artist !== currentArtist) {
+                // Create a new <h1> for a different artist
+                const artistHeader = document.createElement('h1');
+                artistHeader.textContent = album.artist;
+                songSelector.appendChild(artistHeader);
 
-        // Update the current artist
-        currentArtist = album.artist;
-      }
+                // Update the current artist
+                currentArtist = album.artist;
+            }
 
-      // Create a button for the album
-      const albumButton = document.createElement('button');
-      albumButton.innerHTML = `<img src="${album.cover}" width="100px" height="100px">`;
-      albumButton.onclick = () => albumsec(albumIndex);
-      songSelector.appendChild(albumButton);
+            // Create a button for the album
+            const albumButton = document.createElement('button');
+            albumButton.innerHTML = `<img src="${album.cover}" width="100px" height="100px">`;
+            albumButton.onclick = () => albumsec(albumIndex);
+            songSelector.appendChild(albumButton);
+        });
+    })
+    .catch((error) => {
+        alert('Error loading JSON data:', error);
+        console.log('Error loading JSON data:', error);
     });
-  })
-  .catch((error) => {
-    alert('Error loading JSON data:', error);
-    console.log('Error loading JSON data:', error);
-  });
 
 
-  function albumsec(albumnumber) {
+function albumsec(albumnumber) {
     // Retrieve the album details from the albums array
     const albumDetails = albums[albumnumber];
-  
+
     if (albumDetails) {
-      // Update the currentAlbumIndex
-      currentAlbumIndex = albumnumber;
-  
-      // Update the currentAlbum and currentTrackIndex
-      currentAlbum = albumDetails.folder;
-      currentTrackIndex = 0;
-  
-      // Load the track and play it
-      loadTrack();
-      audio.play();
-  
-      // Update the album cover image
-      updateAlbumCover();
+        // Update the currentAlbumIndex
+        currentAlbumIndex = albumnumber;
+
+        // Update the currentAlbum and currentTrackIndex
+        currentAlbum = albumDetails.folder;
+        currentTrackIndex = 0;
+
+        // Load the track and play it
+        loadTrack();
+        audio.play();
+
+        // Update the album cover image
+        updateAlbumCover();
     } else {
-      console.error(`Album with index ${albumnumber} not found in the albums array.`);
+        console.error(`Album with index ${albumnumber} not found in the albums array.`);
     }
-  }
-  
+}
+
 
 function mediathinggy() {
-if ("mediaSession" in navigator) {
-navigator.mediaSession.metadata = new MediaMetadata({
-title: audioTracks[currentAlbum][currentTrackIndex],
-artist: albums[currentAlbumIndex].artist,
-album: albums[currentAlbumIndex].album,
-artwork: [
-{
-src: albums[currentAlbumIndex].image,
-sizes: "96x96",
-type: "image/png",
-},
-{
-src: albums[currentAlbumIndex].image,
-sizes: "128x128",
-type: "image/png",
-},
-{
-src: albums[currentAlbumIndex].image,
-sizes: "192x192",
-type: "image/png",
-},
-{
-src: albums[currentAlbumIndex].image,
-sizes: "256x256",
-type: "image/png",
-},
-{
-src: albums[currentAlbumIndex].image,
-sizes: "384x384",
-type: "image/png",
-},
-{
-src: albums[currentAlbumIndex].image,
-sizes: "512x512",
-type: "image/png",
-},
-],
-});
+    if ("mediaSession" in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: audioTracks[currentAlbum][currentTrackIndex],
+            artist: albums[currentAlbumIndex].artist,
+            album: albums[currentAlbumIndex].album,
+            artwork: [{
+                    src: albums[currentAlbumIndex].image,
+                    sizes: "96x96",
+                    type: "image/png",
+                },
+                {
+                    src: albums[currentAlbumIndex].image,
+                    sizes: "128x128",
+                    type: "image/png",
+                },
+                {
+                    src: albums[currentAlbumIndex].image,
+                    sizes: "192x192",
+                    type: "image/png",
+                },
+                {
+                    src: albums[currentAlbumIndex].image,
+                    sizes: "256x256",
+                    type: "image/png",
+                },
+                {
+                    src: albums[currentAlbumIndex].image,
+                    sizes: "384x384",
+                    type: "image/png",
+                },
+                {
+                    src: albums[currentAlbumIndex].image,
+                    sizes: "512x512",
+                    type: "image/png",
+                },
+            ],
+        });
 
 
-navigator.mediaSession.setActionHandler("play", () => {
-playPause();
-});
-navigator.mediaSession.setActionHandler("pause", () => {
-playPause();
-});
-/*
-navigator.mediaSession.setActionHandler("seekbackward", () => {
+        navigator.mediaSession.setActionHandler("play", () => {
+            playPause();
+        });
+        navigator.mediaSession.setActionHandler("pause", () => {
+            playPause();
+        });
+        /*
+        navigator.mediaSession.setActionHandler("seekbackward", () => {
 
-});
-navigator.mediaSession.setActionHandler("seekforward", () => {
+        });
+        navigator.mediaSession.setActionHandler("seekforward", () => {
 
-});
-navigator.mediaSession.setActionHandler("seekto", () => {
+        });
+        navigator.mediaSession.setActionHandler("seekto", () => {
 
-});*/
-navigator.mediaSession.setActionHandler("previoustrack", () => {
-previousTrack();
-});
-navigator.mediaSession.setActionHandler("nexttrack", () => {
-skipTrack();
-});
+        });*/
+        navigator.mediaSession.setActionHandler("previoustrack", () => {
+            previousTrack();
+        });
+        navigator.mediaSession.setActionHandler("nexttrack", () => {
+            skipTrack();
+        });
 
-}
+    }
 }
 
 function switchthingy(st) {
-  var home = document.getElementById("songselector");
-  var search = document.getElementById("searching");
-  var libaraby = document.getElementById("lilbrary");
-  var login = document.getElementById("mlogin")
-    
-  if (st == "hom") {
-    home.style.display = "block";
-    search.style.display = "none";
-    libaraby.style.display = "none";
-    login.style.display = "none";
-  }
-  if (st == "lil") {
-    home.style.display = "none";
-    search.style.display = "none";
-    libaraby.style.display = "block";
-    login.style.display = "none";
-  }
-  if (st == "user") {
-    home.style.display = "none";
-    search.style.display = "none";
-    libaraby.style.display ="none";
-    login.style.display = "block";
-  }
-  if (st == "search"){
-    home.style.display = "none";
-    search.style.display = "block";
-    libaraby.style.display = "none";
-    login.style.display = "none";
-  }
-}
-function searchfunction() {
-  let input = document.getElementById('myInput').value.toLowerCase();
-  let x = document.querySelector('#list-holder');
-  x.innerHTML = "";
+    var home = document.getElementById("songselector");
+    var search = document.getElementById("searching");
+    var libaraby = document.getElementById("lilbrary");
+    var login = document.getElementById("mlogin")
 
-  for (i = 0; i < albums.length; i++) {
-    let obj = albums[i];
-    let albumName = obj.album.toLowerCase();
-    let artistName = obj.artist.toLowerCase();
-
-    if (albumName.includes(input) || artistName.includes(input)) {
-      const elem = document.createElement("li");
-      elem.innerHTML = `${obj.album} - ${obj.artist}`;
-      x.appendChild(elem);
+    if (st == "hom") {
+        home.style.display = "block";
+        search.style.display = "none";
+        libaraby.style.display = "none";
+        login.style.display = "none";
     }
-  }
+    if (st == "lil") {
+        home.style.display = "none";
+        search.style.display = "none";
+        libaraby.style.display = "block";
+        login.style.display = "none";
+    }
+    if (st == "user") {
+        home.style.display = "none";
+        search.style.display = "none";
+        libaraby.style.display = "none";
+        login.style.display = "block";
+    }
+    if (st == "search") {
+        home.style.display = "none";
+        search.style.display = "block";
+        libaraby.style.display = "none";
+        login.style.display = "none";
+    }
 }
+
+function searchfunction() {
+    let input = document.getElementById('myInput').value.toLowerCase();
+    let x = document.querySelector('#list-holder');
+    x.innerHTML = "";
+
+    for (i = 0; i < albums.length; i++) {
+        let obj = albums[i];
+        let albumName = obj.album.toLowerCase();
+        let artistName = obj.artist.toLowerCase();
+
+        if (albumName.includes(input) || artistName.includes(input)) {
+            const elem = document.createElement("li");
+            elem.innerHTML = `${obj.album} - ${obj.artist}`;
+            x.appendChild(elem);
+        }
+    }
+}s

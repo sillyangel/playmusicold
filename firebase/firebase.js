@@ -29,7 +29,7 @@ const signupForm = document.getElementById("signup-form");
 const signupEmail = document.getElementById("signup-email");
 const signupPassword = document.getElementById("signup-password");
 const logoutButton = document.getElementById("logout-button");
-const createPlaylistButton = document.getElementById("createplaylist");
+var createPlaylistButton = document.getElementById("createplaylist");
 
 // Function to handle login
 function handleLogin(event) {
@@ -39,12 +39,16 @@ function handleLogin(event) {
   
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
+      let user = auth.currentUser;
       alert("Logged in:", user);
     })
     .catch((error) => {
-      alert("Login error:", error.message);
+      alert("Login error:", error);
     });
+}
+function handlereset(event) {
+  event.preventDefault();
+  const email = .value
 }
 
 // Function to handle signup
@@ -55,18 +59,30 @@ function handleSignup(event) {
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
+      let user = auth.currentUser;
       alert("Signed up:", user);
+      return userCredential.user.updateProfile({
+        displayName: document.getElementById("displayname").value
+      })
     })
     .catch((error) => {
-      alert("Signup error:", error.message);
+      alert("Signup error:", error);
     });
+}
+function logout(event) {
+  event.preventDefault();
+  signOut(auth).then(() => {
+    // Sign-out successful.
+    alert("Log Out")
+  }).catch((error) => {
+    alert("a error happened when loging out", error)
+  });
 }
 
 // Attach event listeners to forms
 loginForm.addEventListener("submit", handleLogin);
 signupForm.addEventListener("submit", handleSignup);
-const user = firebase.auth().currentUser;
+let user = firebase.auth().currentUser;
 
 function createPlaylistInFirestore() {
     const nameofplaylist = prompt("Name of new playlist?");
@@ -100,4 +116,4 @@ function createPlaylistInFirestore() {
         });
     }
   }
- createPlaylistButton.addEventListener("click", createPlaylistInFirestore);
+ createPlaylistButton.addEventListener("submit", createPlaylistInFirestore);
