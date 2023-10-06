@@ -173,8 +173,11 @@ async function createPlaylistInFirestore() {
  auth.onAuthStateChanged(async (user) => {
   if (user) {
     const nameu = document.getElementById('username');
+    var divsl = document.getElementById("lisuf");
     nameu.innerHTML = ''
     nameu.innerHTML = `${user.email}`
+    divsl.style.display = "none";
+
   } else {
     const nameu = document.getElementById('username');  
     nameu.innerHTML = "Not Logged In"
