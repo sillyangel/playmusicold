@@ -213,8 +213,8 @@ async function createPlaylistInFirestore() {
  
      // Add a click event listener to the button if needed
      button.addEventListener("click", () => {
-       // Handle button click here, e.g., navigate to the playlist
-     });
+      alert('Playlist : ' + playlistData.name + " is not available yet")
+    });
  
      // Append the button to the container
      playlistContainer.appendChild(button);
