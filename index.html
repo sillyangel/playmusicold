@@ -44,6 +44,7 @@
                 <li><button onclick="switchthingy('search')"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> </button></li>
                 <li><button onclick="switchthingy('hom')"><i class="fa-solid fa-house" style="color: #ffffff;"></i> </button></li>
                 <li><button onclick="switchthingy('lil')"><i class="fa-solid fa-lines-leaning" style="color: #ffffff;"></i> </button></li>
+                <li><button onclick="darkmode()"><i class="fa-solid fa-circle-half-stroke" style="color:#ffffff;"></i></button></li>
             </ul>
         </div>
         <div id="songselector">
@@ -59,7 +60,7 @@
           <h2>Your Library</h2>
           <div class="user-profile">
             <i class="fas fa-user"></i>
-            <span class="username">YourUsername</span>
+            <span id="username">YourUsername</span>
         </div>
           <button type="submit" id="createplaylist"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
           <div id="playlistContainer">

@@ -169,6 +169,17 @@ async function createPlaylistInFirestore() {
      console.log("User is not authenticated.");
    }
  });
+
+ auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    const nameu = document.getElementById('username');
+    nameu.innerHTML = ''
+    nameu.innerHTML = `${user.email}`
+  } else {
+    const nameu = document.getElementById('username');  
+    nameu.innerHTML = "Not Logged In"
+  }
+ });
  
  const playlistContainer = document.getElementById("playlistContainer"); // Assuming you have a container in your HTML with this ID
 
