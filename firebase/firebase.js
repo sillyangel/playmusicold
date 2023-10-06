@@ -1,7 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 
 
 const firebaseConfig = {
@@ -18,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 // Firebase authentication
-const auth = getAuth(app);
+const auth = getAuth();
 const db = getFirestore(app);
 
 // Get HTML elements
@@ -38,18 +37,29 @@ function handleLogin(event) {
   const password = loginPassword.value;
   
   signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      let user = auth.currentUser;
-      alert("Logged in:", user);
-    })
-    .catch((error) => {
-      alert("Login error:", error);
-    });
+  .then((userCredential) => {
+    const user = userCredential.user;
+    alert("Logged in as: " + user.email);
+    // Update the UI with user information
+  })
+  .catch((error) => {
+    alert("Login error: " + error.message);
+  });
+
 }
 function handlereset(event) {
   event.preventDefault();
-  const email = emailforrest.value
+  const email = emailforreset.value; // Assuming you have an element with id "emailforreset"
+  
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      alert("Password reset email sent. Check your inbox.");
+    })
+    .catch((error) => {
+      alert("Error sending password reset email: " + error.message);
+    });
 }
+
 
 // Function to handle signup
 function handleSignup(event) {
@@ -66,7 +76,7 @@ function handleSignup(event) {
       })
     })
     .catch((error) => {
-      alert("Signup error:", error);
+      alert("Signup error:", error.message);
     });
 }
 function logout(event) {
@@ -75,45 +85,82 @@ function logout(event) {
     // Sign-out successful.
     alert("Log Out")
   }).catch((error) => {
-    alert("a error happened when loging out", error)
+    alert("a error happened when loging out", error.message)
   });
 }
 
 // Attach event listeners to forms
 loginForm.addEventListener("submit", handleLogin);
 signupForm.addEventListener("submit", handleSignup);
-let user = firebase.auth().currentUser;
+logoutButton.addEventListener("click", logout);
 
-function createPlaylistInFirestore() {
-    const nameofplaylist = prompt("Name of new playlist?");
-    const urltonewplaylistimg = prompt("URL for the playlist image");
-  
-    if (nameofplaylist && urltonewplaylistimg) {
+
+async function createPlaylistInFirestore() {
+  const nameofplaylist = prompt("Name of new playlist?");
+  const urltonewplaylistimg = prompt("URL for the playlist image");
+  const user = auth.currentUser;
+  if (nameofplaylist && urltonewplaylistimg) {
+    // Check the user's authentication status using your preferred method
+
+    if (user.uid) {
       // Replace 'userId123' with the actual user ID or identifier
       const userId = user.uid;
-  
-      // Define the playlist data
+
       const playlistData = {
         name: nameofplaylist,
         imageUrl: urltonewplaylistimg,
         // Add more properties as needed
       };
-  
-      // Create a reference to the "playlists" collection
+
       const playlistsCollection = collection(db, "playlists");
-  
-      // Add the playlist data to Firestore
-      addDoc(playlistsCollection, {
-        userId: userId,
-        data: playlistData
-      })
-        .then(() => {
-          alert("Playlist data saved in Firestore.");
-          // Optionally, you can reload the page or update the UI here
-        })
-        .catch((error) => {
-          alert("Error adding playlist data: ", error);
+
+      try {
+        await addDoc(playlistsCollection, {
+          userId: userId,
+          data: playlistData,
         });
+        alert("Playlist data saved in Firestore.");
+        // Optionally, you can reload the page or update the UI here
+      } catch (error) {
+        alert("Error adding playlist data: " + error.message);
+      }
+    } else {
+      alert("You need to be logged in to create a playlist.");
     }
   }
- createPlaylistButton.addEventListener("submit", createPlaylistInFirestore);
+}
+
+
+ createPlaylistButton.addEventListener("click", createPlaylistInFirestore);
+
+ // Check for user authentication when the page is loaded
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    // User is authenticated
+    const userId = auth.currentUser.uid;
+
+    // Check if the user has a playlist (assuming you have a 'playlists' collection)
+    const playlistsCollection = collection(db, "playlists");
+    const query = query(playlistsCollection, where("userId", "==", userId));
+
+    try {
+      const querySnapshot = await getDocs(query);
+      if (!querySnapshot.empty) {
+        // User has a playlist, load and display it
+        querySnapshot.forEach((doc) => {
+          const playlistData = doc.data();
+          // Load and display the playlist data as needed
+          console.log("Loaded playlist:", playlistData);
+        });
+      } else {
+        // User doesn't have a playlist
+        console.log("User doesn't have a playlist.");
+      }
+    } catch (error) {
+      console.error("Error checking for playlist:", error);
+    }
+  } else {
+    // User is not authenticated
+    console.log("User is not authenticated.");
+  }
+});
