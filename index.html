@@ -29,6 +29,7 @@
     <!-- Favicon (you can create a favicon.ico and place it in the root directory of your website) -->
     <link rel="icon" href="assets/logo/mlogo.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     
 </head>
 <body onload="checkOrientationAndRedirect();">
@@ -60,7 +61,7 @@
             <i class="fas fa-user"></i>
             <span class="username">YourUsername</span>
         </div>
-          <button type="submit" id="createplaylist" onclick="createaplaylist()"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
+          <button type="submit" id="createplaylist"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
         </div>
         <div style="display: none;" id="mlogin">
           <h2>Account</h2>
@@ -83,6 +84,7 @@
                 <button type="submit">Sign Up</button>
             </form>
         </div>
+        <button id="logout-button">Logout</button>
     </div>
     </div>
   <div class="audio-controls">
@@ -103,10 +105,10 @@
     <audio id="myAudio" controls>
         Your browser does not support the audio element.
     </audio>
+<script type="module" src="firebase/firebase.js"></script>
 </body>
 <script src="main.js"></script>
 
-<script type="module" src="firebase/firebase.js"></script>
 
 <script>
   // Function to check the screen orientation and redirect if necessary

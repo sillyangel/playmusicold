@@ -380,7 +380,7 @@ var albums = [
     { artist: "Lemon Demon", album: "Spirit phone", folder: "ld/sp", image: "songs/ld/sp/albumcover.png"},
     { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.png"},
     { artist: "Kanye West", album: "My Beautiful Dark Twisted Fantasy", folder: "kanyewest/mbdtf", image: "songs/kanyewest/mbdtf/albumcover.jpg"},
-    { artist: "Kanye West", album: "Yeezus", folder: "kanyewest/yeezus", image: "songs/kanyewest/Yeezus/albumcover.jpg"},
+    { artist: "Kanye West", album: "Yeezus", folder: "kanyewest/yeezus", image: "songs/kanyewest/yeezus/Cover.jpg"},
     { artist: "Kanye West", album: "Ye", folder: "kanyewest/ye", image: "songs/kanyewest/ye/Cover.jpg" },
     { artist: "Kanye West", album: "Jesus Is King", folder: "kanyewest/jesusisking", image: "songs/kanyewest/jesusisking/Cover.jpg" },
     { artist: "Kanye West", album: "Donda", folder: "kanyewest/donda", image: "songs/kanyewest/donda/cover.jpg" },
@@ -707,4 +707,4 @@ function searchfunction() {
             x.appendChild(elem);
         }
     }
-}s
+}
