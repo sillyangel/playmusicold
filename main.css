@@ -274,3 +274,8 @@ input[type=password] {
   color: white;
   cursor: pointer;
 }
+
+.dark-mode {
+  background-color: white;
+  color: #222;
+}
