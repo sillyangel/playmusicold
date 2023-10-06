@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
-
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCrXbgrgnkGFfPkbHdJ5oRD4ezbv5ypWbE",
@@ -134,33 +134,77 @@ async function createPlaylistInFirestore() {
  createPlaylistButton.addEventListener("click", createPlaylistInFirestore);
 
  // Check for user authentication when the page is loaded
-auth.onAuthStateChanged(async (user) => {
-  if (user) {
-    // User is authenticated
-    const userId = auth.currentUser.uid;
+ 
+ // Firebase initialization code (already defined)
+ 
+ // Check for user authentication when the page is loadedMake sure 'app' is properly initialized
+ 
+ auth.onAuthStateChanged(async (user) => {
+   if (user) {
+     // User is authenticated
+     const userId = user.uid;
+     // Check if the user has a playlist (assuming you have a 'playlists' collection)
+     const playlistsCollection = collection(db, "playlists");
+     const q = query(playlistsCollection, where("userId", "==", userId));
+ 
+     try {
+       const querySnapshot = await getDocs(q);
+       if (!querySnapshot.empty) {
+         // User has a playlist, load and display it
+         querySnapshot.forEach((doc) => {
+           const playlistData = doc.data();
+           // Load and display the playlist data as needed
+           console.log("Loaded playlist:", playlistData);
+           displayUserPlaylists(userId);
+         });
+       } else {
+         // User doesn't have a playlist
+         console.log("User doesn't have a playlist.");
+       }
+     } catch (error) {
+       console.error("Error checking for playlist:", error);
+     }
+   } else {
+     // User is not authenticated
+     console.log("User is not authenticated.");
+   }
+ });
+ 
+ const playlistContainer = document.getElementById("playlistContainer"); // Assuming you have a container in your HTML with this ID
 
-    // Check if the user has a playlist (assuming you have a 'playlists' collection)
-    const playlistsCollection = collection(db, "playlists");
-    const query = query(playlistsCollection, where("userId", "==", userId));
-
-    try {
-      const querySnapshot = await getDocs(query);
-      if (!querySnapshot.empty) {
-        // User has a playlist, load and display it
-        querySnapshot.forEach((doc) => {
-          const playlistData = doc.data();
-          // Load and display the playlist data as needed
-          console.log("Loaded playlist:", playlistData);
-        });
-      } else {
-        // User doesn't have a playlist
-        console.log("User doesn't have a playlist.");
-      }
-    } catch (error) {
-      console.error("Error checking for playlist:", error);
-    }
-  } else {
-    // User is not authenticated
-    console.log("User is not authenticated.");
-  }
-});
+ // Function to retrieve and display playlist data for a specific user
+ async function displayUserPlaylists(userId) {
+   // Query Firestore to get playlist data for the specific user
+   const playlistsCollection = collection(db, "playlists");
+   const q = query(playlistsCollection, where("userId", "==", userId));
+   const querySnapshot = await getDocs(q);
+ 
+   // Clear existing content in the playlistContainer
+   playlistContainer.innerHTML = '';
+ 
+   // Loop through the retrieved documents and create buttons
+   querySnapshot.forEach((doc) => {
+     const playlistData = doc.data();
+ 
+     // Create a button for each playlist
+     const button = document.createElement("button");
+     button.setAttribute("src", "playlistcustom"); // Set the 'src' attribute
+ 
+     const image = document.createElement("img");
+     image.setAttribute("src", playlistData.imageUrl); // Set the 'src' attribute for the image
+     button.appendChild(image); // Append the image to the button
+ 
+     // Set the button's text (playlist name)
+     button.textContent = playlistData.name;
+ 
+     // Add a click event listener to the button if needed
+     button.addEventListener("click", () => {
+       // Handle button click here, e.g., navigate to the playlist
+     });
+ 
+     // Append the button to the container
+     playlistContainer.appendChild(button);
+   });
+ }
+ 
+ // Example usage: Call the function to display playlists for a specific user (replace 'userId123' with the actual user ID)
