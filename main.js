@@ -378,7 +378,7 @@ var albums = [
     { artist: "Roddy Ricch", album: "life lives fast", folder: "rr/llf", image: "songs/rr/llf/albumcover.png"},
     { artist: "Roddy Ricch", album: "Please excuse me for being antisocial", folder: "rr/pemfba", image: "songs/rr/pemfba/albumcover.png"},
     { artist: "Lemon Demon", album: "Spirit phone", folder: "ld/sp", image: "songs/ld/sp/albumcover.png"},
-    { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.png"},
+    { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.jpg"},
     { artist: "Kanye West", album: "My Beautiful Dark Twisted Fantasy", folder: "kanyewest/mbdtf", image: "songs/kanyewest/mbdtf/albumcover.jpg"},
     { artist: "Kanye West", album: "Yeezus", folder: "kanyewest/yeezus", image: "songs/kanyewest/yeezus/Cover.jpg"},
     { artist: "Kanye West", album: "Ye", folder: "kanyewest/ye", image: "songs/kanyewest/ye/Cover.jpg" },
@@ -541,8 +541,8 @@ audio.addEventListener("timeupdate", function() {
 fetch('songs.json')
     .then((response) => response.json())
     .then((data) => {
-        const songSelector = document.getElementById('songselector');
-        songSelector.innerHTML = '<h2>Home</h2>'; // Clear existing content
+        const songSelector = document.getElementById('farts');
+        songSelector.innerHTML = ''; // Clear existing content
 
         let currentArtist = ''; // Initialize the current artist
         data.albums.forEach((album, albumIndex) => {
@@ -663,32 +663,38 @@ function switchthingy(st) {
     var home = document.getElementById("songselector");
     var search = document.getElementById("searching");
     var libaraby = document.getElementById("lilbrary");
-    var login = document.getElementById("mlogin")
+    var login = document.getElementById("mlogin");
+    var accountsettings = document.getElementById("accountsettings");
 
     if (st == "hom") {
-        home.style.display = "block";
+        home.style.display = "flex";
         search.style.display = "none";
         libaraby.style.display = "none";
         login.style.display = "none";
+        accountsettings.style.display = "none";
     }
     if (st == "lil") {
         home.style.display = "none";
         search.style.display = "none";
         libaraby.style.display = "block";
         login.style.display = "none";
+        accountsettings.style.display = "none";
     }
     if (st == "user") {
         home.style.display = "none";
         search.style.display = "none";
         libaraby.style.display = "none";
         login.style.display = "block";
+        accountsettings.style.display = "none";
     }
     if (st == "search") {
         home.style.display = "none";
         search.style.display = "block";
         libaraby.style.display = "none";
         login.style.display = "none";
+        accountsettings.style.display = "none";
     }
+
 }
 
 function searchfunction() {
