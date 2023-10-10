@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
 
@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-// Firebase authentication
+// Firebase authentication and Firestore database
 const auth = getAuth();
 const db = getFirestore(app);
 
@@ -28,7 +28,10 @@ const signupForm = document.getElementById("signup-form");
 const signupEmail = document.getElementById("signup-email");
 const signupPassword = document.getElementById("signup-password");
 const logoutButton = document.getElementById("logout-button");
+const savebutton = document.getElementById("savebutton");
 var createPlaylistButton = document.getElementById("createplaylist");
+const userdiv = document.getElementById("user");
+
 
 // Function to handle login
 function handleLogin(event) {
@@ -146,7 +149,6 @@ async function createPlaylistInFirestore() {
      // Check if the user has a playlist (assuming you have a 'playlists' collection)
      const playlistsCollection = collection(db, "playlists");
      const q = query(playlistsCollection, where("userId", "==", userId));
- 
      try {
        const querySnapshot = await getDocs(q);
        if (!querySnapshot.empty) {
@@ -176,7 +178,6 @@ async function createPlaylistInFirestore() {
     var divsl = document.getElementById("lisuf");
     nameu.innerHTML = ''
     nameu.innerHTML = `${user.email}`
-    divsl.style.display = "none";
 
   } else {
     const nameu = document.getElementById('username');  
@@ -222,3 +223,39 @@ async function createPlaylistInFirestore() {
  }
  
  // Example usage: Call the function to display playlists for a specific user (replace 'userId123' with the actual user ID)
+
+ // if userdiv is clicked check if the user is logged if so show the settings
+ auth.onAuthStateChanged(async (user) => {
+  if (user) {
+  const accountmain = document.getElementById("accountmainbutton");
+  var home = document.getElementById("songselector");
+  var search = document.getElementById("searching");
+  var libaraby = document.getElementById("lilbrary");
+  var login = document.getElementById("mlogin");
+  var accountsettings = document.getElementById("accountsettings");
+
+  // Define a function to handle the click event
+  function handleAccountMainButtonClick() {
+    home.style.display = "none";
+    search.style.display = "none";
+    libaraby.style.display = "none";
+    login.style.display = "none";
+    accountsettings.style.display = "block";
+  }
+
+  // Set the onclick property to the function reference
+  accountmain.onclick = handleAccountMainButtonClick;
+
+}});
+
+async function updateProfileWithFormData() {
+  updateProfile(auth.currentUser, {
+    displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+  }).then(() => {
+    // Profile updated!
+    // ...
+  }).catch((error) => {
+    alert("a error happened when updatingProfile out ", error.message)
+  });
+}
+

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,22 +5,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="main.css">
     <link rel="manifest" href="app.webmanifest">
-    <meta name="description" content="A simple audio player website by angel">
-    <meta name="keywords" content="audio player, music, playmusic, angel">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
     <meta name="author" content="sillyangel3">
     <meta name="theme-color" content="#222222"> <!-- Set the theme color to match your background/theme -->
     
     <!-- Open Graph meta tags for social sharing -->
-    <meta property="og:title" content="Your PlayMusic Website">
-    <meta property="og:description" content="A simple audio player website by angel">
+    <meta property="og:title" content="">
+    <meta property="og:description" content="">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sillyangel.github.io/playmusic"> <!-- Replace with your actual URL -->
     <meta property="og:image" content="./assets/logo/mlogo.png"> <!-- Replace with a link to your website's image -->
     
     <!-- Twitter Card meta tags for Twitter sharing -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Your PlayMusic Website">
-    <meta name="twitter:description" content="A simple audio player website by angel">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content="">
     <meta name="twitter:image" content="./assets/logo/mlogo.png"> <!-- Replace with a link to your website's image -->
     <script>
     navigator.serviceWorker.register("sw.js");
@@ -40,13 +39,27 @@
                                     <br>
             <br>
             <ul>
-                <li><button onclick="switchthingy('user')"><i class="fa-regular fa-user" style="color: #ffffff;"></i></button></li>
+                <li><button id="accountmainbutton" onclick="switchthingy('user')"><i class="fa-regular fa-user" style="color: #ffffff;"></i></button></li>
                 <li><button onclick="switchthingy('search')"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> </button></li>
                 <li><button onclick="switchthingy('hom')"><i class="fa-solid fa-house" style="color: #ffffff;"></i> </button></li>
                 <li><button onclick="switchthingy('lil')"><i class="fa-solid fa-lines-leaning" style="color: #ffffff;"></i> </button></li>
             </ul>
         </div>
+        <div id="accountsettings" style="display: none;">
+          <h2>Account Settings</h2>
+          <input type="text" placeholder="Display Name / Username">
+          <input type="url" placeholder="Photo Url">
+        <button id="logout-button">Logout</button>
+        <button id="savebutton">Save Settings</button>
+          </div>
         <div id="songselector">
+          <h2>Home</h2>
+          <div id="user">
+            <i class="fas fa-user"></i>
+            <span id="username">Not Logged In</span>
+          </div>
+          <div id="farts">
+          </div>
         </div>
         <div style="display: none;" id="searching">
           <h2>Search</h2>
@@ -57,19 +70,15 @@
         </div>
         <div style="display: none;" id="lilbrary">
           <h2>Your Library</h2>
-          <div class="user-profile">
-            <i class="fas fa-user"></i>
-            <span id="username">YourUsername</span>
-        </div>
           <button type="submit" id="createplaylist"><img src="assets/addplaylist.png" alt="createa playlist" width="120px" height="120px"></button>
           <div id="playlistContainer">
           </div>
         </div>
+      </div>
         <div style="display: none;" id="mlogin">
-          <h2>Account</h2>
+          <h2>Account Login</h2>
       <div class="container">
         <div class="lisuf">
-        <h2>Login</h2>
         <div id="login">
             <h3>Login</h3>
             <form id="login-form">
@@ -87,13 +96,12 @@
                 <button type="submit">Sign Up</button>
             </form>
         </div>
-        <button id="logout-button">Logout</button>
         </div>
     </div>
     </div>
   <div class="audio-controls">
         <div class="album-cover">
-            <img id="albumCover" src="assets/nonealbum.png" alt="Album Cover" width="60px" height="60px">
+            <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="60px" height="60px">
         </div>
           <div class="currentTrack"> </div>
             <button alt="" onclick="previousAlbum()"><i class="fas fa-chevron-left"></i></button>
@@ -117,7 +125,7 @@
 <script>
   // Function to check the screen orientation and redirect if necessary
   function checkOrientationAndRedirect() {
-    if (window.innerWidth <= 800 && (window.orientation === 0 || window.orientation === 180)) {
+    if (window.innerWidth <= 789 && (window.orientation === 0 || window.orientation === 180)) {
       // Portrait orientation on a mobile device, redirect to the mobile version
       window.location.href = "moblie.html";
     }
