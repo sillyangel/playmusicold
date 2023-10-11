@@ -74,9 +74,7 @@ function handleSignup(event) {
     .then((userCredential) => {
       let user = auth.currentUser;
       alert("Signed up:", user);
-      return userCredential.user.updateProfile({
-        displayName: document.getElementById("displayname").value
-      })
+      window.location.reload();
     })
     .catch((error) => {
       alert("Signup error:", error.message);
@@ -157,7 +155,6 @@ async function createPlaylistInFirestore() {
            const playlistData = doc.data();
            // Load and display the playlist data as needed
            console.log("Loaded playlist:", playlistData);
-           displayUserPlaylists(userId);
          });
        } else {
          // User doesn't have a playlist
@@ -174,6 +171,46 @@ async function createPlaylistInFirestore() {
 
  auth.onAuthStateChanged(async (user) => {
   if (user) {
+    const playlistContainer = document.getElementById("playlistContainer"); // Assuming you have a container in your HTML with this ID
+    const userId = user.uid;
+    const playlistsCollection = collection(db, "playlists");
+    const q = query(playlistsCollection, where("userId", "==", userId));
+    try {
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        // User has a playlist, load and display it
+        querySnapshot.forEach((doc) => {
+          const playlistData = doc.data().data;
+  
+          const button = document.createElement("button");
+          button.setAttribute("id", "playlistcustom");
+      
+          const image = document.createElement("img");
+          image.src = playlistData.imageUrl;
+          image.alt = playlistData.name;
+          button.appendChild(image);
+      
+          button.addEventListener("click", () => {
+            alert('Playlist : ' + playlistData.name + " is not available yet")
+          });
+      
+          playlistContainer.appendChild(button);
+        });
+      } else {
+        // User doesn't have a playlist
+        console.log("User doesn't have a playlist.");
+      }
+    } catch (error) {
+      console.error("Error checking for playlist:", error);
+    }
+  } else {
+    // User is not authenticated
+    console.log("User is not authenticated.");
+  }
+});
+
+ auth.onAuthStateChanged(async (user) => {
+  if (user) {
     const nameu = document.getElementById('username');
     var divsl = document.getElementById("lisuf");
     nameu.innerHTML = ''
@@ -185,44 +222,6 @@ async function createPlaylistInFirestore() {
   }
  });
  
- const playlistContainer = document.getElementById("playlistContainer"); // Assuming you have a container in your HTML with this ID
-
- // Function to retrieve and display playlist data for a specific user
- async function displayUserPlaylists(userId) {
-   // Query Firestore to get playlist data for the specific user
-   const playlistsCollection = collection(db, "playlists");
-   const q = query(playlistsCollection, where("userId", "==", userId));
-   const querySnapshot = await getDocs(q);
- 
-   // Clear existing content in the playlistContainer
-   playlistContainer.innerHTML = '';
- 
-   // Loop through the retrieved documents and create buttons
-   querySnapshot.forEach((doc) => {
-     const playlistData = doc.data();
- 
-     // Create a button for each playlist
-     const button = document.createElement("button");
-     button.setAttribute("src", "playlistcustom"); // Set the 'src' attribute
- 
-     const image = document.createElement("img");
-     image.setAttribute("src", playlistData.imageUrl); // Set the 'src' attribute for the image
-     button.appendChild(image); // Append the image to the button
- 
-     // Set the button's text (playlist name)
-     button.textContent = playlistData.name;
- 
-     // Add a click event listener to the button if needed
-     button.addEventListener("click", () => {
-      alert('Playlist : ' + playlistData.name + " is not available yet")
-    });
- 
-     // Append the button to the container
-     playlistContainer.appendChild(button);
-   });
- }
- 
- // Example usage: Call the function to display playlists for a specific user (replace 'userId123' with the actual user ID)
 
  // if userdiv is clicked check if the user is logged if so show the settings
  auth.onAuthStateChanged(async (user) => {
