@@ -676,7 +676,7 @@ function switchthingy(st) {
     if (st == "lil") {
         home.style.display = "none";
         search.style.display = "none";
-        libaraby.style.display = "block";
+        libaraby.style.display = "flex";
         login.style.display = "none";
         accountsettings.style.display = "none";
     }
