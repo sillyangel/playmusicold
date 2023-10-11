@@ -177,7 +177,7 @@ async function createPlaylistInFirestore() {
     const nameu = document.getElementById('username');
     var divsl = document.getElementById("lisuf");
     nameu.innerHTML = ''
-    nameu.innerHTML = `${user.email}`
+    nameu.innerHTML = `${user.displayName}`
 
   } else {
     const nameu = document.getElementById('username');  
@@ -249,13 +249,15 @@ async function createPlaylistInFirestore() {
 }});
 
 async function updateProfileWithFormData() {
+  const displayNameV = document.getElementById("displayname").value;
+  const photoURLV = document.getElementById("PhotoUrl").value;
   updateProfile(auth.currentUser, {
-    displayName: "Jane Q. User", photoURL: "https://example.com/jane-q-user/profile.jpg"
+    displayName: displayNameV, photoURL: photoURLV 
   }).then(() => {
-    // Profile updated!
-    // ...
+    console.log("Updated Profile Details");
   }).catch((error) => {
     alert("a error happened when updatingProfile out ", error.message)
   });
 }
+savebutton.onclick = updateProfileWithFormData;
 
