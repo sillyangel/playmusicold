@@ -156,6 +156,7 @@ async function createPlaylistInFirestore() {
            // Load and display the playlist data as needed
            console.log("Loaded playlist:", playlistData);
          });
+         playlistdatathn(user);         
        } else {
          // User doesn't have a playlist
          console.log("User doesn't have a playlist.");
@@ -169,7 +170,7 @@ async function createPlaylistInFirestore() {
    }
  });
 
- auth.onAuthStateChanged(async (user) => {
+async function playlistdatathn(user) {
   if (user) {
     const playlistContainer = document.getElementById("playlistContainer"); // Assuming you have a container in your HTML with this ID
     const userId = user.uid;
@@ -187,7 +188,7 @@ async function createPlaylistInFirestore() {
       
           const image = document.createElement("img");
           image.src = playlistData.imageUrl;
-          image.alt = playlistData.name;
+          image.alt = playlistData.name; 
           button.appendChild(image);
       
           button.addEventListener("click", () => {
@@ -207,7 +208,7 @@ async function createPlaylistInFirestore() {
     // User is not authenticated
     console.log("User is not authenticated.");
   }
-});
+};
 
  auth.onAuthStateChanged(async (user) => {
   if (user) {
