@@ -4,7 +4,7 @@ self.addEventListener("fetch", event => {
     // some browsers
   });
   
-  const urlsToCache = ["/", "sw.js", "main.css", "./assets", "./songs", "index.html", "app.webmanifest"];
+  const urlsToCache = ["sw.js", "main.css", "index.html", "app.webmanifest", "main.js", "firebas.js", "moblie.css", "moblie.html"];
   self.addEventListener("install", event => {
      event.waitUntil(
         caches.open("pwa-assets")
