@@ -3,7 +3,4 @@
 package-lock.json
 package.json
 node_modules/
-./firebase-debug.log
-```
-
-
+firebase-debug.log
