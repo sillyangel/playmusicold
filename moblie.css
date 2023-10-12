@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Montserrat&display=swap');
  body {
      background-color: #222;
@@ -104,26 +105,25 @@ progress {
 }
 .audio-controls {
     position: fixed;
-    width: 99%;
+    width: 100%;
     bottom: 0px;
+    left: 0px;
     border-top: 2px solid #333;
     display: flex;
-    width: auto;
     
 }
 #songselector img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
 }
 #songselector {
-  left: 20px;
-  padding-left: 100px;
-  margin-top: 0 10px;
-  float: right;
-  width: 95%;
-  height: auto;
-  display: block;
+    padding-left: 20px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
 }
+
 #albumcover {
     width: auto;
 }
@@ -131,6 +131,11 @@ progress {
 background: none;
 border: none;
 cursor: pointer;
+}
+#farts button {
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 #playerfull {
@@ -168,3 +173,191 @@ cursor: pointer;
     margin-right: 5px;
     font-size: 25px;
 }
+
+#playlistContainer {
+    display: inline-block; /* Make it inline to adjust to content */
+  }
+
+  #user {
+    display: flex;
+    position: relative;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  
+  }
+  
+  #user {
+    cursor: pointer;
+  }
+
+  #lilbrary {
+    padding-left: 20px;
+    margin-top: 0 10px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  #accountsettings {
+    padding-left: 20px;
+    margin-top: 0 10px;
+    float: right;
+    height: auto;
+    display: flex;
+  }
+  #searching {
+    height: auto;
+    margin: 10px;
+  }
+  #searching input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #acacac;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('assets/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+  }
+  #searching input[type=text] {
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+  }
+  
+  input[type=text]:focus {
+    border: 3px solid #ffffff;
+  }
+  
+  #list-holder li {
+    font-weight: bold;
+    font-size: 13px;
+    padding-top: 6px;
+    padding-left: 0px!important;
+    display: block;
+  }
+  
+  #lilbrary button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #mlogin {
+    margin-top: 0 10px;
+    height: auto;
+    display: flex;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    text-align: center;
+  }
+  #mlogin button {
+    background: #333333;
+    border: 3px solid #444444;
+    color: white;
+  }
+  #mlogin h2 {
+    font-size: 40px;
+  }
+  h3 {
+    font-size: 25px;
+  }
+  input[type=email]:focus {
+    border: 3px solid #ffffff
+  }
+  input[type=email] {
+    box-sizing: border-box;
+    border: 2px solid #acacac;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+  }
+  input[type=password] {
+    box-sizing: border-box;
+    border: 2px solid #acacac;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+  }
+  .container input {
+    box-sizing: border-box;
+    border: 2px solid #acacac;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+  }
+  #list-holder li{
+    color: white;
+    cursor: pointer;
+  }
+  
+  .dark-mode {
+    background-color: white;
+    color: #222;
+  }
+  
+  #user {
+    right: 20px;
+    position: absolute;
+    color: #fff;
+    text-decoration: none;
+    font-size: 19px;
+    display: flex;
+    align-content: space-between;
+    margin-top: 30px;
+  }
+  
+  #user {
+    cursor: pointer;
+  }
+  
+  #accountsettings button {
+    opacity: 0.9;
+    transition: 0.3s;
+    background-color: #5c5c5c;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  #accountsettings button:hover {
+    opacity: 1;
+  }
+
+  .sidebarmen {
+    display: inline;
+    text-align: center;
+  }
+  li {
+    display: inline;
+  }
+  li button {
+    background: none;
+    border: none;
+    font-size: 25px;
+    align-content: space-between;
+    text-align: center;
+  }
+
+
+
+
+
+
+
+
+
+  
