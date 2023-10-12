@@ -6,7 +6,30 @@
       "**/.*",
       "**/node_modules/**",
       "**/.github/**",
-      ".firebaserc"
+      ".firebaserc",
+      "**/.git/**",
+      "**/.gitignore",
+      "**/.idea/**",
+      "**/.vscode/**",
+      "**/yarn.lock",
+      "**/README.md",
+      "**/package.json",
+      "**/package-lock.json",
+      "**/firebase-debug.log",
+      "**/firebase.json",
+      "**/firestore.indexes.json",
+      "**/firestore.rules",
+      "**/storage.rules",
+      "**/storage.indexes.json",
+      "**/database.rules.json",
+      "**/database.indexes.json",
+      "**/functions/package.json",
+      "**/functions/package-lock.json",
+      "**/functions/node_modules/**",
+      "**/functions/lib/**",
+      "**/functions/tsconfig.json",
+      "**/functions/tsconfig.prod.json",
+      "**/functions/tslint.json"
     ]
   }
 }
