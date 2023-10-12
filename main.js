@@ -709,7 +709,9 @@ function searchfunction() {
 
         if (albumName.includes(input) || artistName.includes(input)) {
             const elem = document.createElement("li");
+            const spacer = document.createElement('br')
             elem.innerHTML = `${obj.album} - ${obj.artist}`;
+            elem.appendChild(spacer)
             x.appendChild(elem);
         }
     }
