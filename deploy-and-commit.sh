@@ -16,7 +16,7 @@ fi
 # Deploy to Firebase with a custom message
 echo "Deploying to Firebase with the following commit message:"
 echo ">> $commit_message"
-firebase deploy -m "$commit_message"
+firebase deploy
 
 # Add all changes to the Git staging area
 echo "Adding changes to Git staging area..."
@@ -38,19 +38,4 @@ else
     echo "Error: failed to push changes to the '$remote_branch' branch."
     exit 1
 fi
-
-# Check Firebase hosting status
-echo "Checking Firebase hosting status..."
-firebase hosting:channel:deploy "$commit_message"
-
-# If the deployment status is a success, confirm the deployment
-if [ $? -eq 0 ]; then
-    echo "Firebase hosting deployment is successful for commit message: $commit_message"
-else
-    echo "Error: Firebase hosting deployment failed for commit message: $commit_message"
-    exit 1
-fi
-
-
-
 
