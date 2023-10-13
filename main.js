@@ -1,8 +1,40 @@
-var audio = document.getElementById("myAudio");
-var playButton = document.getElementById("playbuttonthung");
-var volumeControl = document.getElementById("volume");
-var progressBar = document.getElementById("progress");
-var currentTrackIndex = 0;
+var albums = [
+    { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf", image: "songs/tylerthecreator/wolf/albumcover.png" },
+    { artist: "Tyler, The Creator", album: "Flower Boy", folder: "tylerthecreator/flowerboy", image: "songs/tylerthecreator/flowerboy/albumcover.png" },
+    { artist: "Tyler, The Creator", album: "Igor", folder: "tylerthecreator/igor", image: "songs/tylerthecreator/igor/igorcover.png" },
+    { artist: "Tyler, The Creator", album: "Cherry Bomb", folder: "tylerthecreator/cherrybomb", image: "songs/tylerthecreator/cherrybomb/cherrybomb.png" },
+    { artist: "Tyler, The Creator", album: "Goblin", folder: "tylerthecreator/goblin", image: "songs/tylerthecreator/goblin/Goblincover.png" },
+    { artist: "Tyler, The Creator", album: "Bastard", folder: "tylerthecreator/bas", image: "songs/tylerthecreator/bas/bas.png" },
+    { artist: "Arctic Monkeys", album: "AM", folder: "arcticmonkeys/am", image: "songs/arcticmonkeys/am/albumcover.jpg"},
+    { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "songs/arcticmonkeys/humbug/albumcover.jpg"},
+    { artist: "Arctic Monkeys", album: "WPSIATWIN", folder: "arcticmonkeys/wpsiatwin", image: "songs/arcticmonkeys/wpsiatwin/albumcover.jpg"},
+    { artist: "Arctic Monkeys", album: "Favourite Worst Nightmare", folder: "arcticmonkeys/fwn", image: "songs/arcticmonkeys/fwn/albumcover.jpg"},
+    { artist: "Arctic Monkeys", album: "Suck It and See", folder: "arcticmonkeys/sias", image: "songs/arcticmonkeys/sias/albumcover.jpg"},
+    { artist: "Arctic Monkeys", album: "Tranquility Base Hotel & Casino", folder: "arcticmonkeys/tbhc", image: "songs/arcticmonkeys/tbhc/albumcover.png"},
+    { artist: "Arctic Monkeys", album: "The Car", folder: "arcticmonkeys/car", image: "songs/arcticmonkeys/car/albumcover.jpg"},
+    { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "songs/wallows/nonthinghappens/albumcover.png"},
+    { artist: "Melanie Martinez", album: "Crybaby", folder: "melanie/crybaby", image: "songs/melanie/crybaby/albumcover.png"},
+    { artist: "Melanie Martinez", album: "K-12", folder: "melanie/k12", image: "songs/melanie/k12/albumcover.png"},
+    { artist: "Melanie Martinez", album: "Portals", folder: "melanie/portals", image: "songs/melanie/portals/albumcover.png"},
+    { artist: "The weeknd", album: "Kiss Land", folder: "theweekend/kissland", image: "songs/theweekend/kissland/albumcover.png"},
+    { artist: "The weeknd", album: "Beauty Behind the Madness", folder: "theweekend/bbtm", image: "songs/theweekend/bbtm/albumcover.png"},
+    { artist: "The weeknd", album: "starboy", folder: "theweekend/starboy", image: "songs/theweekend/starboy/albumcover.png"},
+    { artist: "The weeknd", album: "Afterhours", folder: "theweekend/afterhours", image: "songs/theweekend/afterhours/albumcover.png"},
+    { artist: "The weeknd", album: "Dawnfm", folder: "theweekend/dawnfm", image: "songs/theweekend/dawnfm/albumcover.png"},
+    { artist: "Laufey", album: "Bewitched", folder: "laufey/bewitched", image: "songs/laufey/bewitched/albumcover.png"},
+    { artist: "Laufey", album: "Everything I know about love", folder: "laufey/eikal", image: "songs/laufey/eikal/albumcover.png"},
+    { artist: "Roddy Ricch", album: "life lives fast", folder: "rr/llf", image: "songs/rr/llf/albumcover.png"},
+    { artist: "Roddy Ricch", album: "Please excuse me for being antisocial", folder: "rr/pemfba", image: "songs/rr/pemfba/albumcover.png"},
+    { artist: "Lemon Demon", album: "Spirit phone", folder: "ld/sp", image: "songs/ld/sp/albumcover.png"},
+    { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.jpg"},
+    { artist: "Kanye West", album: "My Beautiful Dark Twisted Fantasy", folder: "kanyewest/mbdtf", image: "songs/kanyewest/mbdtf/albumcover.jpg"},
+    { artist: "Kanye West", album: "Yeezus", folder: "kanyewest/yeezus", image: "songs/kanyewest/yeezus/Cover.jpg"},
+    { artist: "Kanye West", album: "Ye", folder: "kanyewest/ye", image: "songs/kanyewest/ye/Cover.jpg" },
+    { artist: "Kanye West", album: "Jesus Is King", folder: "kanyewest/jesusisking", image: "songs/kanyewest/jesusisking/Cover.jpg" },
+    { artist: "Kanye West", album: "Donda", folder: "kanyewest/donda", image: "songs/kanyewest/donda/cover.jpg" },
+    { artist: "Kanye West", album: "Donda 2", folder: "kanyewest/donda2", image: "songs/kanyewest/donda2/" },
+    // Add more albums here
+];
 var audioTracks = {
     "tylerthecreator/wolf": [
         "WOLF.mp3",
@@ -349,44 +381,12 @@ var audioTracks = {
     ]
 
 };
+var audio = document.getElementById("myAudio");
+var playButton = document.getElementById("playbuttonthung");
+var volumeControl = document.getElementById("volume");
+var progressBar = document.getElementById("progress");
+var currentTrackIndex = 0;
 var currentAlbum = "tylerthecreator/wolf";
-var albums = [
-    { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf", image: "songs/tylerthecreator/wolf/albumcover.png" },
-    { artist: "Tyler, The Creator", album: "Flower Boy", folder: "tylerthecreator/flowerboy", image: "songs/tylerthecreator/flowerboy/albumcover.png" },
-    { artist: "Tyler, The Creator", album: "Igor", folder: "tylerthecreator/igor", image: "songs/tylerthecreator/igor/igorcover.png" },
-    { artist: "Tyler, The Creator", album: "Cherry Bomb", folder: "tylerthecreator/cherrybomb", image: "songs/tylerthecreator/cherrybomb/cherrybomb.png" },
-    { artist: "Tyler, The Creator", album: "Goblin", folder: "tylerthecreator/goblin", image: "songs/tylerthecreator/goblin/Goblincover.png" },
-    { artist: "Tyler, The Creator", album: "Bastard", folder: "tylerthecreator/bas", image: "songs/tylerthecreator/bas/bas.png" },
-    { artist: "Arctic Monkeys", album: "AM", folder: "arcticmonkeys/am", image: "songs/arcticmonkeys/am/albumcover.jpg"},
-    { artist: "Arctic Monkeys", album: "Humbug", folder: "arcticmonkeys/humbug", image: "songs/arcticmonkeys/humbug/albumcover.jpg"},
-    { artist: "Arctic Monkeys", album: "WPSIATWIN", folder: "arcticmonkeys/wpsiatwin", image: "songs/arcticmonkeys/wpsiatwin/albumcover.jpg"},
-    { artist: "Arctic Monkeys", album: "Favourite Worst Nightmare", folder: "arcticmonkeys/fwn", image: "songs/arcticmonkeys/fwn/albumcover.jpg"},
-    { artist: "Arctic Monkeys", album: "Suck It and See", folder: "arcticmonkeys/sias", image: "songs/arcticmonkeys/sias/albumcover.jpg"},
-    { artist: "Arctic Monkeys", album: "Tranquility Base Hotel & Casino", folder: "arcticmonkeys/tbhc", image: "songs/arcticmonkeys/tbhc/albumcover.png"},
-    { artist: "Arctic Monkeys", album: "The Car", folder: "arcticmonkeys/car", image: "songs/arcticmonkeys/car/albumcover.jpg"},
-    { artist: "Wallows", album: "Nothing Happens", folder: "wallows/nonthinghappens", image: "songs/wallows/nonthinghappens/albumcover.png"},
-    { artist: "Melanie Martinez", album: "Crybaby", folder: "melanie/crybaby", image: "songs/melanie/crybaby/albumcover.png"},
-    { artist: "Melanie Martinez", album: "K-12", folder: "melanie/k12", image: "songs/melanie/k12/albumcover.png"},
-    { artist: "Melanie Martinez", album: "Portals", folder: "melanie/portals", image: "songs/melanie/portals/albumcover.png"},
-    { artist: "The weeknd", album: "Kiss Land", folder: "theweekend/kissland", image: "songs/theweekend/kissland/albumcover.png"},
-    { artist: "The weeknd", album: "Beauty Behind the Madness", folder: "theweekend/bbtm", image: "songs/theweekend/bbtm/albumcover.png"},
-    { artist: "The weeknd", album: "starboy", folder: "theweekend/starboy", image: "songs/theweekend/starboy/albumcover.png"},
-    { artist: "The weeknd", album: "Afterhours", folder: "theweekend/afterhours", image: "songs/theweekend/afterhours/albumcover.png"},
-    { artist: "The weeknd", album: "Dawnfm", folder: "theweekend/dawnfm", image: "songs/theweekend/dawnfm/albumcover.png"},
-    { artist: "Laufey", album: "Bewitched", folder: "laufey/bewitched", image: "songs/laufey/bewitched/albumcover.png"},
-    { artist: "Laufey", album: "Everything I know about love", folder: "laufey/eikal", image: "songs/laufey/eikal/albumcover.png"},
-    { artist: "Roddy Ricch", album: "life lives fast", folder: "rr/llf", image: "songs/rr/llf/albumcover.png"},
-    { artist: "Roddy Ricch", album: "Please excuse me for being antisocial", folder: "rr/pemfba", image: "songs/rr/pemfba/albumcover.png"},
-    { artist: "Lemon Demon", album: "Spirit phone", folder: "ld/sp", image: "songs/ld/sp/albumcover.png"},
-    { artist: "Lemon Demon", album: "Clown", folder: "ld/cc", image: "songs/ld/cc/albumcover.jpg"},
-    { artist: "Kanye West", album: "My Beautiful Dark Twisted Fantasy", folder: "kanyewest/mbdtf", image: "songs/kanyewest/mbdtf/albumcover.jpg"},
-    { artist: "Kanye West", album: "Yeezus", folder: "kanyewest/yeezus", image: "songs/kanyewest/yeezus/Cover.jpg"},
-    { artist: "Kanye West", album: "Ye", folder: "kanyewest/ye", image: "songs/kanyewest/ye/Cover.jpg" },
-    { artist: "Kanye West", album: "Jesus Is King", folder: "kanyewest/jesusisking", image: "songs/kanyewest/jesusisking/Cover.jpg" },
-    { artist: "Kanye West", album: "Donda", folder: "kanyewest/donda", image: "songs/kanyewest/donda/cover.jpg" },
-    { artist: "Kanye West", album: "Donda 2", folder: "kanyewest/donda2", image: "songs/kanyewest/donda2/" },
-    // Add more albums here
-];
 var currentAlbumIndex = 0;
 var currentTrackElements = document.querySelectorAll(".currentTrack");
 var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
@@ -639,16 +639,21 @@ function mediathinggy() {
         navigator.mediaSession.setActionHandler("pause", () => {
             playPause();
         });
-        /*
-        navigator.mediaSession.setActionHandler("seekbackward", () => {
-
+        navigator.mediaSession.setActionHandler("seekbackward", (details) => {
+            const seekAmount = details.seekOffset || 10; // defaulting to 10 seconds
+            audio.currentTime = Math.max(audio.currentTime - seekAmount, 0); // ensuring currentTime doesn't go below 0
         });
-        navigator.mediaSession.setActionHandler("seekforward", () => {
-
+        navigator.mediaSession.setActionHandler("seekforward", (details) => {
+            const seekAmount = details.seekOffset || 10; // defaulting to 10 seconds
+            audio.currentTime = Math.min(audio.currentTime + seekAmount, audio.duration); // ensuring currentTime doesn't go above duration
         });
         navigator.mediaSession.setActionHandler("seekto", () => {
-
-        });*/
+            if (details.fastSeek && 'fastSeek' in audio) {
+                audio.fastSeek(details.seekTime);
+            } else {
+                audio.currentTime = details.seekTime;
+            }
+        });
         navigator.mediaSession.setActionHandler("previoustrack", () => {
             previousTrack();
         });
@@ -658,7 +663,6 @@ function mediathinggy() {
 
     }
 }
-
 function switchthingy(st) {
     var home = document.getElementById("songselector");
     var search = document.getElementById("searching");
@@ -666,56 +670,48 @@ function switchthingy(st) {
     var login = document.getElementById("mlogin");
     var accountsettings = document.getElementById("accountsettings");
 
-    if (st == "hom") {
-        home.style.display = "flex";
-        search.style.display = "none";
-        libaraby.style.display = "none";
-        login.style.display = "none";
-        accountsettings.style.display = "none";
-    }
-    if (st == "lil") {
-        home.style.display = "none";
-        search.style.display = "none";
-        libaraby.style.display = "flex";
-        login.style.display = "none";
-        accountsettings.style.display = "none";
-    }
-    if (st == "user") {
-        home.style.display = "none";
-        search.style.display = "none";
-        libaraby.style.display = "none";
-        login.style.display = "block";
-        accountsettings.style.display = "none";
-    }
-    if (st == "search") {
-        home.style.display = "none";
-        search.style.display = "block";
-        libaraby.style.display = "none";
-        login.style.display = "none";
-        accountsettings.style.display = "none";
-    }
+    home.style.display = "none";
+    search.style.display = "none";
+    libaraby.style.display = "none";
+    login.style.display = "none";
+    accountsettings.style.display = "none";
 
+    switch(st) {
+        case "hom":
+            home.style.display = "flex";
+            break;
+        case "lil":
+            libaraby.style.display = "flex";
+            break;
+        case "user":
+            login.style.display = "block";
+            break;
+        case "search":
+            search.style.display = "block";
+            break;
+    }
 }
 
-function searchfunction() {
-    let input = document.getElementById('myInput').value.toLowerCase();
-    let x = document.querySelector('#list-holder');
-    x.innerHTML = "";
 
-    for (i = 0; i < albums.length; i++) {
-        let obj = albums[i];
-        let albumName = obj.album.toLowerCase();
-        let artistName = obj.artist.toLowerCase();
+function searchfunction() {
+    const input = document.getElementById('myInput').value.toLowerCase();
+    const listHolder = document.querySelector('#list-holder');
+    listHolder.innerHTML = "";
+
+    for (let i = 0; i < albums.length; i++) {
+        const obj = albums[i];
+        const albumName = obj.album.toLowerCase();
+        const artistName = obj.artist.toLowerCase();
 
         if (albumName.includes(input) || artistName.includes(input)) {
-            const elem = document.createElement("li");
-            const spacer = document.createElement('br')
-            elem.innerHTML = `${obj.album} - ${obj.artist}`;
-            elem.appendChild(spacer)
-            x.appendChild(elem);
+            const listItem = document.createElement("li");
+            listItem.textContent = `${obj.album} - ${obj.artist}`;
+            listHolder.appendChild(listItem);
+            listHolder.appendChild(document.createElement('br'));
         }
     }
 }
+
 
 function darkmode() {
     var element = document.body;
