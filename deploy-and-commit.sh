@@ -1,7 +1,23 @@
 #!/bin/bash
 
-# This script simplifies the process of deploying code to Firebase with Git commits.
-# It also handles custom error messages and additional checks.
+if ! command -v firebase >/dev/null 2>&1; then
+    echo "Firebase tools are not installed. Installing now..."
+    npm install -g firebase-tools
+
+    # Check if the installation was successful
+    if [ $? -eq 0 ]; then
+        echo "Firebase tools installed successfully."
+    else
+        echo "Error: Failed to install firebase-tools. Please try installing it manually."
+        exit 1
+    fi
+fi
+
+# Continue with the rest of the script
+echo "Please enter a commit message:"
+read commit_message
+
+# Rest of the script here...
 
 # Prompt the user for a commit message
 echo "Please enter a commit message:"
@@ -14,8 +30,7 @@ if [ -z "$commit_message" ]; then
 fi
 
 # Deploy to Firebase with a custom message
-echo "Deploying to Firebase with the following commit message:"
-echo ">> $commit_message"
+echo "Deploying to Firebase"
 firebase deploy
 
 # Add all changes to the Git staging area
