@@ -645,13 +645,18 @@ function mediathinggy() {
         navigator.mediaSession.setActionHandler("pause", () => {
             playPause();
         });
-        navigator.mediaSession.setActionHandler("seekto", () => {
-            if (details.fastSeek && 'fastSeek' in audio) {
-                audio.fastSeek(details.seekTime);
+        navigator.mediaSession.setActionHandler("seekto", (details) => {
+            if (details && details.seekTime !== undefined) {
+                if (details.fastSeek && 'fastSeek' in audio) {
+                    audio.fastSeek(details.seekTime);
+                } else {
+                    audio.currentTime = details.seekTime;
+                }
             } else {
-                audio.currentTime = details.seekTime;
+                console.error("Invalid or missing details for seekto operation");
             }
         });
+        
         navigator.mediaSession.setActionHandler("previoustrack", () => {
             previousTrack();
         });
