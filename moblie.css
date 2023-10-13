@@ -83,7 +83,7 @@ progress {
 
 .audio-controls {
    position: fixed;
-   width: 99%;
+   width: 100%;
    bottom: 0px;
    border-top: 2px solid #333;
 }
@@ -343,14 +343,18 @@ cursor: pointer;
   }
   li {
     display: inline;
+    text-align: center;
+    align-content: space-between;
+
   }
   li button {
     background: none;
     border: none;
     font-size: 25px;
-    align-content: space-between;
-    text-align: center;
   }
+ul {
+  padding-left: 0px;
+}
 
 
 
