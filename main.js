@@ -432,10 +432,16 @@ function previousTrack() {
 }
 
 function seek(event) {
+    const progressBar = document.getElementById('progress');
     const percent = event.offsetX / progressBar.offsetWidth;
     const seekTime = percent * audio.duration;
-    audio.currentTime = seekTime;
+    if (isFinite(seekTime)) {
+        audio.currentTime = seekTime;
+    } else {
+        console.error("Invalid seek time");
+    }
 }
+
 // Modify the updateAlbumCover function
 function updateAlbumCover() {
     // Get all elements with the same ID "albumCover"
@@ -638,14 +644,6 @@ function mediathinggy() {
         });
         navigator.mediaSession.setActionHandler("pause", () => {
             playPause();
-        });
-        navigator.mediaSession.setActionHandler("seekbackward", (details) => {
-            const seekAmount = details.seekOffset || 10; // defaulting to 10 seconds
-            audio.currentTime = Math.max(audio.currentTime - seekAmount, 0); // ensuring currentTime doesn't go below 0
-        });
-        navigator.mediaSession.setActionHandler("seekforward", (details) => {
-            const seekAmount = details.seekOffset || 10; // defaulting to 10 seconds
-            audio.currentTime = Math.min(audio.currentTime + seekAmount, audio.duration); // ensuring currentTime doesn't go above duration
         });
         navigator.mediaSession.setActionHandler("seekto", () => {
             if (details.fastSeek && 'fastSeek' in audio) {
