@@ -1,7 +1,4 @@
 .vscode/
 ./vscode/extensions/
-package-lock.json
-package.json
-node_modules/
 firebase-debug.log
 ./firebase/
