@@ -20,8 +20,6 @@ read commit_message
 # Rest of the script here...
 
 # Prompt the user for a commit message
-echo "Please enter a commit message:"
-read commit_message
 
 # Check if the commit message is empty
 if [ -z "$commit_message" ]; then
