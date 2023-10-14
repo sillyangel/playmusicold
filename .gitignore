@@ -1,6 +1,5 @@
 .vscode/
 ./vscode/extensions/
 firebase-debug.log
-./firebase/
 dev/
-.dev/
+./dev/
