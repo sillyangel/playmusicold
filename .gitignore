@@ -2,3 +2,4 @@
 ./vscode/extensions/
 firebase-debug.log
 ./firebase/
+dev/
