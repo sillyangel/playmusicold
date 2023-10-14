@@ -694,8 +694,6 @@ function switchthingy(st) {
             break;
     }
 }
-
-
 function searchfunction() {
     const input = document.getElementById('myInput').value.toLowerCase();
     const listHolder = document.querySelector('#list-holder');
