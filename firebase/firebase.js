@@ -29,6 +29,7 @@ const signupEmail = document.getElementById("signup-email");
 const signupPassword = document.getElementById("signup-password");
 const logoutButton = document.getElementById("logout-button");
 const savebutton = document.getElementById("savebutton");
+const emailforreset = document.getElementById("emailforreset");
 var createPlaylistButton = document.getElementById("createplaylist");
 const userdiv = document.getElementById("user");
 
@@ -43,6 +44,7 @@ function handleLogin(event) {
   .then((userCredential) => {
     const user = userCredential.user;
     alert("Logged in as: " + user.email);
+    window.location.href = "https://sillyangel.me/"
     // Update the UI with user information
   })
   .catch((error) => {
@@ -75,6 +77,7 @@ function handleSignup(event) {
       let user = auth.currentUser;
       alert("Signed up:", user);
       window.location.reload();
+    window.location.href = "https://sillyangel.me/"
     })
     .catch((error) => {
       alert("Signup error:", error.message);
@@ -85,6 +88,7 @@ function logout(event) {
   signOut(auth).then(() => {
     // Sign-out successful.
     alert("Log Out")
+    window.location.href = "https://sillyangel.me/"
   }).catch((error) => {
     alert("a error happened when loging out", error.message)
   });
