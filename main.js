@@ -393,7 +393,7 @@ var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
 
 function loadTrack() {
     var trackPath = audioTracks[currentAlbum][currentTrackIndex];
-    audio.src = "songs/" + currentAlbum + "/" + trackPath;
+    audio.src = "https://cdn.sillyangel.me/" + "songs/" + currentAlbum + "/" + trackPath;
     audio.load();
     updateTrackText();
     mediathinggy();
