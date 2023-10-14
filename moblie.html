@@ -150,12 +150,15 @@ var playerfull = document.getElementById("playerfull");
 var playermini = document.getElementsByClassName("bcontainer");
 var sidebarmen = docuemnt.getElementsByClassName("sidebarmen");
 function hidefullplayer() {
-  songselectorjs.style.display = "flrx";
+  songselectorjs.style.display = "flex";
   playerfull.style.display = "none";
-  sidebarmen.style.display = "block";
+  sidebarmen.style.display = "inline";
   // Loop through the elements with the class "audio-controls" and set their display style
   for (var i = 0; i < playermini.length; i++) {
     playermini[i].style.display = "flex";
+  }
+  for (var i = 0; i < sidebarmen.length; i++) {
+    sidebarmen[i].style.display = "inline";
   }
 }
 
@@ -166,6 +169,9 @@ function openfullplayer() {
   // Loop through the elements with the class "audio-controls" and set their display style
   for (var i = 0; i < playermini.length; i++) {
     playermini[i].style.display = "none";
+  }
+  for (var i = 0; i < sidebarmen.length; i++) {
+    sidebarmen[i].style.display = "none";
   }
 }
 
