@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
 
@@ -21,6 +21,8 @@ const auth = getAuth();
 const db = getFirestore(app);
 
 // Get HTML elements
+const ResetEmail = document.getElementById("reset-email");
+const resetbutton = document.getElementById("resetbutton");
 const loginForm = document.getElementById("login-form");
 const loginEmail = document.getElementById("login-email");
 const loginPassword = document.getElementById("login-password");
@@ -29,9 +31,7 @@ const signupEmail = document.getElementById("signup-email");
 const signupPassword = document.getElementById("signup-password");
 const logoutButton = document.getElementById("logout-button");
 const savebutton = document.getElementById("savebutton");
-const emailforreset = document.getElementById("emailforreset");
 var createPlaylistButton = document.getElementById("createplaylist");
-const userdiv = document.getElementById("user");
 
 
 // Function to handle login
@@ -54,7 +54,7 @@ function handleLogin(event) {
 }
 function handlereset(event) {
   event.preventDefault();
-  const email = emailforreset.value; // Assuming you have an element with id "emailforreset"
+  const email = ResetEmail.value; // Assuming you have an element with id "emailforreset"
   
   sendPasswordResetEmail(auth, email)
     .then(() => {
@@ -64,6 +64,7 @@ function handlereset(event) {
       alert("Error sending password reset email: " + error.message);
     });
 }
+
 
 
 // Function to handle signup
@@ -98,6 +99,7 @@ function logout(event) {
 loginForm.addEventListener("submit", handleLogin);
 signupForm.addEventListener("submit", handleSignup);
 logoutButton.addEventListener("click", logout);
+resetbutton.addEventListener("click", handlereset)
 
 
 async function createPlaylistInFirestore() {
