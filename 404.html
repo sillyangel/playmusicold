@@ -6,60 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Page Not Found</title>
   <style media="screen">
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
     body {
       background-color: #fff;
       color: #2e2e2e;
-      font-family: 'PublicPixel', sans-serif;
-      text-rendering: optimizeLegibility;
+      font-family: 'Roboto Mono', monospace;
       margin: 0;
       padding: 0;
       text-align: center;
     }
-    @font-face {
-      font-family: 'PublicPixel';
-     src: url('assets/fonts/PublicPixel.ttf') format('truetype');
-    }
-    h1, p {
-      font-family: 'PublicPixel', sans-serif;
-      text-rendering: optimizeLegibility;
+    h1 {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 100px;
+      margin-top: 15%;
+      margin-bottom: 0px;
     }
 
     .content {
       text-align: center;
-      margin-top: 20px;
     }
-    a {
-      font-size: 18px;
-      color: #0077b6;
-      text-decoration: none;
-      display: block;
-      position: relative;
-    }
-    a:hover {
-      animation: colorChange 0.3s ease-in-out forwards;
-    }
-    @keyframes colorChange {
-      0% {
-        color: #0077b6; /* Start color */
-      }
-      100% {
-        color: #0056b3; /* End color on hover */
-      }
-    }
-    span {
-      font-size: 24px;
+    p {
+      font-weight: bold;
+      size: 50px;
     }
   </style>
 </head>
 <body>
   <div class="content">
-    <h1>Oops! Page Not Found</h1>
-    <p>We couldn't find the page you're looking for.</p>
-
-    <!-- Back to Home Link -->
-    <a href="/">
-      <span>&larr;</span> Back to Home
-    </a>
+    <h1>404</h1>
+    <p>Not Found</p>
   </div>
 </body>
 </html>
