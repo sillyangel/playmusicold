@@ -6,8 +6,7 @@
       "**/.*",
       "**/node_modules/**",
       "firebase-debug.log",
-      "**/.git/**",
-      "**/dev/**"
+      "**/.git/**"
     ]
   }
 }
