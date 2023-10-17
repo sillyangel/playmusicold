@@ -349,3 +349,20 @@ input[type=password] {
   width: 120px;
   height: 120px;
 }
+.playlist-item button {
+  max-width: 50px;
+  border: none;
+  background: #5c5c5c;
+}
+#deletebutton {
+  background: red;
+  font-weight: bolder;
+  color: white;
+}
+#exitbutton {
+  font-weight: bolder;
+  color: white;
+}
+#playlist-item button {
+  display: inline;
+}
