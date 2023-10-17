@@ -76,7 +76,15 @@
             <button type="submit">Sign Up</button>
         </form>
     </div>
+    <div id="forgotrest">
+      <h3>Forgot Password?</h3>
+      <form id="reset-form">
+        <input type="email" id="reset-email" placeholder="Email to reset" required>
+        <button id="resetbutton" type="submit">Send reset email</button>
+        </form> 
     </div>
+    </div>
+    <button id="githubuttonlogin">login with github</button>
 </div>
 </div>
 <div id="accountsettings" style="display: none;">
@@ -104,7 +112,7 @@
 </div>
 <div class="bcontainer">
     <div class="audio-controls">
-            <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="60px" height="60px">
+            <img id="albumCover" src="https://cdn.sillyangel.me/songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="60px" height="60px">
           <div class="currentTrack"> </div>
       <button onclick="openfullplayer()" id="arrow-button"><i class="fas fa-chevron-up"></i></button>
     </div>
@@ -112,7 +120,7 @@
 
     <div id="playerfull">
       <button onclick="hidefullplayer()" id="arrow-button"><i class="fas fa-chevron-down"></i></button>
-        <img id="albumCover" src="songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="300px" height="300px">
+        <img id="albumCover" src="https://cdn.sillyangel.me/songs/tylerthecreator/wolf/albumcover.png" alt="Album Cover" width="300px" height="300px">
         <br>
         <br>
         <div class="currentTrack2"> </div>
@@ -148,11 +156,10 @@
 var songselectorjs = document.getElementById("songselector");
 var playerfull = document.getElementById("playerfull");
 var playermini = document.getElementsByClassName("bcontainer");
-var sidebarmen = docuemnt.getElementsByClassName("sidebarmen");
+var sidebarmen = document.getElementsByClassName("sidebarmen");
 function hidefullplayer() {
   songselectorjs.style.display = "flex";
   playerfull.style.display = "none";
-  sidebarmen.style.display = "inline";
   // Loop through the elements with the class "audio-controls" and set their display style
   for (var i = 0; i < playermini.length; i++) {
     playermini[i].style.display = "flex";
@@ -165,7 +172,6 @@ function hidefullplayer() {
 function openfullplayer() {
   songselectorjs.style.display = "none";
   playerfull.style.display = "block";
-  sidebarmen.style.display = "none";
   // Loop through the elements with the class "audio-controls" and set their display style
   for (var i = 0; i < playermini.length; i++) {
     playermini[i].style.display = "none";
