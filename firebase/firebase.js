@@ -234,21 +234,16 @@ async function playlistdatathn(user) {
                 const br5 = document.createElement("br");
                 // Create an exit button
                 const exitButton = document.createElement("button");
+                exitButton.id = "exitbutton";
                 exitButton.textContent = "Exit";
                 exitButton.addEventListener("click", () => {
                     playlistDiv.style.display = "none"; // Hide the playlist div
                     document.getElementById("lilbrary").style.display = "flex"; // Show the library
                 });
-                playlistDiv.appendChild(h3);
-                playlistDiv.appendChild(br1);
-                playlistDiv.appendChild(br2);
-                playlistDiv.appendChild(br3);
-                playlistDiv.appendChild(exitButton);
-                playlistDiv.appendChild(img);
-                playlistDiv.appendChild(br4);
-                playlistDiv.appendChild(br5);
+
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
+                deleteButton.id = "deletebutton";
                 deleteButton.addEventListener("click", async () => {
                     try {
                         await deleteDoc(doc.ref);
@@ -257,7 +252,13 @@ async function playlistdatathn(user) {
                         console.error("Error deleting playlist:", error);
                     }
                 });
+                playlistDiv.appendChild(h3);
+                playlistDiv.appendChild(exitButton);
                 playlistDiv.appendChild(deleteButton);
+                playlistDiv.appendChild(br3);
+                playlistDiv.appendChild(img);
+                playlistDiv.appendChild(br4);
+                playlistDiv.appendChild(br5);
 
                 // Append the div to the body
                 document.body.appendChild(playlistDiv);
