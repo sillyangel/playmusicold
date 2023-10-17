@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+import { getRedirectResult, signInWithPopup, GithubAuthProvider, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+import { deleteDoc, getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
 
 const firebaseConfig = {
@@ -19,6 +19,7 @@ const analytics = getAnalytics(app);
 // Firebase authentication and Firestore database
 const auth = getAuth();
 const db = getFirestore(app);
+const provider = new GithubAuthProvider();
 
 // Get HTML elements
 const ResetEmail = document.getElementById("reset-email");
@@ -31,8 +32,32 @@ const signupEmail = document.getElementById("signup-email");
 const signupPassword = document.getElementById("signup-password");
 const logoutButton = document.getElementById("logout-button");
 const savebutton = document.getElementById("savebutton");
+const githublogin = document.getElementById("githubuttonlogin");
 var createPlaylistButton = document.getElementById("createplaylist");
 
+function handlegithub(event) {
+  event.preventDefault(event);
+  signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+    const credential = GithubAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GithubAuthProvider.credentialFromError(error);
+    // ...
+  });
+}
 
 // Function to handle login
 function handleLogin(event) {
@@ -44,7 +69,7 @@ function handleLogin(event) {
   .then((userCredential) => {
     const user = userCredential.user;
     alert("Logged in as: " + user.email);
-    window.location.href = "https://sillyangel.me/"
+    window.location.href = "./"
     // Update the UI with user information
   })
   .catch((error) => {
@@ -99,7 +124,8 @@ function logout(event) {
 loginForm.addEventListener("submit", handleLogin);
 signupForm.addEventListener("submit", handleSignup);
 logoutButton.addEventListener("click", logout);
-resetbutton.addEventListener("click", handlereset)
+resetbutton.addEventListener("click", handlereset);
+githublogin.addEventListener("click", handlegithub);
 
 
 async function createPlaylistInFirestore() {
@@ -175,46 +201,94 @@ async function createPlaylistInFirestore() {
      console.log("User is not authenticated.");
    }
  });
-
+async function addsongtoplaylist() {
+  
+}
 async function playlistdatathn(user) {
   if (user) {
-    const playlistContainer = document.getElementById("playlistContainer"); // Assuming you have a container in your HTML with this ID
     const userId = user.uid;
     const playlistsCollection = collection(db, "playlists");
     const q = query(playlistsCollection, where("userId", "==", userId));
     try {
-      const querySnapshot = await getDocs(q);
-      if (!querySnapshot.empty) {
-        // User has a playlist, load and display it
-        querySnapshot.forEach((doc) => {
-          const playlistData = doc.data().data;
-  
-          const button = document.createElement("button");
-          button.setAttribute("id", "playlistcustom");
-      
-          const image = document.createElement("img");
-          image.src = playlistData.imageUrl;
-          image.alt = playlistData.name; 
-          button.appendChild(image);
-      
-          button.addEventListener("click", () => {
-            alert('Playlist : ' + playlistData.name + " is not available yet")
-          });
-      
-          playlistContainer.appendChild(button);
-        });
-      } else {
-        // User doesn't have a playlist
-        console.log("User doesn't have a playlist.");
-      }
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+            querySnapshot.forEach((doc) => {
+                const playlistData = doc.data().data;
+                const playlistName = playlistData.name;
+
+                // Create a new div for each playlist
+                const playlistDiv = document.createElement("div");
+                playlistDiv.id = playlistName;
+                playlistDiv.classList.add('playlist-item'); // Add the class for CSS styling
+                playlistDiv.style.display = "none"; // Initially set to hidden
+
+                const img = document.createElement("img")
+                img.src = playlistData.imageUrl;
+
+                const h3 = document.createElement("h2");
+                h3.textContent = playlistName + ' - Playlist';
+                const br1 = document.createElement("br");
+                const br2 = document.createElement("br");
+                const br3 = document.createElement("br");
+                const br4 = document.createElement("br");
+                const br5 = document.createElement("br");
+                // Create an exit button
+                const exitButton = document.createElement("button");
+                exitButton.textContent = "Exit";
+                exitButton.addEventListener("click", () => {
+                    playlistDiv.style.display = "none"; // Hide the playlist div
+                    document.getElementById("lilbrary").style.display = "flex"; // Show the library
+                });
+                playlistDiv.appendChild(h3);
+                playlistDiv.appendChild(br1);
+                playlistDiv.appendChild(br2);
+                playlistDiv.appendChild(br3);
+                playlistDiv.appendChild(exitButton);
+                playlistDiv.appendChild(img);
+                playlistDiv.appendChild(br4);
+                playlistDiv.appendChild(br5);
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.addEventListener("click", async () => {
+                    try {
+                        await deleteDoc(doc.ref);
+                        document.body.removeChild(playlistDiv); // Remove the playlist div from the body
+                    } catch (error) {
+                        console.error("Error deleting playlist:", error);
+                    }
+                });
+                playlistDiv.appendChild(deleteButton);
+
+                // Append the div to the body
+                document.body.appendChild(playlistDiv);
+
+                // Create a button for each playlist in the library
+                const showPlaylistButton = document.createElement("button");
+                const buttonpimage = document.createElement("img");
+                buttonpimage.src = playlistData.imageUrl;
+                buttonpimage.alt = playlistName;
+                showPlaylistButton.addEventListener("click", () => {
+                    const allDivs = document.querySelectorAll('.playlist-item'); // Select all elements with the class 'playlist-item'
+                    allDivs.forEach((div) => {
+                        div.style.display = "none"; // Hide all playlist divs
+                    });
+                    playlistDiv.style.display = "flex"; // Show the selected playlist div
+                    document.getElementById("lilbrary").style.display = "none"; // Hide the library
+                });
+                showPlaylistButton.appendChild(buttonpimage);
+                playlistContainer.appendChild(showPlaylistButton); // Append the button to the library
+            });
+        } else {
+            // User doesn't have a playlist
+            console.log("User doesn't have a playlist.");
+        }
     } catch (error) {
-      console.error("Error checking for playlist:", error);
+        console.error("Error checking for playlist:", error);
     }
-  } else {
+} else {
     // User is not authenticated
     console.log("User is not authenticated.");
-  }
-};
+}};
 
  auth.onAuthStateChanged(async (user) => {
   if (user) {
@@ -265,5 +339,7 @@ async function updateProfileWithFormData() {
     alert("a error happened when updatingProfile out ", error.message)
   });
 }
+
+
 savebutton.onclick = updateProfileWithFormData;
 

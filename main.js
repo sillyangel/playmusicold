@@ -510,6 +510,12 @@ function updateTrackText() {
     var artist = albums[currentAlbumIndex].artist;
     var track = audioTracks[currentAlbum][currentTrackIndex];
 
+    // Remove the .mp3 extension from the track name
+    track = track.replace(".mp3", "");
+
+    // Remove the numbering at the beginning of the track name, handling extra dash or period
+    track = track.replace(/^\d+\s*[-.]*\s*/, "");
+
     // Loop through each element with class "currentTrack" and update its content
     currentTrackElements.forEach(function(element) {
         element.textContent = artist + " - " + track;
@@ -520,6 +526,7 @@ function updateTrackText() {
         element.textContent = artist + " - " + track;
     });
 }
+
 
 // Call the function to update both elements
 updateTrackText();

@@ -4,11 +4,12 @@ service cloud.firestore {
     // Allow anyone to read playlists (assuming they are public)
     match /playlists/{playlistId} {
       allow read;
-      
+
       // Allow authenticated users to create their own playlists
       allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+
+      // Allow authenticated users to delete their own playlists
+      allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
   }
 }
-
-

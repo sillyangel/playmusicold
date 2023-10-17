@@ -2,7 +2,7 @@
  body {
      background-color: #222;
      color: #fff;
-     font-family: 'Montserrat', sans-serif;
+     font-family: 'Ubuntu', sans-serif;
      margin: 0;
      padding: 0;
 }
@@ -12,6 +12,7 @@ h1 {
 h2 {
     font-size: 40px;
 }
+
 .reqformgg {
     text-align: right;
     padding: 20px;
@@ -252,6 +253,17 @@ input[type=text]:focus {
   text-align: center;
   align-items: center;
 }
+.playlist-item {
+  left: 20px;
+  padding-left: 20px;
+  margin-top: 0 10px;
+  float: right;
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
 #mlogin button {
   background: #333333;
   border: 3px solid #444444;
@@ -332,4 +344,8 @@ input[type=password] {
 }
 #accountsettings button:hover {
   opacity: 1;
+}
+.playlist-item img{
+  width: 120px;
+  height: 120px;
 }
