@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "firebase": "^10.5.0"
+  },
+  "name": "playmusic",
+  "description": "a spofity ripoff",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
