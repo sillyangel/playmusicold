@@ -387,3 +387,4 @@ input[type=password] {
 #footer a {
   font-weight: bolder;
 }
+.grecaptcha-badge { visibility: hidden; }
