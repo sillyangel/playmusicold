@@ -2,10 +2,10 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
   // the entry point file described above
-  input: './src/firebase/firebase.js',
+  input: './public/firebase/firebase.js',
   // the output for the build folder described above
   output: {
-    file: './src/dist/bundle.js',
+    file: './public/dist/bundle.js',
     // Optional and for development only. This provides the ability to
     // map the built code back to the original source format when debugging.
     sourcemap: 'inline',
