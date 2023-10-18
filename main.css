@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Montserrat&display=swap');
- body {
+@font-face {
+  font-family: SFPRO;
+  src: url("assets/fonts/SF-Pro-Rounded-Regular.otf") format("opentype");
+}
+@font-face {
+  font-family: SFPROS;
+  src: url("assets/fonts/SF-Pro-Text-Medium.otf") format("opentype");
+}
+body {
      background-color: #222;
      color: #fff;
-     font-family: 'Ubuntu', sans-serif;
+     font-family: SFPRO;
      margin: 0;
      padding: 0;
 }
@@ -265,9 +273,15 @@ input[type=text]:focus {
   flex-direction: column;
 }
 #mlogin button {
-  background: #333333;
-  border: 3px solid #444444;
-  color: white;
+  box-sizing: border-box;
+  border: 2px solid #131313;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #1e1e1e;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 20px;
+  color: #fff;
 }
 #mlogin h2 {
   font-size: 40px;
@@ -365,4 +379,8 @@ input[type=password] {
 }
 #playlist-item button {
   display: inline;
+}
+/* Color of the progress bar */
+#progress::-webkit-progress-value {
+  background-color: lightblue; /* You can change this color to the one you prefer */
 }
