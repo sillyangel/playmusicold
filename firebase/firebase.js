@@ -3,6 +3,8 @@ import { getRedirectResult, signInWithPopup, GithubAuthProvider, getAuth, sendPa
 import { deleteDoc, getFirestore, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
 import { getPerformance } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-performance.js";
+import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app-check.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyCrXbgrgnkGFfPkbHdJ5oRD4ezbv5ypWbE",
@@ -14,6 +16,13 @@ const firebaseConfig = {
   measurementId: "G-DZ88CYJF8L"
 };
 
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LfhO68oAAAAAH-9cGAU4C9VEZHm0gzxXmS0ubbw'),
+
+  // Optional argument. If true, the SDK automatically refreshes App Check
+  // tokens as needed.
+  isTokenAutoRefreshEnabled: true
+});
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const perf = getPerformance(app);
