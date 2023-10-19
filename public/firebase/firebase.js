@@ -60,7 +60,18 @@ function handlegithub(event) {
     const user = result.user;
     // IdP data available using getAdditionalUserInfo(result)
     // ...
-    getRedirectResult(auth)
+    
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GithubAuthProvider.credentialFromError(error);
+    // ...
+  });
+  getRedirectResult(auth)
   .then((result) => {
     const credential = GithubAuthProvider.credentialFromResult(result);
     if (credential) {
@@ -82,18 +93,7 @@ function handlegithub(event) {
     // The AuthCredential type that was used.
     const credential = GithubAuthProvider.credentialFromError(error);
     // ...
-  });
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GithubAuthProvider.credentialFromError(error);
-    // ...
-  });
-  
+  }); 
 }
 
 // Function to handle login
