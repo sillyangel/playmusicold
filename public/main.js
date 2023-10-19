@@ -397,6 +397,9 @@ function loadTrack() {
     audio.load();
     updateTrackText();
     mediathinggy();
+    var firebasesongplaying = [
+        { track: `${currentTrackIndex}`, album : `${currentAlbumIndex}`}
+    ];
 }
 
 function playPause() {

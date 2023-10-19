@@ -33,6 +33,7 @@ const appCheck = initializeAppCheck(app, {
 const auth = getAuth();
 const db = getFirestore(app);
 
+
 // Get HTML elements
 const ResetEmail = document.getElementById("reset-email");
 const resetbutton = document.getElementById("resetbutton");
@@ -46,6 +47,8 @@ const logoutButton = document.getElementById("logout-button");
 const savebutton = document.getElementById("savebutton");
 const githublogin = document.getElementById("githubuttonlogin");
 var createPlaylistButton = document.getElementById("createplaylist");
+var audio = document.getElementById("myAudio");
+var songplaying = audio.src;
 
 function handlegithub(event) {
   event.preventDefault(event);
@@ -141,7 +144,9 @@ signupForm.addEventListener("submit", handleSignup);
 logoutButton.addEventListener("click", logout);
 resetbutton.addEventListener("click", handlereset);
 githublogin.addEventListener("click", handlegithub);
-
+audio.addEventListener("ended", function() {
+  alert(JSON.stringify(songplaying));
+});
 
 async function createPlaylistInFirestore() {
   const nameofplaylist = prompt("Name of new playlist?");
