@@ -29,6 +29,7 @@ fi
 
 # Deploy to Firebase with a custom message
 echo "Deploying to Firebase"
+npm run buildwebpack
 firebase deploy
 
 # Add all changes to the Git staging area

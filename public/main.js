@@ -606,10 +606,17 @@ function albumsec(albumnumber) {
 }
 
 
+
 function mediathinggy() {
+    var track = audioTracks[currentAlbum][currentTrackIndex]
+    console.log("Original track:", track);
+    track = track.replace(".mp3", "");
+    console.log("Track after removing .mp3:", track);
+    track = track.replace(/^\d+\s*[-.]*\s*/, "");
+    console.log("Track after regex replacement:", track);
     if ("mediaSession" in navigator) {
         navigator.mediaSession.metadata = new MediaMetadata({
-            title: audioTracks[currentAlbum][currentTrackIndex],
+            title: track,
             artist: albums[currentAlbumIndex].artist,
             album: albums[currentAlbumIndex].album,
             artwork: [{
