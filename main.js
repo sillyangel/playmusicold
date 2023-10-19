@@ -8,3 +8,8 @@ app.use(express.static('public'))
 app.listen(port, () => {
     console.log(`alive in port ${port}`)
 });
+
+app.use((req, res, next) => { 
+    res.status(404).sendFile('./public/404.html', { root: __dirname });
+});
+

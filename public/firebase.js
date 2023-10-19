@@ -48,13 +48,13 @@ const savebutton = document.getElementById("savebutton");
 const githublogin = document.getElementById("githubuttonlogin");
 var createPlaylistButton = document.getElementById("createplaylist");
 var audio = document.getElementById("myAudio");
-var songplaying = audio.src;
+
 
 function handlegithub(event) {
   event.preventDefault(event);
   const provider = new GithubAuthProvider();
   signInWithPopup(auth, provider)
-  .then((result) => {
+  .then(async (result) => {
     // This gives you a GitHub Access Token. You can use it to access the GitHub API.
     const credential = GithubAuthProvider.credentialFromResult(result);
     console.log(credential.accessToken, 'data');
@@ -65,6 +65,12 @@ function handlegithub(event) {
     const user = result.user;
     // IdP data available using getAdditionalUserInfo(result)
     // ...
+    result = await getRedirectResult(auth);
+// Provider of the access token could be Facebook, Github, etc.
+if (result === null || provider.credentialFromResult(result) === null) {
+  return null;
+}
+return result;
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
@@ -76,6 +82,8 @@ function handlegithub(event) {
     // ...
   });
 }
+
+
 
 // Function to handle login
 function handleLogin(event) {
@@ -144,7 +152,8 @@ signupForm.addEventListener("submit", handleSignup);
 logoutButton.addEventListener("click", logout);
 resetbutton.addEventListener("click", handlereset);
 githublogin.addEventListener("click", handlegithub);
-audio.addEventListener("ended", function() {
+audio.addEventListener("ended", async function() {
+  var songplaying = audio.src;
   alert(JSON.stringify(songplaying));
 });
 

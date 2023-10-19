@@ -354,10 +354,31 @@ input[type=password] {
   border: none;
   color: white;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
+  padding: 6px 6px 6px 6px;
 }
 #accountsettings button:hover {
   opacity: 1;
+}
+#accountsettings input[type=text] {
+  box-sizing: border-box;
+  border: 2px solid #acacac;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+}
+#accountsettings input[type=url] {
+  box-sizing: border-box;
+  border: 2px solid #acacac;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
 }
 .playlist-item img{
   width: 120px;

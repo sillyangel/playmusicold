@@ -2,6 +2,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "firebase": "^10.5.0",
+    "lodash-webpack-plugin": "^0.11.6",
     "path": "^0.12.7"
   },
   "name": "playmusic",
@@ -9,7 +10,8 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "buildwebpack": "webpack --mode=development",
+    "build-dev": "webpack --mode development",
+    "build-prod": "webpack --mode production",
     "build": "rollup -c rollup.config.js --bundleConfigAsCjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
