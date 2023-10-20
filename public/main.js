@@ -1,3 +1,4 @@
+try {
 var albums = [
     { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf", image: "https://cdn.sillyangel.me/songs/tylerthecreator/wolf/albumcover.png" },
     { artist: "Tyler, The Creator", album: "Flower Boy", folder: "tylerthecreator/flowerboy", image: "https://cdn.sillyangel.me/songs/tylerthecreator/flowerboy/albumcover.png" },
@@ -388,28 +389,23 @@ var progressBar = document.getElementById("progress");
 var currentTrackIndex = 0;
 var currentAlbum = "tylerthecreator/wolf";
 var currentAlbumIndex = 0;
+currentAlbumIndex =  localStorage.getItem("Albumindex");
+currentTrackIndex = localStorage.getItem("Trackindex");
+currentAlbum = localStorage.getItem("CurrentAlbum");
 var currentTrackElements = document.querySelectorAll(".currentTrack");
 var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
 
 function loadTrack() {
+    localStorage.setItem("Albumindex", currentAlbumIndex);
+localStorage.setItem("Trackindex", currentTrackIndex);
+localStorage.setItem("CurrentAlbum", currentAlbum);
     var trackPath = audioTracks[currentAlbum][currentTrackIndex];
     audio.src = "https://cdn.sillyangel.me/" + "songs/" + currentAlbum + "/" + trackPath;
     audio.load();
     updateTrackText();
+    updateAlbumCover();
     mediathinggy();
-    console.log("Current Track Index:", currentTrackIndex);
-    console.log("Current Album Index:", currentAlbumIndex);
-
-    var firebasesongplaying = [{ 
-        track: currentTrackIndex, 
-        album: currentAlbumIndex 
-    }];
-
-    // Storing in localStorage
-    localStorage.setItem("firebasesongplaying", JSON.stringify(firebasesongplaying));
-    window.currentTrackIndex = currentTrackIndex;
-    window.currentAlbumIndex = currentAlbumIndex;
-  
+    audio.play();
 }
 
 function playPause() {
@@ -744,4 +740,8 @@ function searchfunction() {
 function darkmode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
- }  
+ } 
+} catch(error) {
+    alert(error);
+    alert(error.message);
+}
