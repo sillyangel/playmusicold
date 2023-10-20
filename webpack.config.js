@@ -3,6 +3,7 @@ const path = require('path');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
 
 const config = {
+  mode: 'none', // Add this line to disable strict mode
   entry: './public/firebase.js',
   output: {
     path: path.resolve(__dirname, './public/dist'),

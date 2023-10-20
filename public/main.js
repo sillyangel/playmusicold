@@ -397,9 +397,19 @@ function loadTrack() {
     audio.load();
     updateTrackText();
     mediathinggy();
-    var firebasesongplaying = [
-        { track: `${currentTrackIndex}`, album : `${currentAlbumIndex}`}
-    ];
+    console.log("Current Track Index:", currentTrackIndex);
+    console.log("Current Album Index:", currentAlbumIndex);
+
+    var firebasesongplaying = [{ 
+        track: currentTrackIndex, 
+        album: currentAlbumIndex 
+    }];
+
+    // Storing in localStorage
+    localStorage.setItem("firebasesongplaying", JSON.stringify(firebasesongplaying));
+    window.currentTrackIndex = currentTrackIndex;
+    window.currentAlbumIndex = currentAlbumIndex;
+  
 }
 
 function playPause() {
@@ -734,4 +744,4 @@ function searchfunction() {
 function darkmode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
- }
+ }  

@@ -152,10 +152,23 @@ signupForm.addEventListener("submit", handleSignup);
 logoutButton.addEventListener("click", logout);
 resetbutton.addEventListener("click", handlereset);
 githublogin.addEventListener("click", handlegithub);
-audio.addEventListener("ended", async function() {
-  var songplaying = audio.src;
-  alert(JSON.stringify(songplaying));
+var receivedData = localStorage.getItem("firebasesongplaying");
+var firebasesongplaying = JSON.parse(receivedData);
+const observer = new MutationObserver(function(mutations) {
+  mutations.forEach(function(mutation) {
+      if (mutation.attributeName === 'src') {
+          var songplaying = audio.src;
+          if (firebasesongplaying && firebasesongplaying.length > 0) {
+            console.log("Current Track Index:", currentTrackIndex);
+            console.log("Current Album Index:", currentAlbumIndex);
+            // Do something with currentTrackIndex and currentAlbumIndex
+          }
+      }
+  });
 });
+
+
+observer.observe(audio, { attributes: true });
 
 async function createPlaylistInFirestore() {
   const nameofplaylist = prompt("Name of new playlist?");
