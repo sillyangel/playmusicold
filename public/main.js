@@ -389,25 +389,27 @@ var progressBar = document.getElementById("progress");
 var currentTrackIndex = 0;
 var currentAlbum = "tylerthecreator/wolf";
 var currentAlbumIndex = 0;
+var audiotimern;
 currentAlbumIndex =  localStorage.getItem("Albumindex");
 currentTrackIndex = localStorage.getItem("Trackindex");
 currentAlbum = localStorage.getItem("CurrentAlbum");
+audiotimern = localStorage.getItem("timerforaudio");
 var currentTrackElements = document.querySelectorAll(".currentTrack");
 var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
 
 function loadTrack() {
     localStorage.setItem("Albumindex", currentAlbumIndex);
-localStorage.setItem("Trackindex", currentTrackIndex);
-localStorage.setItem("CurrentAlbum", currentAlbum);
+    localStorage.setItem("Trackindex", currentTrackIndex);
+    localStorage.setItem("CurrentAlbum", currentAlbum);
     var trackPath = audioTracks[currentAlbum][currentTrackIndex];
     audio.src = "https://cdn.sillyangel.me/" + "songs/" + currentAlbum + "/" + trackPath;
+    audio.currentTime = audiotimern
     audio.load();
     updateTrackText();
     updateAlbumCover();
     mediathinggy();
     audio.play();
 }
-
 function playPause() {
     if (audio.paused) {
         audio.play();
@@ -504,6 +506,7 @@ audio.addEventListener("timeupdate", function() {
         var percentComplete = (currentTime / duration) * 100;
         progressBar.value = percentComplete;
     }
+    audio.currentTime = localStorage.setItem("timerforaudio", audio.currentTime);
 });
 // Load the first track when the page loads
 loadTrack();
