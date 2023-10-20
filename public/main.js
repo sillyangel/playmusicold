@@ -398,17 +398,16 @@ var currentTrackElements = document.querySelectorAll(".currentTrack");
 var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
 
 function loadTrack() {
-    localStorage.setItem("Albumindex", currentAlbumIndex);
-    localStorage.setItem("Trackindex", currentTrackIndex);
-    localStorage.setItem("CurrentAlbum", currentAlbum);
     var trackPath = audioTracks[currentAlbum][currentTrackIndex];
     audio.src = "https://cdn.sillyangel.me/" + "songs/" + currentAlbum + "/" + trackPath;
-    audio.currentTime = audiotimern
     audio.load();
     updateTrackText();
     updateAlbumCover();
     mediathinggy();
     audio.play();
+    localStorage.setItem("Albumindex", currentAlbumIndex);
+    localStorage.setItem("Trackindex", currentTrackIndex);
+    localStorage.setItem("CurrentAlbum", currentAlbum);
 }
 function playPause() {
     if (audio.paused) {
