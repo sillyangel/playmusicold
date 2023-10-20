@@ -421,7 +421,8 @@ function playPause() {
 }
 
 function setVolume() {
-    audio.volume = volumeControl.value;
+    localStorage.setItem("Volume", volumeControl.value);
+    audio.volume = localStorage.getItem("Volume")
 }
 
 function skipTrack() {
@@ -745,6 +746,8 @@ function darkmode() {
     element.classList.toggle("dark-mode");
  } 
 } catch(error) {
-    alert(error);
     alert(error.message);
+    alert(error);
+    console.log(error);
+    console.log(error.message);
 }

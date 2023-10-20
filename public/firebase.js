@@ -389,4 +389,6 @@ savebutton.onclick = updateProfileWithFormData;
 } catch(error) {
   alert(error.message);
   alert(error);
+  console.log(error.message);
+  console.log(error);
 }
