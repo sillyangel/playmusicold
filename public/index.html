@@ -22,9 +22,7 @@
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content="">
     <meta name="twitter:image" content="./assets/logo/mlogo.png"> <!-- Replace with a link to your website's image -->
-    <script>
-    navigator.serviceWorker.register("sw.js");
-    </script>
+
     <!-- Favicon (you can create a favicon.ico and place it in the root directory of your website) -->
     <link rel="icon" href="./assets/nonealbum.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -139,6 +137,7 @@
         Your browser does not support the audio element.
     </audio>
 <script type="module" src="./dist/bundle.js"></script>
+
 </body>
 <script src="main.js"></script>
 
@@ -152,5 +151,16 @@
     if (isMobileDevice()) {
         window.location.href = 'moblie.html';
     }
+</script>
+<script>
+    if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('firebase-messaging-sw.js2').then(function (registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }, function (err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    });
+  }
 </script>
 </html>

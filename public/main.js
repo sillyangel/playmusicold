@@ -386,21 +386,20 @@ var audio = document.getElementById("myAudio");
 var playButton = document.getElementById("playbuttonthung");
 var volumeControl = document.getElementById("volume");
 var progressBar = document.getElementById("progress");
-var currentTrackIndex = localStorage.getItem("Trackindex");
-var currentAlbum = localStorage.getItem("CurrentAlbum");
-var currentAlbumIndex = localStorage.getItem("Albumindex");
+var currentTrackIndex = 0;
+var currentAlbum = "tylerthecreator/wolf"
+var currentAlbumIndex = 0;
 var audiotimern;
-
-if (isNaN(currentTrackIndex) || currentTrackIndex === null) {
-    currentTrackIndex = 0;
+if (localStorage.getItem("Albumindex") !== null) {
+    currentAlbumIndex = localStorage.getItem("Albumindex");
 }
 
-if (currentAlbum === null) {
-    currentAlbum = "tylerthecreator/wolf";
+if (localStorage.getItem("Trackindex") !== null) {
+    currentTrackIndex = localStorage.getItem("Trackindex");
 }
 
-if (isNaN(currentAlbumIndex) || currentAlbumIndex === null) {
-    currentAlbumIndex = 0;
+if (localStorage.getItem("CurrentAlbum") !== null) {
+    currentAlbum = localStorage.getItem("CurrentAlbum");
 }
 
 if (localStorage.getItem("timerforaudio") !== null) {
@@ -520,6 +519,7 @@ audio.addEventListener("timeupdate", function() {
     }
     localStorage.setItem("timerforaudio", audio.currentTime);
 });
+audio.currentTime = localStorage.getItem("timerforaudio");
 
 // Load the first track when the page loads
 loadTrack();

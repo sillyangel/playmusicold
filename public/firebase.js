@@ -23,18 +23,12 @@ const analytics = getAnalytics(app);
 const perf = getPerformance(app);
 const appCheck = initializeAppCheck(app, {
   provider: new ReCaptchaV3Provider('6LfhO68oAAAAAH-9cGAU4C9VEZHm0gzxXmS0ubbw'),
-
-  // Optional argument. If true, the SDK automatically refreshes App Check
-  // tokens as needed.
   isTokenAutoRefreshEnabled: true
 });
-
-// Firebase authentication and Firestore database
 const auth = getAuth();
 const db = getFirestore(app);
 
-
-// Get HTML elements
+// Get elements
 const ResetEmail = document.getElementById("reset-email");
 const resetbutton = document.getElementById("resetbutton");
 const loginForm = document.getElementById("login-form");
@@ -48,6 +42,9 @@ const savebutton = document.getElementById("savebutton");
 const githublogin = document.getElementById("githubuttonlogin");
 var createPlaylistButton = document.getElementById("createplaylist");
 var audio = document.getElementById("myAudio");
+// end of get elements
+
+
 
 
 function handlegithub(event) {
@@ -158,53 +155,9 @@ const observer = new MutationObserver(function(mutations) {
       if (mutation.attributeName === 'src') {
             console.log("Current Track Index:", currentTrackIndex);
             console.log("Current Album Index:", currentAlbumIndex);
-            savemusic();
       }
   });
 });
-auth.onAuthStateChanged(async (user) => {
-  if (user) {
-    const userId = user.uid;
-    const albumtracksRef = doc(db, "currentplaylist", userId); // Reference the document with the user's ID
-    try {
-      const docSnap = await getDoc(albumtracksRef);
-      if (docSnap.exists()) {
-        const albumtack = docSnap.data();
-        localStorage.setItem("Albumindex", albumtack.currentAlbumIndex);
-        localStorage.setItem("Trackindex", albumtack.currentTrackIndex);
-        localStorage.setItem("CurrentAlbum", albumtack.currentAlbum);
-        console.log("Loaded playlist:", albumtack);
-      } else {
-        console.log("User doesn't have any currently playing music data.");
-      }
-    } catch (error) {
-      console.error("Error checking for currently playing music data:", error);
-    }
-  } else {
-    console.log("User is not authenticated.");
-  }
-});
-
-async function savemusic() {
-  const user = auth.currentUser;
-  if (user) {
-    const userId = user.uid;
-    const currentplaying = {
-      currentTrackIndex: currentTrackIndex,
-      currentAlbumIndex: currentAlbumIndex,
-      currentAlbum: currentAlbum
-    };
-
-    const albumtracksRef = doc(db, "currentplaylist", userId); // Reference the document with the user's ID
-    try {
-      await setDoc(albumtracksRef, { data: currentplaying }); // Use setDoc to update the document
-      console.log("Currently playing music data saved in Firestore.");
-      // Optionally, you can reload the page or update the UI here
-    } catch (error) {
-      alert("Error saving music data: " + error.message);
-    }
-  }
-}
 
 
 async function createPlaylistInFirestore() {
