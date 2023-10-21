@@ -152,23 +152,68 @@ signupForm.addEventListener("submit", handleSignup);
 logoutButton.addEventListener("click", logout);
 resetbutton.addEventListener("click", handlereset);
 githublogin.addEventListener("click", handlegithub);
-var receivedData = localStorage.getItem("firebasesongplaying");
-var firebasesongplaying = JSON.parse(receivedData);
+createPlaylistButton.addEventListener("click", createPlaylistInFirestore);
 const observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
       if (mutation.attributeName === 'src') {
-          var songplaying = audio.src;
-          if (firebasesongplaying && firebasesongplaying.length > 0) {
             console.log("Current Track Index:", currentTrackIndex);
             console.log("Current Album Index:", currentAlbumIndex);
-            // Do something with currentTrackIndex and currentAlbumIndex
-          }
+            savemusic();
       }
   });
 });
+  const user = auth.currentUser;
+  if (user) {
+    // User is authenticated
+    const userId = user.uid;
+    // Check if the user has a playlist (assuming you have a 'playlists' collection)
+    const albumtracks = collection(db, "currentplaylist");
+    const q = query(albumtracks, where("userId", "==", userId));
+    try {
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        // User has a playlist, load and display it
+        querySnapshot.forEach((doc) => {
+          const albumtack = doc.data();
+          localStorage.setItem("Albumindex", albumtack.currentAlbumIndex);
+          localStorage.setItem("Trackindex", albumtack.currentTrackIndex);
+          localStorage.setItem("CurrentAlbum", albumtack.currentAlbum);
+          console.log("Loaded playlist:", albumtack);
+        });
+      } else {
+        // User doesn't have a playlist
+        console.log("User doesn't have a playlist.");
+      }
+    } catch (error) {
+      console.error("Error checking for playlist:", error);
+    }
+  } else {
+    // User is not authenticated
+    console.log("User is not authenticated.");
+  }
+async function savemusic() {
+  const user = auth.currentUser;
+  if (user.uid) {
+    const userId = user.uid;
+    const currentplaying = {
+      currentTrackIndex: currentTrackIndex,
+      currentAlbumIndex: currentAlbumIndex,
+      currentAlbum: currentAlbum
+    };
 
-
-observer.observe(audio, { attributes: true });
+    const albumtracks = collection(db, "currentplaylist");
+    try {
+      await addDoc(albumtracks, {
+        userId: userId,
+        data: currentplaying,
+      });
+      console.log("currely data saved in Firestore.");
+      // Optionally, you can reload the page or update the UI here
+    } catch (error) {
+      alert("Error saveing music data: " + error.message);
+    }
+  }
+}
 
 async function createPlaylistInFirestore() {
   const nameofplaylist = prompt("Name of new playlist?");
@@ -206,8 +251,10 @@ async function createPlaylistInFirestore() {
 }
 
 
- createPlaylistButton.addEventListener("click", createPlaylistInFirestore);
 
+
+
+observer.observe(audio, { attributes: true });
  // Check for user authentication when the page is loaded
  
  // Firebase initialization code (already defined)
@@ -227,7 +274,7 @@ async function createPlaylistInFirestore() {
          // User has a playlist, load and display it
          querySnapshot.forEach((doc) => {
            const playlistData = doc.data();
-           // Load and display the playlist data as needed
+
            console.log("Loaded playlist:", playlistData);
          });
          playlistdatathn(user);         
