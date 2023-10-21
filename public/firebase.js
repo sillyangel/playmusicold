@@ -162,7 +162,7 @@ const observer = new MutationObserver(function(mutations) {
       }
   });
 });
-  const user = auth.currentUser;
+auth.onAuthStateChanged(async (user) => {
   if (user) {
     // User is authenticated
     const userId = user.uid;
@@ -191,6 +191,8 @@ const observer = new MutationObserver(function(mutations) {
     // User is not authenticated
     console.log("User is not authenticated.");
   }
+});
+
 async function savemusic() {
   const user = auth.currentUser;
   if (user.uid) {
