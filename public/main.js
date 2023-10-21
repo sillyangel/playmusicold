@@ -589,14 +589,13 @@ fetch('songs.json')
                 const artistHeader = document.createElement('h1');
                 artistHeader.textContent = album.artist;
                 songSelector.appendChild(artistHeader);
-
                 // Update the current artist
                 currentArtist = album.artist;
             }
 
             // Create a button for the album
             const albumButton = document.createElement('button');
-            albumButton.innerHTML = `<img src="${album.cover}" width="100px" height="100px">`;
+            albumButton.innerHTML = `<img src="${album.cover}" alt="${album.album}" width="100px" height="100px">`;
             albumButton.onclick = () => albumsec(albumIndex);
             songSelector.appendChild(albumButton);
         });

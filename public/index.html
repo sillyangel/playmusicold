@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>‎</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
@@ -32,16 +32,16 @@
     </head>
 <body>
           <div class="sidebarmen">
-            <img src="./assets/nonealbum.png" width="50px" height="50px">
+            <img src="./assets/nonealbum.png" alt="main image icon" width="50px" height="50px">
             <br>
                         <br>
                                     <br>
             <br>
             <ul>
-                <li><button id="accountmainbutton" onclick="switchthingy('user')"><i class="fa-regular fa-user" style="color: #ffffff;"></i></button></li>
-                <li><button onclick="switchthingy('search')"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> </button></li>
-                <li><button onclick="switchthingy('hom')"><i class="fa-solid fa-house" style="color: #ffffff;"></i> </button></li>
-                <li><button onclick="switchthingy('lil')"><i class="fa-solid fa-lines-leaning" style="color: #ffffff;"></i> </button></li>
+                <li><button aria-label="Account Menu/button" id="accountmainbutton" onclick="switchthingy('user')"><i class="fa-regular fa-user" style="color: #ffffff;"></i></button></li>
+                <li><button aria-label="Search" onclick="switchthingy('search')"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i> </button></li>
+                <li><button aria-label="Home" onclick="switchthingy('hom')"><i class="fa-solid fa-house" style="color: #ffffff;"></i> </button></li>
+                <li><button aria-label="Library" onclick="switchthingy('lil')"><i class="fa-solid fa-lines-leaning" style="color: #ffffff;"></i> </button></li>
             </ul>
         </div>
         <div id="accountsettings" style="display: none;">
@@ -127,9 +127,9 @@
             <img id="albumCover" src="https://" alt="Album Cover" width="60px" height="60px">
         </div>
           <div class="currentTrack"> </div>
-            <button onclick="previousTrack()"><i class="fas fa-backward"></i></button>
-            <button id="playbuttonthung" onclick="playPause()"><i class="fas fa-play"></i></button>
-            <button onclick="skipTrack()"><i class="fas fa-forward"></i></button>
+            <button aria-label="Back" onclick="previousTrack()"><i class="fas fa-backward"></i></button>
+            <button aria-label="Play/Pause" id="playbuttonthung" onclick="playPause()"><i class="fas fa-play"></i></button>
+            <button aria-label="Skip Track" onclick="skipTrack()"><i class="fas fa-forward"></i></button>
             <input type="range" id="volume" min="0" max="1" step="0.01" onchange="setVolume()">
             <div id="songTime">0:00</div>
             <progress id="progress" value="0" max="100" onclick="seek(event)"></progress>
