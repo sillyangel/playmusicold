@@ -407,12 +407,13 @@ if (localStorage.getItem("timerforaudio") == null) {
 }
 
 if (localStorage.getItem("Albumindex") !== null) {
-    currentAlbumIndex = localStorage.getItem("Albumindex");
+    currentAlbumIndex = parseInt(localStorage.getItem("Albumindex"));
 }
 
 if (localStorage.getItem("Trackindex") !== null) {
-    currentTrackIndex = localStorage.getItem("Trackindex");
+    currentTrackIndex = parseInt(localStorage.getItem("Trackindex"));
 }
+
 
 if (localStorage.getItem("CurrentAlbum") !== null) {
     currentAlbum = localStorage.getItem("CurrentAlbum");
