@@ -2,5 +2,5 @@
 
 echo "installing and updating all packages"
 npm i
-npm run buildwebpack
+npm run build
 node .

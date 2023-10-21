@@ -390,6 +390,22 @@ var currentTrackIndex = 0;
 var currentAlbum = "tylerthecreator/wolf";
 var currentAlbumIndex = 0;
 var audiotimern;
+if (localStorage.getItem("Albumindex") == null) {
+    localStorage.removeItem("Albumindex");
+}
+
+if (localStorage.getItem("Trackindex") == null) {
+    localStorage.removeItem("Trackindex");
+}
+
+if (localStorage.getItem("CurrentAlbum") == null) {
+    localStorage.removeItem("CurrentAlbum");
+}
+
+if (localStorage.getItem("timerforaudio") == null) {
+    localStorage.removeItem("timerforaudio");
+}
+
 if (localStorage.getItem("Albumindex") !== null) {
     currentAlbumIndex = localStorage.getItem("Albumindex");
 }
@@ -405,7 +421,6 @@ if (localStorage.getItem("CurrentAlbum") !== null) {
 if (localStorage.getItem("timerforaudio") !== null) {
     audiotimern = localStorage.getItem("timerforaudio");
 }
-
 var currentTrackElements = document.querySelectorAll(".currentTrack");
 var currentTrack2Elements = document.querySelectorAll(".currentTrack2");
 

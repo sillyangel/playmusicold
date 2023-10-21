@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getRedirectResult, signInWithPopup, GithubAuthProvider, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { deleteDoc, getFirestore, collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { doc, deleteDoc, getFirestore, collection, addDoc, query, where, getDocs, getDoc, setDoc } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getPerformance } from "firebase/performance";
 import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
@@ -164,38 +164,30 @@ const observer = new MutationObserver(function(mutations) {
 });
 auth.onAuthStateChanged(async (user) => {
   if (user) {
-    // User is authenticated
     const userId = user.uid;
-    // Check if the user has a playlist (assuming you have a 'playlists' collection)
-    const albumtracks = collection(db, "currentplaylist");
-    const q = query(albumtracks, where("userId", "==", userId));
+    const albumtracksRef = doc(db, "currentplaylist", userId); // Reference the document with the user's ID
     try {
-      const querySnapshot = await getDocs(q);
-      if (!querySnapshot.empty) {
-        // User has a playlist, load and display it
-        querySnapshot.forEach((doc) => {
-          const albumtack = doc.data();
-          localStorage.setItem("Albumindex", albumtack.currentAlbumIndex);
-          localStorage.setItem("Trackindex", albumtack.currentTrackIndex);
-          localStorage.setItem("CurrentAlbum", albumtack.currentAlbum);
-          console.log("Loaded playlist:", albumtack);
-        });
+      const docSnap = await getDoc(albumtracksRef);
+      if (docSnap.exists()) {
+        const albumtack = docSnap.data();
+        localStorage.setItem("Albumindex", albumtack.currentAlbumIndex);
+        localStorage.setItem("Trackindex", albumtack.currentTrackIndex);
+        localStorage.setItem("CurrentAlbum", albumtack.currentAlbum);
+        console.log("Loaded playlist:", albumtack);
       } else {
-        // User doesn't have a playlist
-        console.log("User doesn't have a savemuisc.");
+        console.log("User doesn't have any currently playing music data.");
       }
     } catch (error) {
-      console.error("Error checking for currentplaylist:", error);
+      console.error("Error checking for currently playing music data:", error);
     }
   } else {
-    // User is not authenticated
     console.log("User is not authenticated.");
   }
 });
 
 async function savemusic() {
   const user = auth.currentUser;
-  if (user.uid) {
+  if (user) {
     const userId = user.uid;
     const currentplaying = {
       currentTrackIndex: currentTrackIndex,
@@ -203,19 +195,17 @@ async function savemusic() {
       currentAlbum: currentAlbum
     };
 
-    const albumtracks = collection(db, "currentplaylist");
+    const albumtracksRef = doc(db, "currentplaylist", userId); // Reference the document with the user's ID
     try {
-      await addDoc(albumtracks, {
-        userId: userId,
-        data: currentplaying,
-      });
-      console.log("currely data saved in Firestore.");
+      await setDoc(albumtracksRef, { data: currentplaying }); // Use setDoc to update the document
+      console.log("Currently playing music data saved in Firestore.");
       // Optionally, you can reload the page or update the UI here
     } catch (error) {
-      alert("Error saveing music data: " + error.message);
+      alert("Error saving music data: " + error.message);
     }
   }
 }
+
 
 async function createPlaylistInFirestore() {
   const nameofplaylist = prompt("Name of new playlist?");
