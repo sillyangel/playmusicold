@@ -182,10 +182,10 @@ auth.onAuthStateChanged(async (user) => {
         });
       } else {
         // User doesn't have a playlist
-        console.log("User doesn't have a playlist.");
+        console.log("User doesn't have a savemuisc.");
       }
     } catch (error) {
-      console.error("Error checking for playlist:", error);
+      console.error("Error checking for currentplaylist:", error);
     }
   } else {
     // User is not authenticated
