@@ -386,37 +386,21 @@ var audio = document.getElementById("myAudio");
 var playButton = document.getElementById("playbuttonthung");
 var volumeControl = document.getElementById("volume");
 var progressBar = document.getElementById("progress");
-var currentTrackIndex = 0;
-var currentAlbum = "tylerthecreator/wolf";
-var currentAlbumIndex = 0;
+var currentTrackIndex = localStorage.getItem("Trackindex");
+var currentAlbum = localStorage.getItem("CurrentAlbum");
+var currentAlbumIndex = localStorage.getItem("Albumindex");
 var audiotimern;
-if (localStorage.getItem("Albumindex") == null) {
-    localStorage.removeItem("Albumindex");
+
+if (isNaN(currentTrackIndex) || currentTrackIndex === null) {
+    currentTrackIndex = 0;
 }
 
-if (localStorage.getItem("Trackindex") == null) {
-    localStorage.removeItem("Trackindex");
+if (currentAlbum === null) {
+    currentAlbum = "tylerthecreator/wolf";
 }
 
-if (localStorage.getItem("CurrentAlbum") == null) {
-    localStorage.removeItem("CurrentAlbum");
-}
-
-if (localStorage.getItem("timerforaudio") == null) {
-    localStorage.removeItem("timerforaudio");
-}
-
-if (localStorage.getItem("Albumindex") !== null) {
-    currentAlbumIndex = parseInt(localStorage.getItem("Albumindex"));
-}
-
-if (localStorage.getItem("Trackindex") !== null) {
-    currentTrackIndex = parseInt(localStorage.getItem("Trackindex"));
-}
-
-
-if (localStorage.getItem("CurrentAlbum") !== null) {
-    currentAlbum = localStorage.getItem("CurrentAlbum");
+if (isNaN(currentAlbumIndex) || currentAlbumIndex === null) {
+    currentAlbumIndex = 0;
 }
 
 if (localStorage.getItem("timerforaudio") !== null) {
