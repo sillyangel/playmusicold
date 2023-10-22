@@ -576,7 +576,7 @@ audio.addEventListener("timeupdate", function() {
     }
 });
 // Load data from JSON file
-fetch('songs.json')
+fetch('https://sillyangel.me/songs.json')
     .then((response) => response.json())
     .then((data) => {
         const songSelector = document.getElementById('farts');
