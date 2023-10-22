@@ -136,7 +136,7 @@
     <audio id="myAudio" controls>
         Your browser does not support the audio element.
     </audio>
-<script type="module" src="./dist/bundle.js"></script>
+<script type="module" src="./dist/main.bundle.js"></script>
 
 </body>
 <script src="main.js"></script>
@@ -153,14 +153,6 @@
     }
 </script>
 <script>
-    if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function () {
-      navigator.serviceWorker.register('firebase-messaging-sw.js2').then(function (registration) {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function (err) {
-        console.log('ServiceWorker registration failed: ', err);
-      });
-    });
-  }
+
 </script>
 </html>

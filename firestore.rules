@@ -1,6 +1,7 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
     // Allow anyone to read playlists (assuming they are public)
     match /playlists/{playlistId} {
       allow read;
@@ -12,12 +13,12 @@ service cloud.firestore {
       allow delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
 
-    // Rules for the currentplaylist collection
+    // Only allow one document per user in the currentplaylist collection
     match /currentplaylist/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
       allow create: if request.auth != null
-                   && request.auth.uid == userId
-                   && !exists(/databases/$(database)/documents/currentplaylist/$(userId));
+                   && !exists(/databases/$(database)/documents/currentplaylist/$(userId))
+                   && request.auth.uid == userId;
     }
   }
 }
