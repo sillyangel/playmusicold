@@ -4,33 +4,27 @@
     <title>‎</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="main.css">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="sillyangel3">
-    <meta name="theme-color" content="#222222"> <!-- Set the theme color to match your background/theme -->
-    
-    <!-- Open Graph meta tags for social sharing -->
-    <meta property="og:title" content="">
-    <meta property="og:description" content="">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://sillyangel.github.io/playmusic"> <!-- Replace with your actual URL -->
-    <meta property="og:image" content="./assets/logo/mlogo.png"> <!-- Replace with a link to your website's image -->
-    
-    <!-- Twitter Card meta tags for Twitter sharing -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="">
-    <meta name="twitter:description" content="">
-    <meta name="twitter:image" content="./assets/logo/mlogo.png"> <!-- Replace with a link to your website's image -->
-    <script>
-    navigator.serviceWorker.register("sw.js");
-    </script>
-    <!-- Favicon (you can create a favicon.ico and place it in the root directory of your website) -->
     <link rel="icon" href="./assets/nonealbum.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.google.com/recaptcha/api.js?render=6LfhO68oAAAAAH-9cGAU4C9VEZHm0gzxXmS0ubbw"></script>
+    <script src="ipcfun.js"></script>
     </head>
 <body>
-          <div class="sidebarmen">
+  <div class="topbar">
+    <div class="titleBar">
+      <div class="titleBarText">
+        <div id="title">
+          Music Player
+        </div>
+      </div>
+      </div>
+      <div class="titleBarBtns">
+        <button aria-label="Minimize" id="minimizebtn"><i class="fas fa-window-minimize"></i></button>
+        <button aria-label="Maximize" id="maximizebtn"><i class="fas fa-window-maximize"></i></button>
+        <button aria-label="Close" id="closebtn"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+    <div class="sidebarmen">
             <img src="./assets/nonealbum.png" alt="main image icon" width="50px" height="50px">
             <br>
                         <br>
@@ -123,7 +117,7 @@
     </div>
   <div class="audio-controls">
         <div class="album-cover">
-            <img id="albumCover" src="https://" alt="Album Cover" width="60px" height="60px">
+            <img id="albumCover" src="https://sillyangel.me/assets/" alt="Album Cover" width="60px" height="60px">
         </div>
           <div class="currentTrack"> </div>
             <button aria-label="Back" onclick="previousTrack()"><i class="fas fa-backward"></i></button>
