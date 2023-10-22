@@ -7,7 +7,7 @@ const ipc = ipcMain;
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
-
+if (process.platform !== "win32") {
 app.setUserTasks([
   {
     program: process.execPath,
@@ -19,7 +19,7 @@ app.setUserTasks([
   }
 ])
 
-
+}
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1200,
