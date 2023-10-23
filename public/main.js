@@ -1,4 +1,5 @@
 try {
+
 var albums = [
     { artist: "Tyler, The Creator", album: "Wolf", folder: "tylerthecreator/wolf", image: "https://cdn.sillyangel.me/songs/tylerthecreator/wolf/albumcover.png" },
     { artist: "Tyler, The Creator", album: "Flower Boy", folder: "tylerthecreator/flowerboy", image: "https://cdn.sillyangel.me/songs/tylerthecreator/flowerboy/albumcover.png" },
@@ -755,10 +756,36 @@ function searchfunction() {
 function darkmode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
- } 
+}
+
+window.addEventListener("DOMContentLoaded", async event => {
+  installApp()
+});
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+});
+
+window.addEventListener('appinstalled', (e) => {
+});
+
+async function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  }
+}
+function consoled(text) {
+      console.log(text);
+}
+navigator.serviceWorker.register("sw.js");
+
+
 } catch(error) {
-    alert(error.message);
     alert(error);
-    console.log(error);
-    console.log(error.message);
+    alert(error.message);
 }

@@ -4,6 +4,7 @@
     <title>‎</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="toast.css">
     <link rel="manifest" href="app.webmanifest">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -152,9 +153,14 @@
         window.location.href = 'moblie.html';
     }
 </script>
-<script>
-if ('serviceWorker' in navigator) {
-   navigator.serviceWorker.register("./sw.js");
-}
+<script type="module">
+  import { toast } from "./toast.js"
+  try {
+
+  toast("a")
+  } catch(error) {
+    console.log(error)
+    console.log(error.message)
+  }
 </script>
 </html>
