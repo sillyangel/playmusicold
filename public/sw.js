@@ -1,3 +1,4 @@
+try {
 // Service Worker
 const CACHE_NAME = 'my-cache-v1';
 const urlsToCache = [
@@ -36,3 +37,9 @@ self.addEventListener('fetch', function (event) {
     )
   );
 });
+} catch(error) {
+   alert(error.message);
+   alert(error);
+   console.log(error);
+   console.log(error.message);
+}
