@@ -30,6 +30,7 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LfhO68oAAAAAH-9cGAU4C9VEZHm0gzxXmS0ubbw"></script>
     </head>
 <body>
+  <div id="snackbar"></div>
           <div class="sidebarmen">
             <img src="./assets/nonealbum.png" alt="main image icon" width="50px" height="50px">
             <br>
@@ -155,12 +156,6 @@
 </script>
 <script type="module">
   import { toast } from "./toast.js"
-  try {
-
-  toast("a")
-  } catch(error) {
-    console.log(error)
-    console.log(error.message)
-  }
+  toast("loaded data")
 </script>
 </html>

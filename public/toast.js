@@ -3,7 +3,7 @@ function toast(text) {
     x.className = "show";
     x.innerHTML = text;
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-    return
+    return;
 }
 
-export function toast
+export { toast };
