@@ -1,9 +1,11 @@
+
 import { initializeApp } from "firebase/app";
 import { getRedirectResult, signInWithPopup, GithubAuthProvider, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { doc, deleteDoc, getFirestore, collection, addDoc, query, where, getDocs, getDoc, setDoc } from "firebase/firestore";
+import { doc, deleteDoc, getFirestore, collection, addDoc, query, where, getDocs, getDoc, setDoc, documentId } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 import { getPerformance } from "firebase/performance";
 import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+import { getDownloadURL, getStorage, ref, uploadBytes, listAll } from "firebase/storage"
 
 try {
 
@@ -28,6 +30,7 @@ const appCheck = initializeAppCheck(app, {
 });
 const auth = getAuth();
 const db = getFirestore(app);
+const storage  = getStorage(app);
 
 // Get elements
 const ResetEmail = document.getElementById("reset-email");
@@ -42,10 +45,24 @@ const logoutButton = document.getElementById("logout-button");
 const savebutton = document.getElementById("savebutton");
 const githublogin = document.getElementById("githubuttonlogin");
 var createPlaylistButton = document.getElementById("createplaylist");
+const bnr = document.getElementById("bupfb");
 var audio = document.getElementById("myAudio");
 // end of get elements
 
 
+var modal = document.getElementById("myModalU");
+var span = document.getElementsByClassName("closeU")[0];
+
+
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 
 
 function handlegithub(event) {
@@ -206,7 +223,7 @@ observer.observe(audio, { attributes: true });
  // Firebase initialization code (already defined)
  
  // Check for user authentication when the page is loadedMake sure 'app' is properly initialized
- 
+
  auth.onAuthStateChanged(async (user) => {
    if (user) {
      // User is authenticated
@@ -237,7 +254,7 @@ observer.observe(audio, { attributes: true });
    }
  });
 async function addsongtoplaylist() {
-  
+   
 }
 async function playlistdatathn(user) {
   if (user) {
@@ -250,7 +267,7 @@ async function playlistdatathn(user) {
             querySnapshot.forEach((doc) => {
                 const playlistData = doc.data().data;
                 const playlistName = playlistData.name;
-
+                
                 // Create a new div for each playlist
                 const playlistDiv = document.createElement("div");
                 playlistDiv.id = playlistName;
@@ -260,13 +277,30 @@ async function playlistdatathn(user) {
                 const img = document.createElement("img")
                 img.src = playlistData.imageUrl;
 
+                const addtrack = document.createElement("button")
+                addtrack.id = "bupfb";
+                addtrack.textContent = "Add Custom Music";
+                addtrack.addEventListener("click", () => {
+                  const modulediv = document.createElement("div");
+                  modulediv.id = "divmodule"
+                  modulediv.style.display = "block";
+                  document.body.appendChild(modulediv)
+                });
+                // heading
                 const h3 = document.createElement("h2");
                 h3.textContent = playlistName + ' - Playlist';
+                // spacing
                 const br1 = document.createElement("br");
                 const br2 = document.createElement("br");
                 const br3 = document.createElement("br");
                 const br4 = document.createElement("br");
                 const br5 = document.createElement("br");
+                const br6 = document.createElement("br");
+                const br7 = document.createElement("br");
+                const br8 = document.createElement("br");
+                const br9 = document.createElement("br");
+                const br10 = document.createElement("br");
+                const br11 = document.createElement("br");
                 // Create an exit button
                 const exitButton = document.createElement("button");
                 exitButton.id = "exitbutton";
@@ -276,26 +310,34 @@ async function playlistdatathn(user) {
                     document.getElementById("lilbrary").style.display = "flex"; // Show the library
                 });
 
+                // creating delete button
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
                 deleteButton.id = "deletebutton";
                 deleteButton.addEventListener("click", async () => {
                     try {
                         await deleteDoc(doc.ref);
+                        document.getElementById("lilbrary").style.display = "flex"
                         document.body.removeChild(playlistDiv); // Remove the playlist div from the body
+                        playlistDiv.style.display = "none"
                     } catch (error) {
                         console.error("Error deleting playlist:", error);
                     }
                 });
+                // append newely created elements 
                 playlistDiv.appendChild(h3);
-                playlistDiv.appendChild(exitButton);
-                playlistDiv.appendChild(deleteButton);
-                playlistDiv.appendChild(br3);
+                playlistDiv.appendChild(br1);
+                playlistDiv.appendChild(br2);
                 playlistDiv.appendChild(img);
+                playlistDiv.appendChild(exitButton);
+                playlistDiv.appendChild(br3);
+                playlistDiv.appendChild(deleteButton);
                 playlistDiv.appendChild(br4);
+                playlistDiv.appendChild(addtrack);
                 playlistDiv.appendChild(br5);
-
+                
                 // Append the div to the body
+                playlistDiv.appendChild(br6);
                 document.body.appendChild(playlistDiv);
 
                 // Create a button for each playlist in the library
@@ -304,12 +346,12 @@ async function playlistdatathn(user) {
                 buttonpimage.src = playlistData.imageUrl;
                 buttonpimage.alt = playlistName;
                 showPlaylistButton.addEventListener("click", () => {
-                    const allDivs = document.querySelectorAll('.playlist-item'); // Select all elements with the class 'playlist-item'
-                    allDivs.forEach((div) => {
-                        div.style.display = "none"; // Hide all playlist divs
-                    });
-                    playlistDiv.style.display = "flex"; // Show the selected playlist div
-                    document.getElementById("lilbrary").style.display = "none"; // Hide the library
+                  const allDivs = document.querySelectorAll('.playlist-item'); // Select all elements with the class 'playlist-item'
+                  allDivs.forEach((div) => {
+                    div.style.display = "none"; // Hide all playlist divs
+                  });
+                  playlistDiv.style.display = "flex"; // Show the selected playlist div
+                  document.getElementById("lilbrary").style.display = "none"; // Hide the library
                 });
                 showPlaylistButton.appendChild(buttonpimage);
                 playlistContainer.appendChild(showPlaylistButton); // Append the button to the library
@@ -338,7 +380,12 @@ async function playlistdatathn(user) {
     nameu.innerHTML = "Not Logged In"
   }
  });
- 
+ auth.onAuthStateChanged(async (user) => {
+  var profiled = document.getElementById("iconsa");
+  if (user) {
+    profiled.src = user.photoURL;
+  }
+ });
 
  // if userdiv is clicked check if the user is logged if so show the settings
  auth.onAuthStateChanged(async (user) => {
@@ -367,17 +414,77 @@ async function playlistdatathn(user) {
 async function updateProfileWithFormData() {
   const displayNameV = document.getElementById("displayname").value;
   const photoURLV = document.getElementById("PhotoUrl").value;
-  updateProfile(auth.currentUser, {
-    displayName: displayNameV, photoURL: photoURLV 
-  }).then(() => {
-    console.log("Updated Profile Details");
-  }).catch((error) => {
-    alert("a error happened when updatingProfile out ", error.message)
-  });
+
+  let profileData = {};
+
+  if (displayNameV) {
+    profileData.displayName = displayNameV;
+  }
+
+  if (photoURLV) {
+    profileData.photoURL = photoURLV;
+  }
+
+  updateProfile(auth.currentUser, profileData)
+    .then(() => {
+      alert("Updated Profile Details");
+    })
+    .catch((error) => {
+      alert("a error happened when updatingProfile out ", error.message);
+    });
 }
 
 
 savebutton.onclick = updateProfileWithFormData;
+
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    document.getElementById('mp3file').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userId = user.uid;
+      const file = document.getElementById('myFile').files[0];
+      const storageRef = ref(storage, `customsongs/${userId}/${file.name}`);
+      
+      if (!file) {
+        alert('Please select a file.');
+        return;
+      }
+
+      if (!file.name.endsWith('.mp3') && file.type !== 'audio/mpeg') {
+        alert('Please select an MP3 file.');
+        return;
+      }
+
+      uploadBytes(storageRef, file).then((snapshot) => {
+        console.log('Uploaded a blob or file!');
+      }).catch((error) => {
+        console.error('Error uploading file:', error);
+      });
+    });
+  } else {
+    // Handle not logged in user
+  }
+});
+
+
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    var userId = user.uid;
+    const storage = getStorage();
+    const listRef = ref(storage, `customsongs/${userId}/`);
+
+    // Fetch all the files in the directory
+    const res = await listAll(listRef);
+
+    // Filter out the .mp3 files and get their download URLs
+    res.items.forEach(async (itemRef) => {
+      if (itemRef.name.endsWith('.mp3')) {
+        const url = await getDownloadURL(itemRef);
+        console.log(url);
+      }
+    });
+  }
+});
 
 } catch(error) {
   alert(error.message);
@@ -385,3 +492,4 @@ savebutton.onclick = updateProfileWithFormData;
   console.log(error.message);
   console.log(error);
 }
+

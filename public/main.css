@@ -261,7 +261,8 @@ input[type=text]:focus {
   text-align: center;
   align-items: center;
 }
-.playlist-item {
+
+footer {
   left: 20px;
   padding-left: 20px;
   margin-top: 0 10px;
@@ -269,9 +270,11 @@ input[type=text]:focus {
   width: 90%;
   height: auto;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+  align-content: center;
+  text-align: center;
+  align-items: center;
 }
+
 #mlogin button {
   box-sizing: border-box;
   border: 2px solid #131313;
@@ -385,21 +388,29 @@ input[type=password] {
   height: 120px;
 }
 .playlist-item button {
-  max-width: 50px;
   border: none;
   background: #5c5c5c;
 }
 #deletebutton {
   background: red;
-  font-weight: bolder;
-  color: white;
 }
-#exitbutton {
-  font-weight: bolder;
-  color: white;
-}
-#playlist-item button {
+.playlist-item button {
   display: inline;
+  color: #fff;
+  font-weight: bolder;
+  margin: 2px;
+}
+.playlist-item {
+  left: 20px;
+  padding-left: 20px;
+  margin-top: 0 10px;
+  float: right;
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: baseline;
 }
 /* Color of the progress bar */
 #progress::-webkit-progress-value {

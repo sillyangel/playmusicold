@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>‎</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="thing.css">
     <link rel="manifest" href="app.webmanifest">
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -30,9 +31,21 @@
     <script src="https://www.google.com/recaptcha/api.js?render=6LfhO68oAAAAAH-9cGAU4C9VEZHm0gzxXmS0ubbw"></script>
     </head>
 <body>
-  <div id="snackbar"></div>
+  <div id="myModalU" class="modal">
+
+    <div class="modal-content">
+      <span class="closeU">&times;</span>
+      <p>upload mp3 files</p>
+      <form id="mp3file">
+        <input type="file" id="myFile" name="filename"  accept=".mp3">
+        <input type="submit">
+      </form>
+      
+    </div>
+  
+  </div>
           <div class="sidebarmen">
-            <img src="./assets/nonealbum.png" alt="main image icon" width="50px" height="50px">
+            <img src="./assets/nonealbum.png" id="iconsa" alt="main image icon" width="50px" height="50px">
             <br>
                         <br>
                                     <br>
@@ -48,6 +61,11 @@
           <h2>Account Settings</h2>
           <input id="displayname" type="text" placeholder="Display Name / Username">
           <input id="PhotoUrl" type="url" placeholder="Photo Url">
+          <input id="email" type="email" placeholder="Email">
+          <!--add a checkbox for wanting explicit and update localStorage.setItem("hideExplicit", "true");    -->
+          <label>
+          <input type="checkbox" id="hideExplicitCheckbox">Hide Explicit Songs
+        </label>
         <button id="logout-button">Logout</button>
         <button id="savebutton">Save Settings</button>
           </div>
@@ -60,9 +78,7 @@
           <div id="farts">
           </div>
           <br>
-          <footer>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScymP9oW3nYbjWESJlCYK5EWa3NrnmfbCi7DXRjXkczjVB60g/viewform">Request a artist</a>
-            </footer>
+
           <br>
           <br>
           <br>
@@ -124,7 +140,7 @@
     </div>
   <div class="audio-controls">
         <div class="album-cover">
-            <img id="albumCover" src="https://" alt="Album Cover" width="60px" height="60px">
+            <img id="albumCover" src="https://cdn.sillyangel.me/songs/tylerthecreator/wolf/albumcover.webp" alt="Album Cover" width="60px" height="60px">
         </div>
           <div class="currentTrack"> </div>
             <button aria-label="Back" onclick="previousTrack()"><i class="fas fa-backward"></i></button>
@@ -138,6 +154,26 @@
     <audio id="myAudio" controls>
         Your browser does not support the audio element.
     </audio>
+    <footer>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScymP9oW3nYbjWESJlCYK5EWa3NrnmfbCi7DXRjXkczjVB60g/viewform">Request a artist</a>
+      </footer>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
 <script type="module" src="./dist/main.bundle.js"></script>
 
 </body>
@@ -153,9 +189,5 @@
     if (isMobileDevice()) {
         window.location.href = 'moblie.html';
     }
-</script>
-<script type="module">
-  import { toast } from "./toast.js"
-  toast("loaded data")
 </script>
 </html>

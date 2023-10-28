@@ -2,5 +2,5 @@
 
 echo "installing and updating all packages"
 npm i
-npm run build
+npm run build-dev
 node .
