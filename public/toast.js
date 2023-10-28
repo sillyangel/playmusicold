@@ -1,4 +1,4 @@
-function toast(text) {
+function toast(a) {
     var x = document.getElementById("snackbar");
     x.className = "show";
     x.innerHTML = text;
